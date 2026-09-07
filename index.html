@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Роман Сарваді - розробник і дизайнер продуктів</title>
+<meta name="description" content="Fullstack-розробник з Кропивницького. Бекенд на PHP і Node.js, мобільна розробка на React Native, інтерфейси у Figma.">
+<style>
+:root{
+  --paper:#14130f;
+  --paper-2:#1c1a15;
+  --ink:#ece7db;
+  --ink-2:#a9a294;
+  --ink-3:#777166;
+  --rule:#2b2820;
+  --rule-2:#3d3930;
+  --accent:#e0a562;
+  --gold:#c08a3e;
+  --dot:rgba(255,240,210,.035);
+  --shot-bg:#0d0c0a;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+:root[data-theme="light"]{
+  --paper:#f3f0e9;
+  --paper-2:#ebe7dd;
+  --ink:#1c1a16;
+  --ink-2:#4a453c;
+  --ink-3:#7d7668;
+  --rule:#d6d0c2;
+  --rule-2:#c2baa8;
+  --accent:#a4531d;
+  --gold:#b98a3c;
+  --dot:rgba(120,105,80,.045);
+  --shot-bg:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:17px/1.62 var(--serif);
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1px);
+  background-size:3px 3px;
+}
+[hidden]{display:none !important}
+a{color:inherit}
+img{max-width:100%}
+
+/* ---------- каркас ---------- */
+.page{max-width:1180px;margin:0 auto;padding:0 28px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:64px;align-items:start}
+.rail{position:sticky;top:0;padding:38px 0 40px;align-self:start}
+.col{max-width:700px;padding:38px 0 0}
+
+/* ---------- рейка ---------- */
+.mark{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
+.mark svg{width:15px;height:15px;flex:none;transform:translateY(2px)}
+.mark b{font:700 17px/1.2 var(--sans);letter-spacing:-.01em}
+.rail .role{font:400 13px/1.45 var(--sans);color:var(--ink-3);margin:0 0 22px}
+.rail nav{border-top:1px solid var(--rule);padding-top:14px}
+.rail nav a{display:flex;gap:10px;text-decoration:none;
+  font:400 13.5px/1.9 var(--sans);color:var(--ink-2)}
+.rail nav a:hover{color:var(--accent)}
+.rail nav a i{font:400 11px/1.9 var(--mono);color:var(--ink-3);font-style:normal}
+.rail .foot{margin-top:22px;border-top:1px solid var(--rule);padding-top:14px;
+  font:400 12.5px/1.7 var(--sans);color:var(--ink-3)}
+.rail .foot a{display:block;text-decoration:none;color:var(--ink-2)}
+.rail .foot a:hover{color:var(--accent)}
+.switches{display:flex;gap:8px;margin-top:16px}
+.sw{background:none;border:1px solid var(--rule-2);color:var(--ink-2);
+  font:600 11px/1 var(--sans);letter-spacing:.12em;padding:7px 11px;
+  cursor:pointer;border-radius:2px}
+.sw:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- титул ---------- */
+.title{border-bottom:2px solid var(--ink);padding-bottom:26px;margin-bottom:6px}
+.title .over{font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 20px}
+h1{font:400 clamp(30px,4.6vw,49px)/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 20px;
+  text-wrap:balance}
+.title p{margin:0 0 14px;color:var(--ink-2);font-size:17.5px}
+.title p:last-child{margin-bottom:0}
+
+.facts{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--rule);margin-bottom:54px}
+.facts div{flex:1 1 150px;padding:14px 16px 14px 0;font:400 13px/1.45 var(--sans);color:var(--ink-2)}
+.facts div + div{padding-left:16px;border-left:1px solid var(--rule)}
+
+/* ---------- розділи ---------- */
+section{margin-bottom:60px;scroll-margin-top:26px}
+.head{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--ink);
+  padding-top:12px;margin-bottom:22px}
+.head .num{font:400 12px/1 var(--mono);color:var(--accent);flex:none;padding-top:5px}
+h2{font:400 clamp(23px,3vw,31px)/1.2 var(--serif);letter-spacing:-.01em;margin:0}
+.kick{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 9px}
+h3{font:600 15.5px/1.35 var(--sans);letter-spacing:-.005em;margin:30px 0 8px}
+p{margin:0 0 15px;color:var(--ink-2)}
+p.lead-p{color:var(--ink);font-size:18.5px}
+strong{color:var(--ink);font-weight:600}
+em{font-style:italic}
+code{font:400 .88em/1.4 var(--mono);background:var(--paper-2);
+  border:1px solid var(--rule);padding:1px 5px;border-radius:2px}
+
+/* ---------- специфікація ---------- */
+.spec{margin:26px 0 6px;border-top:1px solid var(--rule)}
+.spec .row{display:grid;grid-template-columns:150px 1fr;gap:18px;
+  padding:10px 0;border-bottom:1px solid var(--rule)}
+.spec dt{font:400 12px/1.55 var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
+.spec dd{margin:0;font-size:16px;color:var(--ink-2)}
+
+/* ---------- нумеровані розбори ---------- */
+.notes{counter-reset:n;margin-top:8px}
+.note{counter-increment:n;position:relative;padding:22px 0 4px;border-top:1px solid var(--rule)}
+.note:first-child{border-top:none}
+.note::before{content:counter(n,decimal-leading-zero);
+  font:400 11px/1 var(--mono);color:var(--gold);
+  position:absolute;left:-52px;top:26px}
+.note h4{font:600 16px/1.35 var(--sans);margin:0 0 8px}
+.note p{margin:0 0 12px;font-size:16px}
+.note p:last-child{margin-bottom:14px}
+
+/* ---------- смуга екранів ---------- */
+.strip{display:flex;gap:18px;overflow-x:auto;padding:6px 28px 22px;margin:26px -28px 4px;
+  scroll-snap-type:x proximity}
+.strip::-webkit-scrollbar{height:5px}
+.strip::-webkit-scrollbar-thumb{background:var(--rule-2)}
+.shot{flex:none;width:186px;scroll-snap-align:center}
+.shot img{display:block;width:100%;border:1px solid var(--rule-2);background:var(--shot-bg)}
+.shot span{display:block;margin-top:9px;font:400 12px/1.4 var(--sans);color:var(--ink-3)}
+.shot span b{display:block;font:400 10.5px/1.6 var(--mono);color:var(--gold);font-weight:400}
+
+/* ---------- таблиця часу ---------- */
+.tl{width:100%;border-collapse:collapse;margin-top:8px}
+.tl td{border-bottom:1px solid var(--rule);padding:12px 0;vertical-align:baseline;
+  color:var(--ink-2);font-size:16px}
+.tl td:first-child{width:132px;padding-right:18px;white-space:nowrap;
+  font:400 12px/1.7 var(--mono);color:var(--ink-3)}
+.tl tr:first-child td{border-top:1px solid var(--rule)}
+
+/* ---------- інструменти ---------- */
+.tools{margin-top:10px;border-top:1px solid var(--rule)}
+.tools .row{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:11px 0;
+  border-bottom:1px solid var(--rule)}
+.tools .g{font:400 12px/1.6 var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
+.tools .v{font:400 15.5px/1.6 var(--sans);color:var(--ink-2)}
+
+/* ---------- принципи ---------- */
+.how{counter-reset:h;margin-top:6px}
+.how .it{counter-increment:h;position:relative;padding:18px 0;border-bottom:1px solid var(--rule)}
+.how .it:first-child{border-top:1px solid var(--rule)}
+.how .it::before{content:counter(h);position:absolute;left:-52px;top:22px;
+  font:400 11px/1 var(--mono);color:var(--gold)}
+.how h4{font:600 15.5px/1.3 var(--sans);margin:0 0 6px}
+.how p{margin:0;font-size:16px}
+
+/* ---------- виноска ---------- */
+.aside{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:24px 0;
+  font-size:16px;color:var(--ink-3)}
+.aside p{margin:0;color:inherit;font-style:italic}
+
+/* ---------- посилання на проєкт ---------- */
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 4px}
+.links a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  border:1px solid var(--rule-2);padding:9px 15px;border-radius:2px;
+  font:500 14px/1 var(--sans);color:var(--ink)}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.links a i{font-style:normal;font:400 11px/1 var(--mono);color:var(--ink-3);letter-spacing:.04em}
+
+/* ---------- контакти ---------- */
+.contact{border-top:2px solid var(--ink);padding-top:26px}
+.clist{margin:22px 0 70px;border-top:1px solid var(--rule)}
+.clist a{display:flex;justify-content:space-between;gap:16px;
+  padding:12px 0;border-bottom:1px solid var(--rule);text-decoration:none;
+  font:400 15.5px/1.5 var(--sans);color:var(--ink)}
+.clist a:hover{color:var(--accent)}
+.clist i{font-style:normal;font:400 12px/1.7 var(--mono);color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.04em}
+
+/* ---------- адаптив ---------- */
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;gap:0}
+  .rail{position:static;padding:26px 0 0}
+  .rail nav{display:none}
+  .col{padding-top:22px}
+  .note::before,.how .it::before{position:static;display:block;margin-bottom:6px}
+  .spec .row,.tools .row{grid-template-columns:1fr;gap:2px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .page{padding:0 20px}
+  .facts div{flex:1 1 100%;border-left:none !important;padding-left:0 !important;
+    border-bottom:1px solid var(--rule)}
+  .facts div:last-child{border-bottom:none}
+  .strip{margin:22px -20px 4px;padding:6px 20px 20px}
+  .tl td:first-child{width:96px}
+}
+@media print{.rail nav,.switches{display:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="layout">
+
+<aside class="rail">
+  <div class="mark">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6c9.9 0 18 8.1 18 18 0 13.5-13.4 27.4-16.6 32.5a1.7 1.7 0 0 1-2.8 0C27.4 51.4 14 37.5 14 24 14 14.1 22.1 6 32 6z" fill="#c08a3e"/><circle cx="32" cy="24" r="7.4" fill="var(--paper)"/></svg>
+    <b>Роман Сарваді</b>
+  </div>
+  <p class="role" data-uk>Розробник і дизайнер продуктів<br>Кропивницький, Україна</p>
+  <p class="role" data-en hidden>Product developer and designer<br>Kropyvnytskyi, Ukraine</p>
+
+  <nav>
+    <a href="#about"><i>01</i><span data-uk>Хто я</span><span data-en hidden>About</span></a>
+    <a href="#vyrii"><i>02</i><span>Vyrii</span></a>
+    <a href="#onix"><i>03</i><span>Onix Systems</span></a>
+    <a href="#flowers"><i>04</i><span data-uk>Між нами</span><span data-en hidden>Mizh Namy</span></a>
+    <a href="#how"><i>05</i><span data-uk>Як я працюю</span><span data-en hidden>How I work</span></a>
+    <a href="#tools"><i>06</i><span data-uk>Інструменти</span><span data-en hidden>Tools</span></a>
+    <a href="#timeline"><i>07</i><span data-uk>Шлях</span><span data-en hidden>Timeline</span></a>
+    <a href="#contact"><i>08</i><span data-uk>Контакти</span><span data-en hidden>Contact</span></a>
+  </nav>
+
+  <div class="foot">
+    <a href="mailto:roman.sarvadi@gmail.com">roman.sarvadi@gmail.com</a>
+    <a href="tel:+380661440475">+38 066 144 04 75</a>
+    <a href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener">t.me/whxrxmysxxl</a>
+  </div>
+  <div class="switches">
+    <button class="sw" id="lang" type="button">EN</button>
+    <button class="sw" id="theme" type="button" aria-label="Змінити тему">☾</button>
+  </div>
+</aside>
+
+<main class="col">
+
+<!-- 01 -->
+<section id="about">
+  <div class="title">
+    <p class="over" data-uk>Відкритий до пропозицій</p>
+    <p class="over" data-en hidden>Open to work</p>
+    <h1 data-uk>Роблю продукти від макета до збірки на телефоні.</h1>
+    <h1 data-en hidden>I build products from the mockup to the build on a phone.</h1>
+    <p class="lead-p" data-uk>Бекенд-розробник в Onix Systems: PHP, Laravel, Hyperf, PostgreSQL. Там же веду дизайн однієї з фіч мобільного застосунку, тому працюю і в коді, і у Figma.</p>
+    <p class="lead-p" data-en hidden>Backend developer at Onix Systems: PHP, Laravel, Hyperf, PostgreSQL. I also own the design of one of the mobile app's features there, so I work both in code and in Figma.</p>
+    <p data-uk>Поза роботою зробив дві власні речі, які довів до живих користувачів: комерційну платформу для квіткової крамниці, яка працює в продакшені, і застосунок Vyrii на React Native, зібраний під iOS.</p>
+    <p data-en hidden>Outside work I built two things of my own and took both to real users: a commercial platform for a flower shop that runs in production, and Vyrii, a React Native app already built for iOS.</p>
+  </div>
+  <div class="facts">
+    <div><span data-uk>2 роки в розробці</span><span data-en hidden>2 years in development</span></div>
+    <div><span data-uk>9 місяців у продуктовій команді</span><span data-en hidden>9 months in a product team</span></div>
+    <div><span data-uk>Бекенд, мобайл, дизайн</span><span data-en hidden>Backend, mobile, design</span></div>
+    <div><span data-uk>Англійська C1</span><span data-en hidden>English C1</span></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="vyrii">
+  <div class="head">
+    <span class="num">02</span>
+    <div>
+      <p class="kick" data-uk>Власний продукт · 2026 · до релізу</p>
+      <p class="kick" data-en hidden>My own product · 2026 · pre-release</p>
+      <h2 data-uk>Vyrii, маркетплейс послуг і товарів міста</h2>
+      <h2 data-en hidden>Vyrii, a city marketplace of services and goods</h2>
+    </div>
+  </div>
+
+  <p data-uk>У Кропивницькому запис до барбера, майстра нігтів чи на СТО живе в директі інстаграма й у паперовому зошиті. Клієнт пише ввечері, відповідь отримує зранку, частина заявок губиться разом із перепискою. Великі сервіси на таке місто не заходять, їм невигідно.</p>
+  <p data-en hidden>In Kropyvnytskyi, booking a barber, a nail artist or a car service lives in Instagram DMs and a paper notebook. A client writes in the evening, gets an answer next morning, and some requests are lost along with the conversation. Large services do not bother entering a town this size.</p>
+  <p data-uk>Vyrii це застосунок, у якому мешканець знаходить заклад і бронює час, а власник з того ж застосунку веде розклад, клієнтів, товари й аналітику. Я веду проєкт один: дослідження, дизайн у Figma, фронтенд, бекенд, база, тести, деплой і збірка під App Store.</p>
+  <p data-en hidden>Vyrii is an app where a resident finds a venue and books a slot, while the owner uses the same app to run the schedule, clients, products and analytics. I run the project alone: research, design in Figma, frontend, backend, database, tests, deployment and the App Store build.</p>
+
+  <dl class="spec">
+    <div class="row"><dt data-uk>Роль</dt><dt data-en hidden>Role</dt><dd data-uk>Один в проєкті: продукт, дизайн, розробка</dd><dd data-en hidden>Solo: product, design, development</dd></div>
+    <div class="row"><dt data-uk>Період</dt><dt data-en hidden>Period</dt><dd data-uk>Березень 2026 - зараз</dd><dd data-en hidden>March 2026 - now</dd></div>
+    <div class="row"><dt data-uk>Платформи</dt><dt data-en hidden>Platforms</dt><dd data-uk>iOS, Android, веб з однієї кодової бази</dd><dd data-en hidden>iOS, Android and web from one codebase</dd></div>
+    <div class="row"><dt>Front</dt><dd>React Native, Expo, TypeScript</dd></div>
+    <div class="row"><dt>Back</dt><dd>Node.js, TypeScript, PostgreSQL, Redis, Docker</dd></div>
+    <div class="row"><dt data-uk>Дизайн</dt><dt data-en hidden>Design</dt><dd data-uk>Figma, власна палітра, темна й світла теми</dd><dd data-en hidden>Figma, own palette, dark and light themes</dd></div>
+    <div class="row"><dt data-uk>Обсяг</dt><dt data-en hidden>Scope</dt><dd data-uk>155 закладів у каталозі, 159 автотестів</dd><dd data-en hidden>155 venues in the catalogue, 159 automated tests</dd></div>
+  </dl>
+
+  <div class="strip">
+    <div class="shot"><img src="shots/03-map.png" alt=""><span><b>01</b><span data-uk>Карта міста</span><span data-en hidden>City map</span></span></div>
+    <div class="shot"><img src="shots/02-search.png" alt=""><span><b>02</b><span data-uk>Пошук</span><span data-en hidden>Search</span></span></div>
+    <div class="shot"><img src="shots/07-cat-barber.png" alt=""><span><b>03</b><span data-uk>Категорія з фільтрами</span><span data-en hidden>Category with filters</span></span></div>
+    <div class="shot"><img src="shots/15-business-barber.png" alt=""><span><b>04</b><span data-uk>Картка закладу</span><span data-en hidden>Venue page</span></span></div>
+    <div class="shot"><img src="shots/31-booking-detail.png" alt=""><span><b>05</b><span data-uk>Деталі запису</span><span data-en hidden>Booking details</span></span></div>
+    <div class="shot"><img src="shots/18-shop-flowers.png" alt=""><span><b>06</b><span data-uk>Магазин</span><span data-en hidden>Shop</span></span></div>
+    <div class="shot"><img src="shots/34-product.png" alt=""><span><b>07</b><span data-uk>Картка товару</span><span data-en hidden>Product page</span></span></div>
+    <div class="shot"><img src="shots/19-bonuses.png" alt=""><span><b>08</b><span data-uk>Бонуси</span><span data-en hidden>Loyalty</span></span></div>
+    <div class="shot"><img src="shots/20-chats.png" alt=""><span><b>09</b><span data-uk>Чати із закладом</span><span data-en hidden>Chats with a venue</span></span></div>
+    <div class="shot"><img src="shots/41-biz-manage.png" alt=""><span><b>10</b><span data-uk>Кабінет власника</span><span data-en hidden>Owner dashboard</span></span></div>
+    <div class="shot"><img src="shots/42-biz-bookings.png" alt=""><span><b>11</b><span data-uk>Записи закладу</span><span data-en hidden>Venue bookings</span></span></div>
+    <div class="shot"><img src="shots/43-biz-day.png" alt=""><span><b>12</b><span data-uk>День майстра</span><span data-en hidden>Master's day</span></span></div>
+  </div>
+
+  <div class="aside">
+    <p data-uk>Проєкт ще не в App Store, тому архітектуру й продуктові рішення тут не розписую. На співбесіді покажу збірку на телефоні й розповім, як воно влаштоване всередині.</p>
+    <p data-en hidden>The project is not in the App Store yet, so I do not spell out the architecture and product decisions here. In an interview I will show the build on a phone and walk through how it works inside.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="onix">
+  <div class="head">
+    <span class="num">03</span>
+    <div>
+      <p class="kick" data-uk>Комерційний досвід · з січня 2026</p>
+      <p class="kick" data-en hidden>Commercial experience · since January 2026</p>
+      <h2 data-uk>Onix Systems, PHP-розробник</h2>
+      <h2 data-en hidden>Onix Systems, PHP developer</h2>
+    </div>
+  </div>
+
+  <p data-uk>Прийшов стажером у січні 2026, у травні оформили офіційно. Працюю над продакшн-продуктом для мережі роздрібних магазинів: мобільний застосунок, Telegram Mini App і програма лояльності на кілька сотень тисяч користувачів.</p>
+  <p data-en hidden>I joined as an intern in January 2026 and was hired officially in May. I work on a production product for a retail chain: a mobile app, a Telegram Mini App and a loyalty programme with several hundred thousand users.</p>
+  <p data-uk>Бекенд: PHP, Laravel, Hyperf, Swoole, PostgreSQL, Docker. Робив інтеграції із зовнішніми API, службою підтримки й AI-ботом, який відповідає користувачам замість першої лінії. З червня 2026 хед департаменту дав напрям React Native, щоб я міг заходити на мобільні задачі самостійно.</p>
+  <p data-en hidden>Backend: PHP, Laravel, Hyperf, Swoole, PostgreSQL, Docker. I built integrations with external APIs, a service desk and an AI support bot that answers users instead of the first support line. Since June 2026 the head of department pointed me at React Native so I can take mobile tasks on my own.</p>
+
+  <h3 data-uk>Дизайн у тій самій компанії</h3>
+  <h3 data-en hidden>Design at the same company</h3>
+  <p data-uk>Окремо від коду на мені дизайн однієї з фіч застосунку: накопичувальні штампи за покупки. Вісім задач у Jira, близько тридцяти екранів і станів, компонент-сет на п'ятнадцять варіантів і правила розкладки для решти команди. Продуктові рішення узгоджував напряму з маркетингом і PM, частину початкових вимог після обговорення переписали.</p>
+  <p data-en hidden>Separately from the code, I own the design of one of the app's features: collectable stamps for purchases. Eight Jira tasks, around thirty screens and states, a component set with fifteen variants, and layout rules for the rest of the team. I agreed product decisions directly with marketing and the PM, and part of the initial requirements was rewritten after discussion.</p>
+
+  <div class="aside">
+    <p data-uk>Назви клієнтських продуктів і макети під NDA, тому їх тут немає.</p>
+    <p data-en hidden>Client product names and mockups are under NDA, so they are not shown here.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="flowers">
+  <div class="head">
+    <span class="num">04</span>
+    <div>
+      <p class="kick" data-uk>Комерційний проєкт · 2025 - 2026 · у продакшені</p>
+      <p class="kick" data-en hidden>Commercial project · 2025 - 2026 · in production</p>
+      <h2 data-uk>«Між нами», квітковий простір у Telegram</h2>
+      <h2 data-en hidden>"Mizh Namy", a flower shop that lives in Telegram</h2>
+    </div>
+  </div>
+
+  <p data-uk>Почалось як перше замовлення за гроші, і досі працює в продакшені. Крамниця в Кропивницькому втрачала продажі на черзі: людина хотіла букет по дорозі, а не чекати. Перше рішення було просте, «купи і забери»: вибір букета, оплата онлайн, самовивіз без черги.</p>
+  <p data-en hidden>It started as my first paid order and it is still running in production. A shop in Kropyvnytskyi was losing sales to the queue: people wanted a bouquet on the way, not a wait. The first solution was simple, "buy and pick up": choose a bouquet, pay online, pick it up without queueing.</p>
+  <p data-uk>Далі стало зрозуміло, що разова покупка це не бізнес. Квіти купують по датах, а дати люди забувають. Тому основною роботою став не магазин, а <strong>механіка повернення</strong>: щоб клієнт прийшов другий і третій раз, і щоб він не мусив пам'ятати сам.</p>
+  <p data-en hidden>Then it became clear that a one-off purchase is not a business. Flowers are bought around dates, and people forget dates. So the real work was not the shop but the <strong>mechanics of coming back</strong>: making the client return a second and a third time, without having to remember on their own.</p>
+
+  <div class="links">
+    <a href="https://t.me/mizhnamukvitu_bot" target="_blank" rel="noopener"><span data-uk>Відкрити бот</span><span data-en hidden>Open the bot</span><i>t.me</i></a>
+    <a href="https://mizhnamykvity.cliqo.com.ua" target="_blank" rel="noopener"><span data-uk>Сайт крамниці</span><span data-en hidden>Shop website</span><i>www</i></a>
+  </div>
+
+  <h3 data-uk>Що всередині</h3>
+  <h3 data-en hidden>What is inside</h3>
+  <p data-uk><strong>Вітрина в Telegram.</strong> Каталог, кошик, оформлення замовлення, оплата через LiqPay. Відкривається як Mini App прямо з бота, встановлювати нічого не треба.</p>
+  <p data-en hidden><strong>A storefront inside Telegram.</strong> Catalogue, cart, checkout, LiqPay payment. It opens as a Mini App straight from the bot, with nothing to install.</p>
+  <p data-uk><strong>Кабінет власника в браузері.</strong> Канбан замовлень, CRM клієнтів з історією покупок, каталог і категорії, свята, звіти по продажах.</p>
+  <p data-en hidden><strong>An owner dashboard in the browser.</strong> Order kanban, client CRM with purchase history, catalogue and categories, holidays, sales reports.</p>
+  <p data-uk><strong>Два боти.</strong> Клієнтський, з якого починається все, і бот сповіщень для адміністраторів: нове замовлення падає їм у чат одразу, без оновлення сторінки.</p>
+  <p data-en hidden><strong>Two bots.</strong> The customer bot, where everything starts, and an admin notification bot: a new order lands in their chat immediately, with no page refresh.</p>
+
+  <h3 data-uk>З чого складається та сама чверть повторних продажів</h3>
+  <h3 data-en hidden>What that quarter of repeat sales is made of</h3>
+  <p data-uk>Чотири зачіпки, які працюють разом.</p>
+  <p data-en hidden>Four hooks that work together.</p>
+
+  <div class="notes">
+    <div class="note">
+      <h4 data-uk>Депозит, який згорає</h4>
+      <h4 data-en hidden>A deposit that expires</h4>
+      <p data-uk>Після оплаченого замовлення клієнту нараховується 10% від суми покупки. Він живе два місяці й потім згорає, а перед згорянням бот нагадує. Обмежений термін тут навмисний: безстроковий бонус не створює приводу прийти.</p>
+      <p data-en hidden>After a paid order the client gets 10% of the purchase back. It lives for two months and then expires, and the bot reminds them before it does. The deadline is deliberate: a bonus that never expires gives nobody a reason to come back.</p>
+    </div>
+    <div class="note">
+      <h4 data-uk>Відгук, за який теж платять</h4>
+      <h4 data-en hidden>A review that pays</h4>
+      <p data-uk>Після замовлення бот просить оцінку й коментар. За відгук теж нараховується депозит, тому відгуки справді пишуть, а власник бачить, де провалився сервіс.</p>
+      <p data-en hidden>After an order the bot asks for a rating and a comment. A review also earns a deposit, so people actually write them and the owner sees where service failed.</p>
+    </div>
+    <div class="note">
+      <h4 data-uk>Свята з попередженням наперед</h4>
+      <h4 data-en hidden>Holidays with a lead time</h4>
+      <p data-uk>Власник заводить свято з полем «за скільки днів попередити». Бот пише клієнтам заздалегідь, щоб букет встигли зробити, а не за годину до.</p>
+      <p data-en hidden>The owner adds a holiday with a "how many days ahead to warn" field. The bot writes to clients early enough for a bouquet to be made, not an hour before.</p>
+    </div>
+    <div class="note">
+      <h4 data-uk>Особисті дати клієнта</h4>
+      <h4 data-en hidden>The client's own dates</h4>
+      <p data-uk>Клієнт сам додає свої дати: день народження мами, річниця. Бот нагадає наперед. Це найсильніша зачіпка, бо вона персональна і працює рік за роком.</p>
+      <p data-en hidden>Clients add their own dates: mother's birthday, an anniversary. The bot reminds them in advance. This is the strongest hook, because it is personal and it works year after year.</p>
+      <p data-uk>Технічно це стейт-машина всередині бота: дев'ять станів, вісімнадцять callback-обробників, чернетка нагадування, яка переживає перезапуск, і повне редагування вже створеної дати.</p>
+      <p data-en hidden>Technically it is a state machine inside the bot: nine states, eighteen callback handlers, a reminder draft that survives a restart, and full editing of an already created date.</p>
+    </div>
+  </div>
+
+  <dl class="spec">
+    <div class="row"><dt data-uk>Роль</dt><dt data-en hidden>Role</dt><dd data-uk>Один в проєкті: дизайн, код, база, деплой</dd><dd data-en hidden>Solo: design, code, database, deployment</dd></div>
+    <div class="row"><dt data-uk>Період</dt><dt data-en hidden>Period</dt><dd data-uk>2025 - 2026, у продакшені</dd><dd data-en hidden>2025 - 2026, in production</dd></div>
+    <div class="row"><dt data-uk>Стек</dt><dt data-en hidden>Stack</dt><dd>PHP 8.4, Laravel 13, PostgreSQL 16, Redis, Docker, Nginx, Caddy</dd></div>
+    <div class="row"><dt data-uk>Реальний час</dt><dt data-en hidden>Realtime</dt><dd data-uk>Laravel Reverb для живого оновлення канбана замовлень</dd><dd data-en hidden>Laravel Reverb for live order kanban updates</dd></div>
+    <div class="row"><dt data-uk>Оплата</dt><dt data-en hidden>Payments</dt><dd data-uk>LiqPay, захист форм через Cloudflare Turnstile</dd><dd data-en hidden>LiqPay, form protection with Cloudflare Turnstile</dd></div>
+    <div class="row"><dt data-uk>Результат</dt><dt data-en hidden>Result</dt><dd data-uk>Повторні продажі замовника зросли приблизно на чверть</dd><dd data-en hidden>The client's repeat sales grew by roughly a quarter</dd></div>
+  </dl>
+</section>
+
+<!-- 05 -->
+<section id="how">
+  <div class="head">
+    <span class="num">05</span>
+    <div>
+      <h2 data-uk>Як я працюю</h2>
+      <h2 data-en hidden>How I work</h2>
+    </div>
+  </div>
+  <div class="how">
+    <div class="it">
+      <h4 data-uk>Перевіряю цифри, поки не почав</h4>
+      <h4 data-en hidden>I check the numbers before I start</h4>
+      <p data-uk>Перед тим як щось лагодити, дивлюсь у базу чи в логи, скільки разів проблема справді трапляється. Після заміру пріоритети часто змінюються.</p>
+      <p data-en hidden>Before fixing anything I look at the database or the logs to see how often the problem actually happens. Priorities often change after that.</p>
+    </div>
+    <div class="it">
+      <h4 data-uk>Рішення записую</h4>
+      <h4 data-en hidden>I write decisions down</h4>
+      <p data-uk>Кожне непросте технічне рішення йде в журнал: що вибрав, чому, що відкинув. Через місяць це економить години суперечок із самим собою.</p>
+      <p data-en hidden>Every non-trivial technical decision goes into a log: what I chose, why, what I rejected. A month later that saves hours of arguing with myself.</p>
+    </div>
+    <div class="it">
+      <h4 data-uk>Помилку називаю вголос</h4>
+      <h4 data-en hidden>I name my mistakes</h4>
+      <p data-uk>Якщо зламав, кажу прямо й показую, що саме. Приховані баги коштують дорожче за незручну розмову.</p>
+      <p data-en hidden>If I break something, I say so plainly and show what exactly. Hidden bugs cost more than an awkward conversation.</p>
+    </div>
+    <div class="it">
+      <h4 data-uk>Дизайн і код в одній голові</h4>
+      <h4 data-en hidden>Design and code in one head</h4>
+      <p data-uk>Малюю в Figma й сам це реалізую, тому одразу бачу, скільки коштує кожне рішення на макеті.</p>
+      <p data-en hidden>I draw in Figma and implement it myself, so I can see straight away what each decision on a mockup will cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="tools">
+  <div class="head">
+    <span class="num">06</span>
+    <div>
+      <h2 data-uk>Інструменти</h2>
+      <h2 data-en hidden>Tools</h2>
+    </div>
+  </div>
+  <div class="tools">
+    <div class="row"><div class="g" data-uk>Мови</div><div class="g" data-en hidden>Languages</div><div class="v">TypeScript, PHP, JavaScript, SQL</div></div>
+    <div class="row"><div class="g" data-uk>Бекенд</div><div class="g" data-en hidden>Backend</div><div class="v">Node.js, Laravel, Hyperf, Swoole, REST API</div></div>
+    <div class="row"><div class="g" data-uk>Мобайл і фронт</div><div class="g" data-en hidden>Mobile, front</div><div class="v">React Native, Expo, React, HTML, CSS</div></div>
+    <div class="row"><div class="g" data-uk>Дані</div><div class="g" data-en hidden>Data</div><div class="v" data-uk>PostgreSQL, Redis, міграції, аналітика подій</div><div class="v" data-en hidden>PostgreSQL, Redis, migrations, event analytics</div></div>
+    <div class="row"><div class="g" data-uk>Інфраструктура</div><div class="g" data-en hidden>Infrastructure</div><div class="v">Docker, Nginx, Caddy, CI, Git</div></div>
+    <div class="row"><div class="g" data-uk>Дизайн</div><div class="g" data-en hidden>Design</div><div class="v" data-uk>Figma, компонент-сети, дизайн-токени, темна й світла теми</div><div class="v" data-en hidden>Figma, component sets, design tokens, dark and light themes</div></div>
+    <div class="row"><div class="g" data-uk>Робота</div><div class="g" data-en hidden>Ways of working</div><div class="v" data-uk>Jira, код-рев'ю, документація, автотести</div><div class="v" data-en hidden>Jira, code review, documentation, automated tests</div></div>
+  </div>
+  <div class="aside">
+    <p data-uk>AI-інструментами користуюсь щодня в роботі й у власному проєкті: рев'ю, чернетки, рутинний код. Рішення й відповідальність за результат лишаються за мною.</p>
+    <p data-en hidden>I use AI tools daily at work and in my own project: reviews, drafts, routine code. The decisions and the responsibility for the result stay with me.</p>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="timeline">
+  <div class="head">
+    <span class="num">07</span>
+    <div>
+      <h2 data-uk>Шлях</h2>
+      <h2 data-en hidden>Timeline</h2>
+    </div>
+  </div>
+  <table class="tl">
+    <tr><td>2024</td>
+      <td data-uk>Перші статичні сторінки, верстка, основи JavaScript.</td>
+      <td data-en hidden>First static pages, markup, JavaScript basics.</td></tr>
+    <tr><td>2024 - 2028</td>
+      <td data-uk>ЦНТУ, комп'ютерні науки. Поєдную з повною зайнятістю.</td>
+      <td data-en hidden>Central Ukrainian National Technical University, computer science. Combined with full-time work.</td></tr>
+    <tr><td>2025</td>
+      <td data-uk>«Між нами»: перше комерційне замовлення, яке досі працює в продакшені.</td>
+      <td data-en hidden>"Mizh Namy": the first commercial order, still running in production.</td></tr>
+    <tr><td data-uk>Січень 2026</td><td data-en hidden>January 2026</td>
+      <td data-uk>Стажування в Onix Systems, бекенд на PHP. У травні оформлення в штат.</td>
+      <td data-en hidden>Internship at Onix Systems, PHP backend. Hired officially in May.</td></tr>
+    <tr><td data-uk>Березень 2026</td><td data-en hidden>March 2026</td>
+      <td data-uk>Старт Vyrii: власний маркетплейс міста.</td>
+      <td data-en hidden>Vyrii starts: a city marketplace of my own.</td></tr>
+    <tr><td data-uk>Червень 2026</td><td data-en hidden>June 2026</td>
+      <td data-uk>Напрям React Native у компанії, паралельно дизайн фічі застосунку.</td>
+      <td data-en hidden>React Native direction at the company, plus design of an app feature.</td></tr>
+    <tr><td data-uk>Вересень 2026</td><td data-en hidden>September 2026</td>
+      <td data-uk>Vyrii зібраний під iOS, готується вихід на перших клієнтів.</td>
+      <td data-en hidden>Vyrii built for iOS, preparing for the first clients.</td></tr>
+  </table>
+</section>
+
+<!-- 08 -->
+<section id="contact" class="contact">
+  <h2 data-uk>Напишіть</h2>
+  <h2 data-en hidden>Get in touch</h2>
+  <p data-uk>Шукаю роботу, де можна робити продукт, а не тільки закривати тікети: розробка, дизайн інтерфейсів або те й те разом. Готовий і до повної зайнятості, і до проєктної роботи. Відповідаю в той самий день.</p>
+  <p data-en hidden>I am looking for work where I can build a product, not only close tickets: development, interface design, or both. Open to full-time and to project work. I reply the same day.</p>
+  <div class="clist">
+    <a href="mailto:roman.sarvadi@gmail.com"><span>roman.sarvadi@gmail.com</span><i>Email</i></a>
+    <a href="tel:+380661440475"><span>+38 066 144 04 75</span><i data-uk>Телефон</i><i data-en hidden>Phone</i></a>
+    <a href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener"><span>@whxrxmysxxl</span><i>Telegram</i></a>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+
+<script>
+(function () {
+  var langBtn = document.getElementById('lang');
+  var themeBtn = document.getElementById('theme');
+  var uk = document.querySelectorAll('[data-uk]');
+  var en = document.querySelectorAll('[data-en]');
+
+  function setLang(l) {
+    document.documentElement.lang = l;
+    for (var i = 0; i < uk.length; i++) uk[i].hidden = l !== 'uk';
+    for (var j = 0; j < en.length; j++) en[j].hidden = l !== 'en';
+    langBtn.textContent = l === 'uk' ? 'EN' : 'UA';
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  }
+
+  var savedLang = 'uk';
+  var savedTheme = 'dark';
+  try {
+    savedLang = localStorage.getItem('lang') || 'uk';
+    savedTheme = localStorage.getItem('theme') || 'dark';
+  } catch (e) {}
+
+  setLang(savedLang);
+  setTheme(savedTheme);
+
+  langBtn.addEventListener('click', function () {
+    setLang(document.documentElement.lang === 'uk' ? 'en' : 'uk');
+  });
+  themeBtn.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
