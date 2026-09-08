@@ -51,8 +51,8 @@ img{max-width:100%}
 /* ---------- каркас ---------- */
 .page{max-width:1180px;margin:0 auto;padding:0 28px}
 .layout{display:grid;grid-template-columns:230px 1fr;gap:64px;align-items:start}
-.rail{position:sticky;top:0;padding:38px 0 40px;align-self:start}
-.col{max-width:700px;padding:38px 0 0}
+.rail{position:sticky;top:0;padding:38px 0 40px;align-self:start;min-width:0}
+.col{max-width:700px;padding:38px 0 0;min-width:0}
 
 /* ---------- рейка ---------- */
 .mark{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
@@ -100,7 +100,7 @@ p{margin:0 0 15px;color:var(--ink-2)}
 p.lead-p{color:var(--ink);font-size:18.5px}
 strong{color:var(--ink);font-weight:600}
 em{font-style:italic}
-code{font:400 .88em/1.4 var(--mono);background:var(--paper-2);
+code{overflow-wrap:anywhere;font:400 .88em/1.4 var(--mono);background:var(--paper-2);
   border:1px solid var(--rule);padding:1px 5px;border-radius:2px}
 
 /* ---------- специфікація ---------- */
@@ -122,8 +122,9 @@ code{font:400 .88em/1.4 var(--mono);background:var(--paper-2);
 .note p:last-child{margin-bottom:14px}
 
 /* ---------- смуга екранів ---------- */
-.strip{display:flex;gap:18px;overflow-x:auto;padding:6px 28px 22px;margin:26px -28px 4px;
-  scroll-snap-type:x proximity}
+.strip{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;min-width:0;
+  padding:6px 28px 22px;margin:26px -28px 4px;scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch}
 .strip::-webkit-scrollbar{height:5px}
 .strip::-webkit-scrollbar-thumb{background:var(--rule-2)}
 .shot{flex:none;width:186px;scroll-snap-align:center}
@@ -132,7 +133,8 @@ code{font:400 .88em/1.4 var(--mono);background:var(--paper-2);
 .shot span b{display:block;font:400 10.5px/1.6 var(--mono);color:var(--gold);font-weight:400}
 
 /* ---------- таблиця часу ---------- */
-.tl{width:100%;border-collapse:collapse;margin-top:8px}
+.tl{width:100%;table-layout:fixed;border-collapse:collapse;margin-top:8px}
+.tl td{overflow-wrap:anywhere}
 .tl td{border-bottom:1px solid var(--rule);padding:12px 0;vertical-align:baseline;
   color:var(--ink-2);font-size:16px}
 .tl td:first-child{width:132px;padding-right:18px;white-space:nowrap;
@@ -188,13 +190,44 @@ code{font:400 .88em/1.4 var(--mono);background:var(--paper-2);
   .spec .row,.tools .row{grid-template-columns:1fr;gap:2px}
 }
 @media (max-width:560px){
-  body{font-size:16px}
-  .page{padding:0 20px}
-  .facts div{flex:1 1 100%;border-left:none !important;padding-left:0 !important;
+  body{font-size:15.5px;line-height:1.58}
+  .page{padding:0 18px}
+  .rail{padding:22px 0 0}
+  .mark b{font-size:16px}
+  .rail .role{margin-bottom:14px}
+  .rail .foot{margin-top:14px;padding-top:12px;font-size:12px}
+  .switches{margin-top:12px}
+  .col{padding-top:16px}
+
+  h1{font-size:clamp(26px,8vw,34px);line-height:1.14}
+  .title{padding-bottom:20px}
+  .title p{font-size:16px}
+  p.lead-p{font-size:16.5px}
+  .facts{margin-bottom:36px}
+  .facts div{flex:1 1 100%;border-left:none !important;padding:11px 0;
     border-bottom:1px solid var(--rule)}
   .facts div:last-child{border-bottom:none}
-  .strip{margin:22px -20px 4px;padding:6px 20px 20px}
-  .tl td:first-child{width:96px}
+
+  section{margin-bottom:42px}
+  .head{gap:10px;margin-bottom:16px}
+  h2{font-size:23px;line-height:1.22}
+  h3{margin-top:24px}
+
+  .strip{margin:20px -18px 4px;padding:6px 18px 18px;gap:12px}
+  .shot{width:150px}
+  .shot span{font-size:11.5px}
+
+  .spec .row,.tools .row{padding:9px 0}
+  .spec dd,.tools .v{font-size:15px}
+  .note{padding-top:18px}
+  .note p,.how p,.tl td{font-size:15px}
+
+  .tl td:first-child{width:88px;padding-right:12px;white-space:normal;font-size:11px}
+  .links a{width:100%;justify-content:space-between}
+  .clist a{flex-direction:column;align-items:flex-start;gap:2px;padding:11px 0}
+  .clist i{order:-1;font-size:10.5px}
+  .contact{padding-top:20px}
+  .colophon{margin-bottom:48px}
 }
 @media print{.rail nav,.switches{display:none}}
 </style>
