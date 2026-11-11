@@ -1195,10 +1195,12 @@ html.rulers #rul{opacity:1}
     var max = d.scrollHeight - window.innerHeight;
     sp.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
     if (!calm && window.scrollY < 900) giant.style.translate = '0 ' + (window.scrollY * 0.24).toFixed(1) + 'px';
+    syncGuides();
   }
   window.addEventListener('scroll', function () {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
+  window.addEventListener('resize', onScroll);
   onScroll();
 
   if (!calm) {
@@ -1671,7 +1673,21 @@ html.rulers #rul{opacity:1}
     rl.innerHTML = h;
     rl.style.height = H + 'px';
   }
-  function guide(vertical, target) {
+  function guideBounds() {
+    var hero = $('.hero').getBoundingClientRect();
+    // The hero has its own narrower canvas. All following sections share the main content edges.
+    var rect = hero.bottom > innerHeight * 0.45 ? hero : $('.sec').getBoundingClientRect();
+    return { left: rect.left + scrollX, right: rect.right + scrollX - 1 };
+  }
+  function syncGuides() {
+    if (!d.classList.contains('rulers')) return;
+    var bounds = guideBounds();
+    $$in(rul, '.gd.v[data-edge]').forEach(function (g) {
+      g.style.left = bounds[g.getAttribute('data-edge')] + 'px';
+      g.style.height = d.scrollHeight + 'px';
+    });
+  }
+  function guide(vertical, target, edge) {
     return async function (a, my) {
       var g = document.createElement('div');
       g.className = 'gd ' + (vertical ? 'v' : 'h');
@@ -1690,6 +1706,8 @@ html.rulers #rul{opacity:1}
         else { g.style.top = v + 'px'; place(a, sx, v); }
         a.tag.textContent = Math.round(v);
       }, my);
+      if (my !== run) return;
+      if (vertical) { g.setAttribute('data-edge', edge); syncGuides(); }
       mode(a, 'move');
     };
   }
@@ -1915,8 +1933,8 @@ html.rulers #rul{opacity:1}
       if (wide) {
         rulers();
         d.classList.add('rulers');
-        var hr = $('.hero').getBoundingClientRect(), gr = $('.hero-grid').getBoundingClientRect();
-        jobs = [guide(true, hr.left + window.scrollX), guide(true, hr.right + window.scrollX), guide(false, gr.top + window.scrollY)];
+        var bounds = guideBounds(), gr = $('.hero-grid').getBoundingClientRect();
+        jobs = [guide(true, bounds.left, 'left'), guide(true, bounds.right, 'right'), guide(false, gr.top + window.scrollY)];
       }
       hud.setAttribute('data-st', 'run');
       t0 = performance.now();
