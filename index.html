@@ -3,332 +3,1844 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Роман Сарваді — UI/UX-дизайнер і розробник</title>
-<meta name="description" content="UI/UX-дизайн у Figma, веб- і мобільні інтерфейси. Проєкти, комерційний досвід і навчальні роботи Романа Сарваді.">
+<title>Роман Сарваді - UI/UX-дизайнер і розробник</title>
+<meta name="description" content="UI/UX-дизайн у Figma і розробка інтерфейсів. Власний застосунок Vyrii в App Store, комерційний досвід в Onix Systems, платформа для квіткової крамниці.">
+<meta property="og:title" content="Роман Сарваді - UI/UX-дизайнер і розробник">
+<meta property="og:description" content="Проєктую інтерфейси у Figma і сам доводжу їх до релізу. Vyrii, Onix Systems, «Між нами».">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0b'/%3E%3Crect x='9.5' y='9.5' width='13' height='13' fill='none' stroke='%230d99ff' stroke-width='1.5'/%3E%3Cg fill='%23fff' stroke='%230d99ff'%3E%3Crect x='7' y='7' width='5' height='5'/%3E%3Crect x='20' y='7' width='5' height='5'/%3E%3Crect x='7' y='20' width='5' height='5'/%3E%3Crect x='20' y='20' width='5' height='5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Oswald:wght@600;700&family=Unbounded:wght@400;500;800&display=swap" rel="stylesheet">
+<script>
+(function () {
+  var d = document.documentElement;
+  try {
+    var l = localStorage.getItem('lang'), t = localStorage.getItem('theme');
+    if (l === 'en' || l === 'uk') d.lang = l;
+    if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
 <style>
 :root{
-  --paper:#14130f;
-  --paper-2:#1c1a15;
-  --ink:#ece7db;
-  --ink-2:#a9a294;
-  --ink-3:#777166;
-  --rule:#2b2820;
-  --rule-2:#3d3930;
-  --accent:#e0a562;
-  --gold:#c08a3e;
-  --dot:rgba(255,240,210,.035);
-  --shot-bg:#0d0c0a;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --canvas:#0a0a0b;
+  --frame:#131517;
+  --frame-2:#1a1d20;
+  --inset:#0c0d0e;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.18);
+  --dot:rgba(255,255,255,.055);
+  --ink:#f1f1ef;
+  --ink-2:#aeb2b6;
+  --ink-3:#9aa0a6;
+  --sel:#0d99ff;
+  --sel-ink:#43b0ff;
+  --sel-soft:rgba(13,153,255,.13);
+  --ok:#3fcf8e;
+  --r:18px;
+  --display:"Unbounded","Onest",system-ui,sans-serif;
+  --tall:"Oswald","Unbounded",system-ui,sans-serif;
+  --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 :root[data-theme="light"]{
-  --paper:#f3f0e9;
-  --paper-2:#ebe7dd;
-  --ink:#1c1a16;
-  --ink-2:#4a453c;
-  --ink-3:#7d7668;
-  --rule:#d6d0c2;
-  --rule-2:#c2baa8;
-  --accent:#a4531d;
-  --gold:#b98a3c;
-  --dot:rgba(120,105,80,.045);
-  --shot-bg:#fff;
+  --canvas:#e9e9e6;
+  --frame:#fbfbfa;
+  --frame-2:#f1f1ee;
+  --inset:#f0f0ed;
+  --line:rgba(0,0,0,.1);
+  --line-2:rgba(0,0,0,.24);
+  --dot:rgba(0,0,0,.09);
+  --ink:#111213;
+  --ink-2:#44484c;
+  --ink-3:#666a6e;
+  --sel-ink:#0a66c2;
+  --sel-soft:rgba(13,153,255,.12);
+  --ok:#1f9d63;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--paper);color:var(--ink);
-  font:17px/1.62 var(--serif);
+  margin:0;background:var(--canvas);color:var(--ink);
+  font:400 16px/1.6 var(--sans);
   -webkit-font-smoothing:antialiased;
   background-image:radial-gradient(var(--dot) 1px,transparent 1px);
-  background-size:3px 3px;
+  background-size:24px 24px;
+  overflow-x:hidden;
 }
+html[lang="uk"] [data-en],html[lang="en"] [data-uk]{display:none !important}
 [hidden]{display:none !important}
 a{color:inherit}
 img{max-width:100%}
+button{font:inherit;color:inherit}
+p{margin:0}
+.nw{white-space:nowrap}
+.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+::selection{background:var(--sel);color:#fff}
+:focus-visible{outline:2px solid var(--sel);outline-offset:3px}
 
-/* ---------- каркас ---------- */
-.page{max-width:1180px;margin:0 auto;padding:0 28px}
-.layout{display:grid;grid-template-columns:230px 1fr;gap:64px;align-items:start}
-.rail{position:sticky;top:0;padding:38px 0 40px;align-self:start;min-width:0}
-.col{max-width:700px;padding:38px 0 0;min-width:0}
+.wrap{max-width:1168px;margin:0 auto;padding:0 24px}
 
-/* ---------- рейка ---------- */
-.mark{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
-.mark svg{width:15px;height:15px;flex:none;transform:translateY(2px)}
-.mark b{font:700 17px/1.2 var(--sans);letter-spacing:-.01em}
-.rail .role{font:400 13px/1.45 var(--sans);color:var(--ink-3);margin:0 0 22px}
-.rail nav{border-top:1px solid var(--rule);padding-top:14px}
-.rail nav a{display:flex;gap:10px;text-decoration:none;
-  font:400 13.5px/1.9 var(--sans);color:var(--ink-2)}
-.rail nav a:hover{color:var(--accent)}
-.rail nav a i{font:400 11px/1.9 var(--mono);color:var(--ink-3);font-style:normal}
-.rail .foot{margin-top:22px;border-top:1px solid var(--rule);padding-top:14px;
-  font:400 12.5px/1.7 var(--sans);color:var(--ink-3)}
-.rail .foot a{display:block;text-decoration:none;color:var(--ink-2)}
-.rail .foot a:hover{color:var(--accent)}
-.switches{display:flex;gap:8px;margin-top:16px}
-.sw{background:none;border:1px solid var(--rule-2);color:var(--ink-2);
-  font:600 11px/1 var(--sans);letter-spacing:.12em;padding:7px 11px;
-  cursor:pointer;border-radius:2px}
-.sw:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ---------- титул ---------- */
-.title{border-bottom:2px solid var(--ink);padding-bottom:26px;margin-bottom:6px}
-.title .over{font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--accent);margin:0 0 20px}
-h1{font:400 clamp(30px,4.6vw,49px)/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 20px;
-  text-wrap:balance}
-.title p{margin:0 0 14px;color:var(--ink-2);font-size:17.5px}
-.title p:last-child{margin-bottom:0}
-
-.facts{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--rule);margin-bottom:54px}
-.facts div{flex:1 1 150px;padding:14px 16px 14px 0;font:400 13px/1.45 var(--sans);color:var(--ink-2)}
-.facts div + div{padding-left:16px;border-left:1px solid var(--rule)}
-
-/* ---------- розділи ---------- */
-section{margin-bottom:60px;scroll-margin-top:26px}
-.head{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--ink);
-  padding-top:12px;margin-bottom:22px}
-.head .num{font:400 12px/1 var(--mono);color:var(--accent);flex:none;padding-top:5px}
-h2{font:400 clamp(23px,3vw,31px)/1.2 var(--serif);letter-spacing:-.01em;margin:0}
-.kick{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 9px}
-h3{font:600 15.5px/1.35 var(--sans);letter-spacing:-.005em;margin:30px 0 8px}
-p{margin:0 0 15px;color:var(--ink-2)}
-p.lead-p{color:var(--ink);font-size:18.5px}
-strong{color:var(--ink);font-weight:600}
-em{font-style:italic}
-code{overflow-wrap:anywhere;font:400 .88em/1.4 var(--mono);background:var(--paper-2);
-  border:1px solid var(--rule);padding:1px 5px;border-radius:2px}
-
-/* ---------- специфікація ---------- */
-.spec{margin:26px 0 6px;border-top:1px solid var(--rule)}
-.spec .row{display:grid;grid-template-columns:150px 1fr;gap:18px;
-  padding:10px 0;border-bottom:1px solid var(--rule)}
-.spec dt{font:400 12px/1.55 var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
-.spec dd{margin:0;font-size:16px;color:var(--ink-2)}
-
-/* ---------- нумеровані розбори ---------- */
-.notes{counter-reset:n;margin-top:8px}
-.note{counter-increment:n;position:relative;padding:22px 0 4px;border-top:1px solid var(--rule)}
-.note:first-child{border-top:none}
-.note::before{content:counter(n,decimal-leading-zero);
-  font:400 11px/1 var(--mono);color:var(--gold);
-  position:absolute;left:-52px;top:26px}
-.note h4{font:600 16px/1.35 var(--sans);margin:0 0 8px}
-.note p{margin:0 0 12px;font-size:16px}
-.note p:last-child{margin-bottom:14px}
-
-/* ---------- смуга екранів ---------- */
-.strip{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;min-width:0;
-  padding:6px 28px 22px;margin:26px -28px 4px;scroll-snap-type:x proximity;
-  -webkit-overflow-scrolling:touch}
-.strip::-webkit-scrollbar{height:5px}
-.strip::-webkit-scrollbar-thumb{background:var(--rule-2)}
-.shot{flex:none;width:186px;scroll-snap-align:center}
-.shot img{display:block;width:100%;border:1px solid var(--rule-2);background:var(--shot-bg)}
-.shot span{display:block;margin-top:9px;font:400 12px/1.4 var(--sans);color:var(--ink-3)}
-.shot span b{display:block;font:400 10.5px/1.6 var(--mono);color:var(--gold);font-weight:400}
-
-/* ---------- таблиця часу ---------- */
-.tl{width:100%;table-layout:fixed;border-collapse:collapse;margin-top:8px}
-.tl td{overflow-wrap:anywhere}
-.tl td{border-bottom:1px solid var(--rule);padding:12px 0;vertical-align:baseline;
-  color:var(--ink-2);font-size:16px}
-.tl td:first-child{width:132px;padding-right:18px;white-space:nowrap;
-  font:400 12px/1.7 var(--mono);color:var(--ink-3)}
-.tl tr:first-child td{border-top:1px solid var(--rule)}
-
-/* ---------- інструменти ---------- */
-.tools{margin-top:10px;border-top:1px solid var(--rule)}
-.tools .row{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:11px 0;
-  border-bottom:1px solid var(--rule)}
-.tools .g{font:400 12px/1.6 var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
-.tools .v{font:400 15.5px/1.6 var(--sans);color:var(--ink-2)}
-
-/* ---------- принципи ---------- */
-.how{counter-reset:h;margin-top:6px}
-.how .it{counter-increment:h;position:relative;padding:18px 0;border-bottom:1px solid var(--rule)}
-.how .it:first-child{border-top:1px solid var(--rule)}
-.how .it::before{content:counter(h);position:absolute;left:-52px;top:22px;
-  font:400 11px/1 var(--mono);color:var(--gold)}
-.how h4{font:600 15.5px/1.3 var(--sans);margin:0 0 6px}
-.how p{margin:0;font-size:16px}
-
-/* ---------- виноска ---------- */
-.aside{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:24px 0;
-  font-size:16px;color:var(--ink-3)}
-.aside p{margin:0;color:inherit;font-style:italic}
-
-/* ---------- посилання на проєкт ---------- */
-.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 4px}
-.links a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;
-  border:1px solid var(--rule-2);padding:9px 15px;border-radius:2px;
-  font:500 14px/1 var(--sans);color:var(--ink)}
-.links a:hover{border-color:var(--accent);color:var(--accent)}
-.links a i{font-style:normal;font:400 11px/1 var(--mono);color:var(--ink-3);letter-spacing:.04em}
-
-/* ---------- контакти ---------- */
-.contact{border-top:2px solid var(--ink);padding-top:26px}
-.clist{margin:22px 0 70px;border-top:1px solid var(--rule)}
-.clist a{display:flex;justify-content:space-between;gap:16px;
-  padding:12px 0;border-bottom:1px solid var(--rule);text-decoration:none;
-  font:400 15.5px/1.5 var(--sans);color:var(--ink)}
-.clist a:hover{color:var(--accent)}
-.clist i{font-style:normal;font:400 12px/1.7 var(--mono);color:var(--ink-3);
-  text-transform:uppercase;letter-spacing:.04em}
-
-/* ---------- адаптив ---------- */
-@media (max-width:900px){
-  .layout{grid-template-columns:1fr;gap:0}
-  .rail{position:static;padding:26px 0 0}
-  .rail nav{display:none}
-  .col{padding-top:22px}
-  .note::before,.how .it::before{position:static;display:block;margin-bottom:6px}
-  .spec .row,.tools .row{grid-template-columns:1fr;gap:2px}
+/* навігація */
+.nav{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:40;
+  display:flex;align-items:center;gap:4px;
+  padding:6px 6px 6px 14px;max-width:calc(100vw - 24px);white-space:nowrap;
+  border:1px solid var(--line);border-radius:999px;
+  background:var(--frame);
 }
-@media (max-width:560px){
-  body{font-size:15.5px;line-height:1.58}
-  .page{padding:0 18px}
-  .rail{padding:22px 0 0}
-  .mark b{font-size:16px}
-  .rail .role{margin-bottom:14px}
-  .rail .foot{margin-top:14px;padding-top:12px;font-size:12px}
-  .switches{margin-top:12px}
-  .col{padding-top:16px}
-
-  h1{font-size:clamp(26px,8vw,34px);line-height:1.14}
-  .title{padding-bottom:20px}
-  .title p{font-size:16px}
-  p.lead-p{font-size:16.5px}
-  .facts{margin-bottom:36px}
-  .facts div{flex:1 1 100%;border-left:none !important;padding:11px 0;
-    border-bottom:1px solid var(--rule)}
-  .facts div:last-child{border-bottom:none}
-
-  section{margin-bottom:42px}
-  .head{gap:10px;margin-bottom:16px}
-  h2{font-size:23px;line-height:1.22}
-  h3{margin-top:24px}
-
-  .strip{margin:20px -18px 4px;padding:6px 18px 18px;gap:12px}
-  .shot{width:150px}
-  .shot span{font-size:11.5px}
-
-  .spec .row,.tools .row{padding:9px 0}
-  .spec dd,.tools .v{font-size:15px}
-  .note{padding-top:18px}
-  .note p,.how p,.tl td{font-size:15px}
-
-  .tl td:first-child{width:88px;padding-right:12px;white-space:normal;font-size:11px}
-  .links a{width:100%;justify-content:space-between}
-  .clist a{flex-direction:column;align-items:flex-start;gap:2px;padding:11px 0}
-  .clist i{order:-1;font-size:10.5px}
-  .contact{padding-top:20px}
-  .colophon{margin-bottom:48px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;font:600 14px/1 var(--sans);margin-right:8px}
+.brand svg{width:18px;height:18px;flex:none}
+.nav nav{display:flex}
+.nav nav a{padding:9px 11px;border-radius:999px;text-decoration:none;font:400 14px/1 var(--sans);color:var(--ink-2)}
+.nav nav a:hover{color:var(--ink);background:var(--line)}
+.avail{display:flex;align-items:center;gap:8px;margin:0 6px 0 8px;font:500 11px/1 var(--mono);color:var(--ink-2)}
+.dot{width:7px;height:7px;flex:none;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 20%,transparent)}
+.tog{display:flex;gap:4px}
+.tog button{
+  height:32px;min-width:38px;padding:0 10px;cursor:pointer;
+  background:none;border:1px solid var(--line-2);border-radius:999px;
+  font:500 11px/1 var(--mono);color:var(--ink-2);
 }
-@media print{.rail nav,.switches{display:none}}
+.tog button:hover{color:var(--ink);border-color:var(--ink)}
+.tog svg{display:block;margin:0 auto}
+#menu{display:none}
+
+/* перший екран */
+.hero{position:relative;isolation:isolate;padding-top:90px}
+.hero::before{
+  content:"";position:absolute;z-index:-1;left:50%;top:-40px;width:min(1100px,120vw);height:640px;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(13,153,255,.2),transparent);
+}
+.giant{display:block;width:100%;height:auto;overflow:visible;user-select:none}
+.giant text{font-family:var(--tall);font-weight:700;font-size:300px;fill:url(#gg);stroke:var(--sel);stroke-opacity:.8;stroke-width:1.6px}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) 286px minmax(0,340px);gap:44px;align-items:start;
+  margin-top:clamp(-64px,-4.4vw,-18px);
+}
+.hi{margin:0 0 12px;font:400 italic 22px/1 var(--sans);color:var(--ink)}
+h1{margin:0;font:800 clamp(36px,4.9vw,58px)/1 var(--display);letter-spacing:-.03em;text-transform:uppercase}
+.nm{position:relative;display:inline-block;padding:.14em .24em .18em;background:var(--sel);color:#fff}
+.nm i{position:absolute;width:9px;height:9px;background:#fff;border:1.5px solid var(--sel)}
+.nm i:nth-of-type(1){left:-5px;top:-5px}
+.nm i:nth-of-type(2){right:-5px;top:-5px}
+.nm i:nth-of-type(3){left:-5px;bottom:-5px}
+.nm i:nth-of-type(4){right:-5px;bottom:-5px}
+.sn{display:block;margin-top:.22em}
+.role{
+  display:inline-flex;align-items:center;gap:10px;margin:24px 0 0;padding:10px 14px;
+  border:1px solid var(--line-2);background:color-mix(in srgb,var(--frame) 70%,transparent);
+  font:500 12px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;
+}
+.role i{width:6px;height:6px;flex:none;background:var(--sel)}
+.lead{margin:24px 0 0;max-width:30em;font-size:18px;line-height:1.55}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;
+  border:1px solid var(--line-2);border-radius:999px;
+  text-decoration:none;font:500 14.5px/1 var(--sans);color:var(--ink);
+}
+.btn i{font:400 11px/1 var(--mono);font-style:normal;color:var(--ink-3)}
+.btn:hover{border-color:var(--sel)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--canvas)}
+.btn.primary i{color:color-mix(in srgb,var(--canvas) 55%,var(--ink))}
+.btn.primary:hover{background:var(--sel);border-color:var(--sel);color:#04121d}
+.btn.primary:hover i{color:rgba(4,18,29,.7)}
+.mini{display:flex;list-style:none;margin:34px 0 0;padding:16px 0 0;border-top:1px solid var(--line)}
+.mini li{flex:1;padding-right:14px;font-size:13px;line-height:1.35;color:var(--ink-2)}
+.mini li + li{padding-left:16px;border-left:1px solid var(--line)}
+.mini b{display:block;margin-bottom:4px;font:600 30px/1 var(--tall);color:var(--ink)}
+.mini li:first-child b{color:var(--sel-ink)}
+
+.phone{
+  position:relative;margin:0;width:100%;padding:9px;border-radius:44px;
+  background:#050506;border:1px solid var(--line-2);
+  box-shadow:0 40px 110px -34px rgba(13,153,255,.55);
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out;
+}
+.scr{position:relative;overflow:hidden;border-radius:36px;aspect-ratio:860 / 1864;background:#0b0c0d}
+.scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.scr img.act{opacity:1}
+.badge{
+  position:absolute;left:-22px;bottom:64px;display:flex;align-items:center;gap:9px;padding:10px 13px;
+  background:var(--frame);border:1px solid var(--sel);
+  font:500 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
+}
+.idx{position:relative;display:block;padding:18px 20px 19px;border:1px solid var(--line);border-radius:14px;background:var(--frame);text-decoration:none}
+.idx + .idx{margin-top:10px}
+.idx:hover{border-color:var(--sel)}
+.idx .no{display:block;font:500 12px/20px var(--mono);color:var(--ink-3)}
+.idx .tg{position:absolute;right:16px;top:18px;padding:4px 7px;border:1px solid var(--line-2);border-radius:5px;font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.idx b{display:block;margin:8px 0 5px;font:500 18px/1.2 var(--display);letter-spacing:-.02em}
+.idx .d{display:block;font-size:14px;line-height:1.45;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:16px 0 0;padding:0}
+.chips li{padding:5px 10px;border:1px solid var(--line);border-radius:6px;font:400 12px/1.3 var(--mono);color:var(--ink-2)}
+
+/* розділи */
+.sec{margin-top:120px;scroll-margin-top:84px}
+.kick{margin:0 0 16px;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--sel-ink)}
+h2{margin:0;font:500 clamp(28px,4.2vw,48px)/1.06 var(--display);letter-spacing:-.035em;text-wrap:balance}
+.lede{margin:18px 0 0;max-width:40em;font-size:18px;line-height:1.55;color:var(--ink-2)}
+.block{margin-top:38px}
+.fname{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:0 4px 9px;font:500 12.5px/1.2 var(--sans);color:var(--ink-3);
+}
+.fname .dim{font:400 11px/1 var(--mono);font-style:normal}
+.frame{
+  --pad:38px;position:relative;padding:var(--pad);
+  background:var(--frame);border:1px solid var(--line);border-radius:var(--r);
+}
+.frame::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;
+  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),rgba(13,153,255,.1),transparent 62%);
+}
+.frame:hover::after{opacity:1}
+h3{margin:0;font:500 clamp(20px,2.3vw,27px)/1.18 var(--display);letter-spacing:-.025em}
+h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
+.sub4{font:500 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.frame p{color:var(--ink-2)}
+.frame p.sub4{color:var(--ink-3)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px}
+.quote{margin-top:10px;padding:4px 0 4px 20px;border-left:2px solid var(--sel);font-size:18px;line-height:1.5;font-style:italic}
+.frame p.quote{color:var(--ink)}
+.prin{list-style:none;margin:0;padding:0}
+.prin li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:16px 0;border-top:1px solid var(--line)}
+.prin li:first-child{padding-top:0;border-top:0}
+.prin li:last-child{padding-bottom:0}
+.prin .n{font:500 12px/1.9 var(--mono);color:var(--sel-ink)}
+.prin h4{margin-bottom:4px}
+.prin p{font-size:15px}
+
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;margin-bottom:26px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;background:var(--sel-soft);border:1px solid color-mix(in srgb,var(--sel) 45%,transparent);font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sel-ink)}
+.pill::before{content:"";width:6px;height:6px;background:var(--sel)}
+.meta{font:400 12px/1.4 var(--mono);color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:30px}
+.tile{padding:18px 18px 16px;background:var(--inset);border:1px solid var(--line);border-radius:12px}
+.tile b{display:block;font:600 44px/1 var(--tall);color:var(--sel-ink)}
+.tile span{display:block;margin-top:8px;font:400 12px/1.4 var(--mono);color:var(--ink-2)}
+
+.part{margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+.part > .sub4{margin-bottom:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{
+  padding:9px 13px;cursor:pointer;background:none;border:1px solid var(--line-2);border-radius:7px;
+  font:500 12px/1 var(--mono);color:var(--ink-2);
+}
+.tabs button:hover{color:var(--ink);border-color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--sel);border-color:var(--sel);color:#04121d}
+.tp{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;margin-top:14px;padding:28px;align-items:center;background:var(--inset);border:1px solid var(--line);border-radius:14px}
+.tp.solo{grid-template-columns:minmax(0,1fr)}
+.tp.solo p{max-width:46em}
+.tp-k{margin:0 0 14px;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.frame p.tp-k{color:var(--sel-ink)}
+.tp h4{font:500 19px/1.25 var(--display);letter-spacing:-.02em;margin-bottom:12px}
+.strip{display:flex;gap:14px;justify-content:flex-end;min-width:0}
+.shot{flex:1 1 0;min-width:0;max-width:182px;margin:0}
+.shot figcaption{margin:0 0 8px 2px;font:500 12px/1.3 var(--sans);color:var(--ink-3)}
+.shot img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:var(--frame-2)}
+.shot img{transition:transform .25s ease,border-color .2s}
+.shot:hover img{border-color:var(--sel);transform:translateY(-4px)}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.stack > .links{margin-top:10px}
+
+.path{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 30px;padding:0}
+.path li{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--inset);border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--ink)}
+.path b{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sel-ink)}
+.ul{list-style:none;margin:0;padding:0}
+.ul li{position:relative;margin:0 0 11px;padding-left:18px;color:var(--ink-2)}
+.ul li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--sel)}
+.take{margin-top:30px;padding:18px 20px;background:var(--inset);border:1px solid var(--line);border-radius:12px}
+.take .sub4{margin-bottom:10px}
+.frame .take p:not(.sub4){color:var(--ink)}
+.frame p.note{margin-top:18px;font-size:14px;color:var(--ink-3)}
+
+.browser{overflow:hidden;align-self:start;border:1px solid var(--line-2);border-radius:12px;background:#0b0c0d;box-shadow:0 30px 80px -40px rgba(13,153,255,.45)}
+.browser .chrome{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.1)}
+.browser .chrome i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2)}
+.browser .chrome span{flex:1;margin-right:38px;text-align:center;font:400 11px/1 var(--mono);color:rgba(255,255,255,.55)}
+.browser img{display:block;width:100%;height:auto;aspect-ratio:1440 / 636;object-fit:cover;object-position:top}
+.hooks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hook{padding:18px;background:var(--inset);border:1px solid var(--line);border-radius:12px}
+.hook h4{margin-bottom:6px}
+.hook p{font-size:14.5px;line-height:1.5}
+.rows{margin:0}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.row:first-child{padding-top:0}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row dt{font:400 12.5px/1.7 var(--mono);color:var(--ink-3)}
+.row dd{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+.tl li:first-child{padding-top:0;border-top:0}
+.tl li:last-child{padding-bottom:0}
+.tl .when{font:400 12.5px/1.7 var(--mono);color:var(--ink-3)}
+.tl .now{display:inline-flex;align-items:center;gap:8px;padding:6px 9px;background:var(--sel);font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#04121d}
+.tl h4{font-size:17px;margin-bottom:6px}
+.tl p{max-width:46em;font-size:15.5px}
+.prog{display:flex;align-items:center;gap:5px;margin-top:14px}
+.prog i{width:44px;height:5px;background:var(--line-2)}
+.prog i.f{background:var(--sel)}
+.prog span{margin-left:8px;font:400 12px/1 var(--mono);color:var(--ink-2)}
+.figrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;padding:22px var(--pad)}
+.figrow p{max-width:36em}
+.frame.figrow p{color:var(--ink)}
+
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sk{padding:20px;background:var(--frame);border:1px solid var(--line);border-radius:14px}
+.sk h4{margin:0;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sel-ink)}
+.sk .chips{margin-top:14px}
+.sk.wide{grid-column:span 2}
+
+.contact{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:44px;align-items:center;--pad:46px}
+.mail{
+  display:block;margin:0;text-decoration:none;overflow-wrap:anywhere;
+  font:500 clamp(16px,2.8vw,31px)/1.2 var(--display);letter-spacing:-.025em;
+}
+.mail:hover{color:var(--sel-ink)}
+.clist{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.clist a{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:15.5px}
+.clist a:last-child{border-bottom:0}
+.clist a:hover span{text-decoration:underline;text-underline-offset:4px}
+.clist i{font-style:normal;font:400 12px/1.9 var(--mono);color:var(--ink-3)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:34px 4px 110px;font-size:13.5px;color:var(--ink-3)}
+.foot button{background:none;border:0;padding:6px 0;cursor:pointer;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:4px}
+.foot button:hover{color:var(--ink)}
+
+
+/* живі деталі */
+#sp{position:fixed;left:0;top:0;z-index:45;width:100%;height:2px;background:var(--sel);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+#me{
+  position:fixed;left:0;top:0;z-index:70;pointer-events:none;opacity:0;transition:opacity .25s;
+  padding:4px 8px;border-radius:999px;background:var(--ink);color:var(--canvas);font:500 11px/1 var(--sans);white-space:nowrap;
+}
+#me.on{opacity:1}
+.mq{overflow:hidden;margin:76px calc(50% - 50vw) 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--frame) 55%,transparent)}
+.mq-t{display:flex;align-items:center;gap:34px;width:max-content;padding-left:34px}
+.mq-t span{font:600 30px/1 var(--tall);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
+.mq-t span:nth-of-type(even){color:transparent;-webkit-text-stroke:1.2px var(--ink-2)}
+.mq-t i{width:9px;height:9px;flex:none;background:#fff;border:1.5px solid var(--sel)}
+.idx,.tile,.hook,.sk,.shot,.path li{position:relative}
+.tp.in{animation:tpIn .4s ease}
+@keyframes tpIn{from{opacity:0;translate:0 10px}}
+
+.prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.price{position:relative;display:flex;flex-direction:column;gap:14px;padding:28px;background:var(--frame);border:1px solid var(--line);border-radius:var(--r)}
+.price p{color:var(--ink-2)}
+.price p.sub4{color:var(--sel-ink)}
+.amt{display:block}
+.amt b{font:700 62px/1 var(--tall);color:var(--ink)}
+.amt span{display:block;margin-top:8px;font:400 13px/1.3 var(--mono);color:var(--ink-2)}
+.price .ul{margin-top:4px;padding-top:18px;border-top:1px solid var(--line)}
+.pfoot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:20px}
+.pfoot p{font-size:14.5px;color:var(--ink-3)}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero::before{animation:glow 9s ease-in-out infinite alternate}
+  .phone{animation:bob 6s ease-in-out infinite}
+  .mq-t{animation:mq 46s linear infinite}
+  .mq:hover .mq-t{animation-play-state:paused}
+  html.build .giant.on text{stroke-dasharray:4000;animation:draw 2.6s ease-out both}
+  .dot{animation:pulse 2.4s ease-out infinite}
+}
+@keyframes glow{from{opacity:.7;transform:translateX(-50%) scale(1)}to{opacity:1;transform:translateX(-46%) scale(1.14)}}
+@keyframes bob{50%{translate:0 -9px}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes draw{from{stroke-dashoffset:4000;fill-opacity:0}to{stroke-dashoffset:0;fill-opacity:1}}
+@keyframes pulse{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}to{box-shadow:0 0 0 9px transparent}}
+
+/* збірка сторінки: шари сховані, поки агент їх не «намалює» */
+html.build [data-l]{opacity:0}
+html.wipe [data-l]{opacity:0;transition:opacity .5s ease}
+html.build [data-l].on{opacity:1;transition:opacity .2s ease}
+.rest{opacity:0}
+.car{position:relative}
+.car::after{content:"";position:absolute;left:1px;top:.1em;width:2px;height:.95em;background:var(--sel)}
+
+#stage{position:absolute;top:0;left:0;width:100%;height:0;z-index:50;pointer-events:none}
+.bx{position:absolute;border:1px solid var(--sel);transition:opacity .18s}
+.bx.fill{background:color-mix(in srgb,var(--ink) 15%,var(--canvas))}
+.bx .ph{position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;color:var(--ink);opacity:.5}
+.bx i{position:absolute;width:7px;height:7px;background:#fff;border:1px solid var(--sel)}
+.bx i:nth-child(1){left:-4px;top:-4px}
+.bx i:nth-child(2){right:-4px;top:-4px}
+.bx i:nth-child(3){left:-4px;bottom:-4px}
+.bx i:nth-child(4){right:-4px;bottom:-4px}
+.bx b{
+  position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);
+  display:block;margin:0;padding:3px 5px;border-radius:3px;background:var(--sel);color:#fff;
+  font:500 10px/1 var(--mono);letter-spacing:0;text-transform:none;white-space:nowrap;
+}
+.selbox{inset:-1px;z-index:3}
+.cur{position:absolute;left:0;top:0;opacity:0;transition:opacity .3s;will-change:transform}
+.cur.show{opacity:1}
+.cur svg{display:none;width:18px;height:18px}
+.cur[data-m="move"] .g-move,.cur[data-m="guide"] .g-move,.cur[data-m="dup"] .g-dup{display:block}
+.cur[data-m="draw"] .g-draw,.cur[data-m="type"] .g-type{display:block;transform:translate(-9px,-9px)}
+.cur[data-m="fly"] .g-fly{display:block;transform:translate(-9px,-9px) rotate(var(--rot,0rad))}
+.cur > span{position:absolute;left:13px;top:15px;padding:3px 7px;border-radius:999px;font:500 10px/1.1 var(--sans);white-space:nowrap;background:currentColor}
+.cur > span b{font-weight:500}
+.cur.flip > span{left:auto;right:4px}
+.cur[data-m="type"] > span,.cur[data-m="fly"] > span,.cur[data-m="dup"] > span,.cur[data-m="guide"] > span{display:none}
+.cur em{display:none;position:absolute;left:17px;top:-13px;padding:2px 4px;border-radius:3px;background:#ff5c3a;color:#fff;font:500 10px/1 var(--mono);font-style:normal;white-space:nowrap}
+.cur[data-m="dup"] em,.cur[data-m="guide"] em{display:block}
+#flock{position:fixed;inset:0;z-index:50;overflow:hidden;pointer-events:none}
+.ghost{outline:1px solid #ff5c3a;outline-offset:1px}
+.pick{outline:1px solid var(--sel);outline-offset:1px}
+.selx{background:rgba(13,153,255,.42) !important;color:#fff !important}
+
+#rul{position:absolute;top:0;left:0;width:100%;height:0;z-index:38;pointer-events:none;opacity:0;transition:opacity .35s}
+html.rulers #rul{opacity:1}
+.rt,.rl{overflow:hidden;background-color:color-mix(in srgb,var(--frame) 88%,transparent);font:400 8px/1 var(--mono);color:var(--ink-3)}
+.rt{position:fixed;top:0;left:0;right:0;height:16px;border-bottom:1px solid var(--line);
+  background-image:repeating-linear-gradient(90deg,var(--line-2) 0 1px,transparent 1px 100px),repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 10px);
+  background-size:auto 16px,auto 5px;background-position:0 0,0 11px;background-repeat:repeat-x}
+.rl{position:absolute;top:0;left:0;width:16px;height:0;border-right:1px solid var(--line);
+  background-image:repeating-linear-gradient(180deg,var(--line-2) 0 1px,transparent 1px 100px),repeating-linear-gradient(180deg,var(--line) 0 1px,transparent 1px 10px);
+  background-size:16px auto,5px auto;background-position:0 0,11px 0;background-repeat:repeat-y}
+.rt i,.rl i{position:absolute;font-style:normal}
+.rt i{top:2px;margin-left:3px}
+.rl i{left:2px;margin-top:3px;writing-mode:vertical-rl;transform:rotate(180deg)}
+.gd{position:absolute;background:#ff3b6b;opacity:.75}
+.gd.v{top:0;width:1px}
+.gd.h{left:0;width:100%;height:1px}
+
+.hud{
+  position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;
+  display:none;align-items:center;gap:12px;height:46px;padding:0 6px 0 12px;
+  border:1px solid var(--line-2);border-radius:999px;
+  background:var(--frame-2);
+  font:400 12px/1 var(--mono);color:var(--ink-2);white-space:nowrap;
+}
+.hud.show{display:flex}
+.avs{display:flex;padding-left:6px}
+.avs i{
+  width:20px;height:20px;margin-left:-6px;border-radius:50%;border:2px solid var(--frame-2);
+  font:500 9px/16px var(--sans);font-style:normal;text-align:center;
+}
+.cnt b,.ag b{font-weight:500;color:var(--ink)}
+.sep{width:1px;height:16px;background:var(--line-2)}
+.bar{width:60px;height:2px;border-radius:1px;background:var(--line-2);overflow:hidden}
+.bar i{display:block;width:0;height:100%;background:var(--sel)}
+.hud button{
+  height:32px;padding:0 12px;cursor:pointer;border:0;border-radius:999px;
+  background:var(--line);font:500 12px/1 var(--mono);color:var(--ink);
+}
+.hud button:hover{background:var(--line-2)}
+.hud button[aria-pressed="true"]{background:var(--sel);color:#04121d}
+.hud [data-on]{display:none}
+.hud[data-st="scan"] [data-on~="scan"],.hud[data-st="run"] [data-on~="run"],.hud[data-st="skip"] [data-on~="skip"],.hud[data-st="done"] [data-on~="done"]{display:inline}
+.hud[data-st="scan"] .acts[data-on~="scan"],.hud[data-st="run"] .acts[data-on~="run"],.hud[data-st="skip"] .acts[data-on~="skip"],.hud[data-st="done"] .acts[data-on~="done"],.hud[data-st="run"] .avs{display:flex;gap:4px}
+.hud[data-st="run"] .avs{gap:0}
+.hud[data-st="run"] .bar,.hud[data-st="run"] .sep{display:block}
+#close{padding:0 11px;font-size:15px}
+
+@media (max-width:1080px){
+  .avail{display:none}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 260px;gap:36px}
+  .hero-side{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .hero-side .idx + .idx{margin-top:0}
+  .tp{grid-template-columns:minmax(0,1fr);gap:24px}
+  .strip{justify-content:flex-start}
+  .hooks{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .nav nav{display:none}
+  #menu{display:block}
+  .nav.open nav{display:flex;flex-direction:column;position:absolute;top:calc(100% + 8px);right:0;min-width:220px;padding:8px;border:1px solid var(--line-2);border-radius:18px;background:var(--frame)}
+  .nav.open nav a{padding:13px 14px;font-size:15px}
+  .brand{margin-right:4px}
+  .two,.contact{grid-template-columns:minmax(0,1fr);gap:28px}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prices{grid-template-columns:minmax(0,1fr)}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding-top:84px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:34px;margin-top:6px}
+  .hi{font-size:19px}
+  .lead{font-size:17px}
+  .btn{flex:1 1 auto;justify-content:space-between}
+  .phone{max-width:264px;justify-self:center}
+  .badge{left:-12px}
+  .hero-side{grid-template-columns:minmax(0,1fr)}
+  .sec{margin-top:84px}
+  .mq{margin-top:56px;padding:14px 0}
+  .mq-t span{font-size:22px}
+  .amt b{font-size:52px}
+  .price{padding:22px}
+  .lede{font-size:17px}
+  .block{margin-top:28px}
+  .frame{--pad:22px}
+  .contact{--pad:24px}
+  .tile b{font-size:36px}
+  .tp{padding:20px}
+  .strip{overflow-x:auto;margin:0 -20px;padding:0 20px 14px;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 44px),transparent)}
+  .shot{flex:none;width:156px}
+  .hooks,.skills{grid-template-columns:minmax(0,1fr)}
+  .sk.wide{grid-column:auto}
+  .row{grid-template-columns:minmax(0,1fr);gap:0}
+  .tl li{grid-template-columns:minmax(0,1fr);gap:8px}
+  .prog i{width:34px}
+  .fname .dim{display:none}
+  .foot{flex-direction:column;align-items:flex-start;gap:6px}
+  .hud{gap:10px;padding-left:14px}
+  .hud .avs,.hud .bar,.hud .sep,.hud .ag{display:none !important}
+  #rul{display:none}
+  .cur > span{display:none}
+}
+@media print{
+  .nav,.hud,#stage,#flock,#rul,#sp,#me,.mq,.foot button{display:none !important}
+  html.build [data-l]{opacity:1}
+}
 </style>
 </head>
 <body>
-<div class="page">
-<div class="layout">
 
-<aside class="rail">
-  <div class="mark">
-    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6c9.9 0 18 8.1 18 18 0 13.5-13.4 27.4-16.6 32.5a1.7 1.7 0 0 1-2.8 0C27.4 51.4 14 37.5 14 24 14 14.1 22.1 6 32 6z" fill="#c08a3e"/><circle cx="32" cy="24" r="7.4" fill="var(--paper)"/></svg>
-    <b>Роман Сарваді</b>
-  </div>
-  <p class="role" data-uk>Розробник і дизайнер продуктів<br>Кропивницький, Україна</p>
-  <p class="role" data-en hidden>Product developer and designer<br>Kropyvnytskyi, Ukraine</p>
-
-  <nav>
-    <a href="#about"><i>01</i><span data-uk>Хто я</span><span data-en hidden>About</span></a>
-    <a href="#vyrii"><i>02</i><span>Vyrii</span></a>
-    <a href="#onix"><i>03</i><span>Onix Systems</span></a>
-    <a href="#flowers"><i>04</i><span data-uk>Між нами</span><span data-en hidden>Mizh Namy</span></a>
-    <a href="#how"><i>05</i><span data-uk>Як я працюю</span><span data-en hidden>How I work</span></a>
-    <a href="#tools"><i>06</i><span data-uk>Інструменти</span><span data-en hidden>Tools</span></a>
-    <a href="#timeline"><i>07</i><span data-uk>Шлях</span><span data-en hidden>Timeline</span></a>
-    <a href="#contact"><i>08</i><span data-uk>Контакти</span><span data-en hidden>Contact</span></a>
+<header class="nav" data-l="frame">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4.5" y="4.5" width="11" height="11" fill="none" stroke="#0d99ff"/><g fill="#fff" stroke="#0d99ff"><rect x="2.5" y="2.5" width="4" height="4"/><rect x="13.5" y="2.5" width="4" height="4"/><rect x="2.5" y="13.5" width="4" height="4"/><rect x="13.5" y="13.5" width="4" height="4"/></g></svg>
+    <span data-uk>Роман Сарваді</span><span data-en>Roman Sarvadi</span>
+  </a>
+  <nav aria-label="Розділи">
+    <a href="#about"><span data-uk>Про мене</span><span data-en>About</span></a>
+    <a href="#vyrii">Vyrii</a>
+    <a href="#onix">Onix</a>
+    <a href="#flowers"><span data-uk>Між нами</span><span data-en>Mizh Namy</span></a>
+    <a href="#learn"><span data-uk>Навчання</span><span data-en>Learning</span></a>
+    <a href="#pricing"><span data-uk>Ціни</span><span data-en>Pricing</span></a>
+    <a href="#contact"><span data-uk>Контакти</span><span data-en>Contact</span></a>
   </nav>
-
-  <div class="foot">
-    <a href="mailto:roman.sarvadi@gmail.com">roman.sarvadi@gmail.com</a>
-    <a href="tel:+380661440475">+38 066 144 04 75</a>
-    <a href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener">t.me/whxrxmysxxl</a>
+  <span class="avail"><i class="dot"></i><span data-uk>Відкритий до роботи</span><span data-en>Open to work</span></span>
+  <div class="tog">
+    <button id="menu" type="button" aria-expanded="false" aria-label="Меню / Menu"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    <button id="lang" type="button">EN</button>
+    <button id="theme" type="button"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg></button>
   </div>
-  <div class="switches">
-    <button class="sw" id="lang" type="button">EN</button>
-    <button class="sw" id="theme" type="button" aria-label="Змінити тему">☾</button>
-  </div>
-</aside>
+</header>
 
-<main class="col">
-<section id="about"><div class="title"><p class="over" data-uk>Відкритий до дистанційної роботи</p><p class="over" data-en hidden>Open to remote work</p><h1 data-uk>UI/UX-дизайн і розробка інтерфейсів</h1><h1 data-en hidden>UI/UX design and interface development</h1><p class="lead-p" data-uk>Я Роман Сарваді. Проєктую сайти й мобільні інтерфейси у Figma. Працюю в Onix Systems: основний напрямок — PHP-розробка, також маю 5 місяців дизайнерського досвіду в компанії.</p><p class="lead-p" data-en hidden>I am Roman Sarvadi. I design websites and mobile interfaces in Figma. I work at Onix Systems, primarily in PHP development, and have also spent five months on design work at the company.</p><p data-uk>Нижче — мої проєкти й конкретні задачі. Навчальні роботи та практика зібрані в окремому файлі Figma.</p><p data-en hidden>Below are my projects and the work I did. Course exercises and design practice are collected in a separate Figma file.</p></div><div class="facts"><div>Figma · Auto Layout · Components</div><div>UI/UX · Web · Mobile</div><div>English C1</div></div><div class="links"><a href="https://www.figma.com/design/2evt2stRCB1pQFjfOjIkJQ/Portfolio---public" target="_blank" rel="noopener"><span data-uk>Відкрити портфоліо Figma</span><span data-en hidden>View Figma portfolio</span><i>Figma</i></a></div><p data-uk>У файлі: навчальні роботи з курсу Figma, концепція фотопрогулянок «Поза кадром» і рекламні макети Aisance.</p><p data-en hidden>The file includes Figma course exercises, the Poza kadrom photo-walk concept and Aisance advertising layouts.</p></section>
-<section id="vyrii"><div class="head"><span class="num">02</span><div><h2 data-uk>Vyrii — пошук бізнесів і запис на послуги</h2><h2 data-en hidden>Vyrii — business discovery and booking</h2></div></div><p data-uk>Власний продукт. Працюю над дизайном і розробкою каталогу, карти, карток бізнесів, запису на послуги та кабінету власника.</p><p data-en hidden>My own product. I design and develop the catalogue, map, business pages, service booking and owner dashboard.</p><p data-uk>У Figma створюю компоненти й стани екранів, працюю з темною та світлою темами. Реалізую інтерфейс на React Native та Expo; бекенд — Node.js, TypeScript і PostgreSQL.</p><p data-en hidden>In Figma I create components and screen states for dark and light themes. I implement the interface with React Native and Expo, and the backend with Node.js, TypeScript and PostgreSQL.</p><div class="links"><a href="https://app.vyrii.com.ua/" target="_blank" rel="noopener"><span data-uk>Відкрити Vyrii</span><span data-en hidden>Open Vyrii</span><i>Web</i></a></div><div class="strip">
-    <div class="shot"><img src="shots/03-map.png" alt=""><span><b>01</b><span data-uk>Карта міста</span><span data-en hidden>City map</span></span></div>
-    <div class="shot"><img src="shots/02-search.png" alt=""><span><b>02</b><span data-uk>Пошук</span><span data-en hidden>Search</span></span></div>
-    <div class="shot"><img src="shots/07-cat-barber.png" alt=""><span><b>03</b><span data-uk>Категорія з фільтрами</span><span data-en hidden>Category with filters</span></span></div>
-    <div class="shot"><img src="shots/15-business-barber.png" alt=""><span><b>04</b><span data-uk>Картка закладу</span><span data-en hidden>Venue page</span></span></div>
-    <div class="shot"><img src="shots/31-booking-detail.png" alt=""><span><b>05</b><span data-uk>Деталі запису</span><span data-en hidden>Booking details</span></span></div>
-    <div class="shot"><img src="shots/18-shop-flowers.png" alt=""><span><b>06</b><span data-uk>Магазин</span><span data-en hidden>Shop</span></span></div>
-    <div class="shot"><img src="shots/34-product.png" alt=""><span><b>07</b><span data-uk>Картка товару</span><span data-en hidden>Product page</span></span></div>
-    <div class="shot"><img src="shots/19-bonuses.png" alt=""><span><b>08</b><span data-uk>Бонуси</span><span data-en hidden>Loyalty</span></span></div>
-    <div class="shot"><img src="shots/20-chats.png" alt=""><span><b>09</b><span data-uk>Чати із закладом</span><span data-en hidden>Chats with a venue</span></span></div>
-    <div class="shot"><img src="shots/41-biz-manage.png" alt=""><span><b>10</b><span data-uk>Кабінет власника</span><span data-en hidden>Owner dashboard</span></span></div>
-    <div class="shot"><img src="shots/42-biz-bookings.png" alt=""><span><b>11</b><span data-uk>Записи закладу</span><span data-en hidden>Venue bookings</span></span></div>
-    <div class="shot"><img src="shots/43-biz-day.png" alt=""><span><b>12</b><span data-uk>День майстра</span><span data-en hidden>Master's day</span></span></div>
-  </div></section>
-<section id="onix"><div class="head"><span class="num">03</span><div><h2 data-uk>Onix Systems — розробка й дизайн</h2><h2 data-en hidden>Onix Systems — development and design</h2></div></div><p data-uk>Працюю в компанії з січня 2026 року. Розробляю бекенд на PHP, Laravel і Hyperf, працюю з PostgreSQL, зовнішніми API та інтеграціями.</p><p data-en hidden>I have worked at the company since January 2026. I develop backend features with PHP, Laravel and Hyperf, working with PostgreSQL, external APIs and integrations.</p><p data-uk>Дизайнерський досвід у компанії — 5 місяців. Проєктував фічу програми лояльності: близько 30 екранів і станів, набір компонентів із 15 варіантами та правила компонування. Узгоджував рішення з PM і маркетингом.</p><p data-en hidden>Five months of design experience at the company. I designed a loyalty feature: around 30 screens and states, a component set with 15 variants and layout rules. I discussed decisions with the PM and marketing team.</p><div class="aside"><p data-uk>Клієнтські макети не публікую через NDA.</p><p data-en hidden>Client designs are not published because they are covered by an NDA.</p></div></section>
-<section id="flowers"><div class="head"><span class="num">04</span><div><h2 data-uk>«Між нами» — квіткова крамниця</h2><h2 data-en hidden>Mizh Namy — flower shop</h2></div></div><p data-uk>Комерційний проєкт: Telegram Mini App і вебкабінет для квіткової крамниці. Відповідав за дизайн і розробку.</p><p data-en hidden>A commercial project: a Telegram Mini App and web dashboard for a flower shop. I was responsible for design and development.</p><p data-uk>Спроєктував каталог, кошик, оформлення замовлення та онлайн-оплату. Для власника зробив канбан замовлень, клієнтську базу й керування товарами. Додав бонуси, відгуки та нагадування про особисті дати.</p><p data-en hidden>I designed the catalogue, cart, checkout and online payment flow. For the owner I built an order kanban, customer database and product management. I added bonuses, reviews and reminders for personal dates.</p><div class="links"><a href="https://t.me/mizhnamukvitu_bot" target="_blank" rel="noopener"><span data-uk>Відкрити бот</span><span data-en hidden>Open the bot</span><i>Telegram</i></a><a href="https://mizhnamykvity.cliqo.com.ua" target="_blank" rel="noopener"><span data-uk>Сайт крамниці</span><span data-en hidden>Shop website</span><i>Web</i></a></div><p>PHP · Laravel · PostgreSQL · Telegram Mini Apps · LiqPay</p></section>
-<section id="how"><div class="head"><span class="num">05</span><div><h2 data-uk>Як працюю з макетом</h2><h2 data-en hidden>How I work on a design</h2></div></div><p data-uk>Уточнюю задачу й сценарій користувача. Продумую структуру екранів, компоненти, адаптивність і стани інтерфейсу. Після обговорення вношу правки та готую макет до реалізації.</p><p data-en hidden>I clarify the task and user flow, then work on screen structure, components, responsiveness and interface states. After feedback I revise the design and prepare it for implementation.</p><p data-uk>Досвід розробки допомагає обговорювати реалізацію з командою й помічати технічні обмеження ще в макеті.</p><p data-en hidden>My development experience helps me discuss implementation with the team and identify technical constraints while designing.</p></section>
-<section id="tools"><div class="head"><span class="num">06</span><div><h2 data-uk>Навички й інструменти</h2><h2 data-en hidden>Skills and tools</h2></div></div><div class="tools"><div class="row"><div class="g">Design</div><div class="v">Figma, Auto Layout, components, variants, UI/UX, responsive layouts</div></div><div class="row"><div class="g">Frontend</div><div class="v">React Native, Expo, TypeScript, HTML, CSS</div></div><div class="row"><div class="g">Backend</div><div class="v">PHP, Laravel, Node.js, PostgreSQL, REST API</div></div><div class="row"><div class="g">Workflow</div><div class="v">Git, Jira, documentation</div></div></div></section>
-<section id="timeline"><div class="head"><span class="num">07</span><div><h2 data-uk>Освіта й навчання</h2><h2 data-en hidden>Education and learning</h2></div></div><p data-uk>Центральноукраїнський національний технічний університет, комп’ютерні науки. Навчаюсь із 2024 року.</p><p data-en hidden>Central Ukrainian National Technical University, Computer Science. Studying since 2024.</p><p data-uk>Проходжу курс Figma та застосовую матеріал у навчальних макетах і власних проєктах.</p><p data-en hidden>I am taking a Figma course and applying it in exercises and my own projects.</p></section>
-<section id="contact" class="contact"><h2 data-uk>Контакти</h2><h2 data-en hidden>Contact</h2><p data-uk>Шукаю дистанційну роботу в UI/UX, вебдизайні або створенні рекламних матеріалів. Розглядаю повну, часткову й проєктну зайнятість. Бажаний графік — 5/2.</p><p data-en hidden>I am looking for remote work in UI/UX, web design or advertising design. Open to full-time, part-time and project work, preferably on a five-day workweek.</p><div class="clist"><a href="mailto:roman.sarvadi@gmail.com"><span>roman.sarvadi@gmail.com</span><i>Email</i></a><a href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener"><span>@whxrxmysxxl</span><i>Telegram</i></a></div></section>
+<main class="wrap" id="top">
+
+<section class="hero">
+  <svg class="giant" data-l="frame" viewBox="0 0 1120 262" aria-hidden="true">
+    <defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d99ff" stop-opacity=".36"/><stop offset=".9" stop-color="#0d99ff" stop-opacity="0"/></linearGradient></defs>
+    <text data-uk x="560" y="246" text-anchor="middle" textLength="1112" lengthAdjust="spacingAndGlyphs">ПОРТФОЛІО</text>
+    <text data-en x="560" y="246" text-anchor="middle" textLength="1112" lengthAdjust="spacingAndGlyphs">PORTFOLIO</text>
+  </svg>
+
+  <div class="hero-grid">
+    <div class="hero-main">
+      <p class="hi" data-l="type" data-uk>Привіт, я</p>
+      <p class="hi" data-l="type" data-en>Hi, I'm</p>
+      <h1><span class="nm" data-l="frame"><span data-uk>Роман</span><span data-en>Roman</span><i></i><i></i><i></i><i></i></span><span class="sn" data-l="type" data-uk>Сарваді</span><span class="sn" data-l="type" data-en>Sarvadi</span></h1>
+      <p class="role" data-l="frame"><i></i><span data-uk>UI/UX-дизайнер і розробник</span><span data-en>UI/UX designer and developer</span></p>
+      <p class="lead" data-l="type" data-uk>Проєктую сайти й мобільні інтерфейси у Figma і сам доводжу їх до релізу: від макета до застосунку в App Store.</p>
+      <p class="lead" data-l="type" data-en>I design websites and mobile interfaces in Figma and ship them myself: from the first mockup to an app in the App Store.</p>
+      <div class="cta">
+        <a class="btn primary" data-l="frame" href="https://www.figma.com/design/2evt2stRCB1pQFjfOjIkJQ/Portfolio---public" target="_blank" rel="noopener"><span data-uk>Портфоліо у Figma</span><span data-en>Figma portfolio</span><i>Figma</i></a>
+        <a class="btn" data-l="frame" href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener"><span data-uk>Написати</span><span data-en>Message me</span><i>Telegram</i></a>
+      </div>
+      <ul class="mini">
+        <li data-l="text"><b data-n="11">11</b><span data-uk>місяців комерційної розробки</span><span data-en>months of commercial development</span></li>
+        <li data-l="text"><b>1.0</b><span data-uk>власний застосунок в App Store</span><span data-en>my own app in the App Store</span></li>
+        <li data-l="text"><b>C1</b><span data-uk>англійська</span><span data-en>English</span></li>
+      </ul>
+    </div>
+
+    <figure class="phone" data-l="frame">
+      <div class="scr"><img class="act" src="shots/03-map.png" width="860" height="1864" alt=""><img src="shots/15-business-barber.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/18-shop-flowers.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/42-biz-bookings.png" width="860" height="1864" alt="" loading="lazy"></div>
+      <figcaption class="badge" data-l="frame"><i class="dot"></i><span data-uk>Vyrii 1.0 в App Store</span><span data-en>Vyrii 1.0 in the App Store</span></figcaption>
+    </figure>
+
+    <div class="hero-side">
+      <a class="idx" data-l="frame" href="#vyrii"><span class="no">01</span><span class="tg"><span data-uk>Власний продукт</span><span data-en>Own product</span></span><b data-l="type">Vyrii</b><span class="d" data-l="type" data-uk>Маркетплейс послуг і товарів міста: iOS, Android і веб з однієї кодової бази.</span><span class="d" data-l="type" data-en>A city marketplace of services and goods: iOS, Android and web from one codebase.</span></a>
+      <a class="idx" data-l="frame" href="#onix"><span class="no">02</span><span class="tg"><span data-uk>Робота</span><span data-en>Job</span></span><b data-l="type">Onix Systems</b><span class="d" data-l="type" data-uk>Бекенд на PHP і дизайн фічі програми лояльності.</span><span class="d" data-l="type" data-en>PHP backend and design of a loyalty programme feature.</span></a>
+      <a class="idx" data-l="frame" href="#flowers"><span class="no">03</span><span class="tg"><span data-uk>У продакшені</span><span data-en>In production</span></span><b data-l="type" data-uk>«Між нами»</b><b data-l="type" data-en>Mizh Namy</b><span class="d" data-l="type" data-uk>Платформа для квіткової крамниці: Telegram Mini App і кабінет власника.</span><span class="d" data-l="type" data-en>A platform for a flower shop: a Telegram Mini App and an owner dashboard.</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="mq" data-l="frame" aria-hidden="true"><div class="mq-t"><span>UI/UX</span><i></i><span>Figma</span><i></i><span>React Native</span><i></i><span>TypeScript</span><i></i><span>PHP</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>PostgreSQL</span><i></i><span>Telegram Mini Apps</span><i></i><span>Design systems</span><i></i><span>UI/UX</span><i></i><span>Figma</span><i></i><span>React Native</span><i></i><span>TypeScript</span><i></i><span>PHP</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>PostgreSQL</span><i></i><span>Telegram Mini Apps</span><i></i><span>Design systems</span><i></i></div></div>
+
+<section class="sec" id="about">
+  <p class="kick" data-l="type" data-uk>Про мене</p>
+  <p class="kick" data-l="type" data-en>About</p>
+  <h2 data-l="type" data-uk>Дизайн і код в одній голові</h2>
+  <h2 data-l="type" data-en>Design and code in one head</h2>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>Хто я</span><span data-en>Who I am</span></span><i class="dim"></i></div>
+    <div class="frame two" data-l="frame">
+      <div class="stack">
+        <p data-l="type" data-uk>Розробник і дизайнер продукту з Кропивницького. Проєктую інтерфейси у Figma й сам доводжу їх до релізу: від макета до бойового сервера.</p>
+        <p data-l="type" data-en>A product developer and designer from Kropyvnytskyi, Ukraine. I design interfaces in Figma and take them to release myself: from the mockup to the production server.</p>
+        <p data-l="type" data-uk>Працюю в Onix Systems: бекенд на PHP і п’ять місяців дизайну в тій самій команді. Паралельно веду власний продукт Vyrii і підтримую платформу, якою квіткова крамниця торгує щодня.</p>
+        <p data-l="type" data-en>I work at Onix Systems: PHP backend plus five months of design work in the same team. Alongside that I run my own product, Vyrii, and maintain a platform a flower shop sells through every day.</p>
+        <p data-l="type" data-uk>Навчаюсь на комп’ютерних науках у ЦНТУ й постійно проходжу курси. Зараз це курс підвищення кваліфікації з дизайну. Англійська C1.</p>
+        <p data-l="type" data-en>I study Computer Science at CNTU and keep taking courses. Right now it is a professional development course in design. English C1.</p>
+        <p class="quote" data-l="type" data-uk>Малюю у Figma й сам це реалізую, тому не малюю того, що потім доведеться підпирати милицями.</p>
+        <p class="quote" data-l="type" data-en>I draw in Figma and build it myself, so I do not draw things that will need hacks later.</p>
+      </div>
+      <ol class="prin">
+        <li data-l="text"><span class="n">01</span><div><h4><span data-uk>Спочатку міряю, потім роблю</span><span data-en>Measure first, build second</span></h4><p><span data-uk>Перед тим як лагодити, перевіряю в базі чи в логах, скільки разів проблема справді трапляється.</span><span data-en>Before fixing something I check the database or the logs for how often the problem actually happens.</span></p></div></li>
+        <li data-l="text"><span class="n">02</span><div><h4><span data-uk>Рішення записую</span><span data-en>I write decisions down</span></h4><p><span data-uk>Кожне непросте рішення йде в журнал: що вибрав, чому, що відкинув. У Vyrii таких записів уже 61.</span><span data-en>Every non-trivial decision goes into a log: what I chose, why, what I rejected. Vyrii already has 61 of them.</span></p></div></li>
+        <li data-l="text"><span class="n">03</span><div><h4><span data-uk>Помилку називаю вголос</span><span data-en>I name my mistakes</span></h4><p><span data-uk>Якщо зламав, кажу прямо й показую, що саме. Прихований баг коштує дорожче за незручну розмову.</span><span data-en>If I break something, I say so and show what exactly. A hidden bug costs more than an awkward conversation.</span></p></div></li>
+        <li data-l="text"><span class="n">04</span><div><h4><span data-uk>AI-інструменти щодня</span><span data-en>AI tools every day</span></h4><p><span data-uk>Рев’ю, чернетки, рутинний код. Рішення й відповідальність за результат лишаються за мною.</span><span data-en>Reviews, drafts, routine code. The decisions and the responsibility for the result stay with me.</span></p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="vyrii">
+  <p class="kick" data-l="type" data-uk>Власний продукт</p>
+  <p class="kick" data-l="type" data-en>Own product</p>
+  <h2 data-l="type">Vyrii</h2>
+  <p class="lede" data-l="type" data-uk>Маркетплейс послуг і товарів Кропивницького. Проєкт мій від початку до кінця: ідея, дизайн у Figma, фронтенд, бекенд, база, тести, деплой і публікація в App Store.</p>
+  <p class="lede" data-l="type" data-en>A marketplace of services and goods for the city of Kropyvnytskyi. The project is mine end to end: the idea, the design in Figma, frontend, backend, database, tests, deployment and the App Store release.</p>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>Флагман</span><span data-en>Flagship</span></span><i class="dim"></i></div>
+    <div class="frame" data-l="frame">
+      <div class="fhead">
+        <span class="pill" data-l="frame"><span data-uk>У продакшені</span><span data-en>In production</span></span>
+        <span class="meta" data-l="type" data-uk>Березень 2026 - зараз / реліз у вересні 2026</span>
+        <span class="meta" data-l="type" data-en>March 2026 - present / released in September 2026</span>
+      </div>
+      <div class="two">
+        <div class="stack">
+          <p class="sub4" data-l="type" data-uk>Проблема</p>
+          <p class="sub4" data-l="type" data-en>Problem</p>
+          <p data-l="type" data-uk>У Кропивницькому запис до барбера, майстра манікюру чи на СТО живе в директі інстаграма й у паперовому зошиті. Клієнт пише ввечері, відповідь отримує зранку, частина заявок губиться разом із перепискою. Власник не знає, скільки людей відкрили його сторінку й скільком не вистачило відповіді, щоб дійти до запису.</p>
+          <p data-l="type" data-en>In Kropyvnytskyi, booking a barber, a nail artist or a car service lives in Instagram DMs and a paper notebook. A client writes in the evening, gets an answer the next morning, and some requests are lost along with the conversation. The owner has no idea how many people opened their page or gave up before booking.</p>
+        </div>
+        <div class="stack">
+          <p class="sub4" data-l="type" data-uk>Рішення</p>
+          <p class="sub4" data-l="type" data-en>Solution</p>
+          <p data-l="type" data-uk>Застосунок, у якому мешканець знаходить заклад, дивиться послуги й ціни та бронює час. Власник із того ж застосунку веде розклад, клієнтську базу, товари, бонуси й переписку. Один застосунок працює на iOS, Android і у вебі з єдиної кодової бази.</p>
+          <p data-l="type" data-en>An app where a resident finds a venue, checks services and prices and books a slot. The owner uses the same app to run the schedule, the client base, products, loyalty and conversations. One app runs on iOS, Android and the web from a single codebase.</p>
+        </div>
+      </div>
+      <div class="tiles">
+        <div class="tile" data-l="frame"><b data-n="155">155</b><span data-uk>закладів у каталозі</span><span data-en>venues in the catalogue</span></div>
+        <div class="tile" data-l="frame"><b data-n="3">3</b><span data-uk>платформи з однієї кодової бази</span><span data-en>platforms from one codebase</span></div>
+        <div class="tile" data-l="frame"><b data-n="130" data-suf="+">130+</b><span data-uk>автотестів</span><span data-en>automated tests</span></div>
+        <div class="tile" data-l="frame"><b data-n="61">61</b><span data-uk>записане технічне рішення</span><span data-en>recorded technical decisions</span></div>
+      </div>
+
+      <div class="part">
+        <p class="sub4" data-l="type" data-uk>Що всередині: оберіть частину продукту</p>
+        <p class="sub4" data-l="type" data-en>What is inside: pick a part of the product</p>
+        <div class="tabs" role="tablist" data-l="text">
+          <button type="button" role="tab" id="vt1" aria-controls="vp1" aria-selected="true"><span data-uk>Каталог і карта</span><span data-en>Catalogue and map</span></button>
+          <button type="button" role="tab" id="vt2" aria-controls="vp2" aria-selected="false" tabindex="-1"><span data-uk>Запис</span><span data-en>Booking</span></button>
+          <button type="button" role="tab" id="vt3" aria-controls="vp3" aria-selected="false" tabindex="-1"><span data-uk>Магазин і бонуси</span><span data-en>Shop and loyalty</span></button>
+          <button type="button" role="tab" id="vt4" aria-controls="vp4" aria-selected="false" tabindex="-1"><span data-uk>Кабінет бізнесу</span><span data-en>Business dashboard</span></button>
+          <button type="button" role="tab" id="vt5" aria-controls="vp5" aria-selected="false" tabindex="-1"><span data-uk>Дизайн</span><span data-en>Design</span></button>
+          <button type="button" role="tab" id="vt6" aria-controls="vp6" aria-selected="false" tabindex="-1"><span data-uk>Код і реліз</span><span data-en>Code and release</span></button>
+        </div>
+
+        <div class="tp" id="vp1" role="tabpanel" aria-labelledby="vt1" data-l="frame">
+          <div>
+            <p class="tp-k" data-l="type" data-uk>01 // каталог і карта</p>
+            <p class="tp-k" data-l="type" data-en>01 // catalogue and map</p>
+            <h4 data-l="type" data-uk>155 закладів міста на одній карті</h4>
+            <h4 data-l="type" data-en>155 city venues on one map</h4>
+            <p data-l="type" data-uk>Каталог зібрав із відкритих даних OpenStreetMap і звірив вручну. Пошук, категорії з фільтрами й карта з групуванням міток, щоб центр міста не зливався в одну пляму.</p>
+            <p data-l="type" data-en>I assembled the catalogue from OpenStreetMap open data and checked it by hand. Search, categories with filters and a map with marker clustering, so the city centre does not merge into one blob.</p>
+            <ul class="chips" data-l="text"><li>OpenStreetMap</li><li>Apple Maps</li><li><span data-uk>фільтри</span><span data-en>filters</span></li><li><span data-uk>пошук</span><span data-en>search</span></li></ul>
+          </div>
+          <div class="strip">
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Карта міста</span><span data-en>City map</span></figcaption><img src="shots/03-map.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Категорія з фільтрами</span><span data-en>Category with filters</span></figcaption><img src="shots/07-cat-barber.png" width="860" height="1864" alt="" decoding="async"></figure>
+          </div>
+        </div>
+
+        <div class="tp" id="vp2" role="tabpanel" aria-labelledby="vt2" data-l="frame" hidden>
+          <div>
+            <p class="tp-k" data-l="type" data-uk>02 // запис</p>
+            <p class="tp-k" data-l="type" data-en>02 // booking</p>
+            <h4 data-l="type" data-uk>Від картки закладу до підтвердженого часу</h4>
+            <h4 data-l="type" data-en>From a venue page to a confirmed slot</h4>
+            <p data-l="type" data-uk>Картка закладу з послугами й цінами, вибір часу, деталі запису з перенесенням і скасуванням. Вхід через Telegram-бот замість платних SMS: підтвердження без ручного введення коду.</p>
+            <p data-l="type" data-en>A venue page with services and prices, slot selection, booking details with rescheduling and cancelling. Sign-in goes through a Telegram bot instead of paid SMS: confirmation without typing a code.</p>
+            <ul class="chips" data-l="text"><li><span data-uk>слоти</span><span data-en>slots</span></li><li><span data-uk>Telegram-вхід</span><span data-en>Telegram sign-in</span></li><li><span data-uk>пуш-сповіщення</span><span data-en>push notifications</span></li></ul>
+          </div>
+          <div class="strip">
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Картка закладу</span><span data-en>Venue page</span></figcaption><img src="shots/15-business-barber.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Деталі запису</span><span data-en>Booking details</span></figcaption><img src="shots/31-booking-detail.png" width="860" height="1864" alt="" decoding="async"></figure>
+          </div>
+        </div>
+
+        <div class="tp" id="vp3" role="tabpanel" aria-labelledby="vt3" data-l="frame" hidden>
+          <div>
+            <p class="tp-k" data-l="type" data-uk>03 // магазин і бонуси</p>
+            <p class="tp-k" data-l="type" data-en>03 // shop and loyalty</p>
+            <h4 data-l="type" data-uk>Три двигуни замість коду під кожну категорію</h4>
+            <h4 data-l="type" data-en>Three engines instead of code per category</h4>
+            <p data-l="type" data-uk>Один заклад може приймати записи, продавати товари й здавати об’єкти подобово. Поведінку задає двигун (запис, продаж, оренда), а категорія закладу на неї не впливає. Поруч бонуси й чат із закладом.</p>
+            <p data-l="type" data-en>One venue can take bookings, sell goods and rent places by the day. Behaviour is defined by an engine (booking, sales, rental), and the venue category does not affect it. Loyalty and a chat with the venue sit alongside.</p>
+            <ul class="chips" data-l="text"><li><span data-uk>запис</span><span data-en>booking</span></li><li><span data-uk>продаж</span><span data-en>sales</span></li><li><span data-uk>оренда</span><span data-en>rental</span></li><li><span data-uk>бонуси</span><span data-en>loyalty</span></li><li><span data-uk>чати</span><span data-en>chats</span></li></ul>
+          </div>
+          <div class="strip">
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Магазин</span><span data-en>Shop</span></figcaption><img src="shots/18-shop-flowers.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Картка товару</span><span data-en>Product page</span></figcaption><img src="shots/34-product.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Бонуси</span><span data-en>Loyalty</span></figcaption><img src="shots/19-bonuses.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Чати</span><span data-en>Chats</span></figcaption><img src="shots/20-chats.png" width="860" height="1864" alt="" decoding="async"></figure>
+          </div>
+        </div>
+
+        <div class="tp" id="vp4" role="tabpanel" aria-labelledby="vt4" data-l="frame" hidden>
+          <div>
+            <p class="tp-k" data-l="type" data-uk>04 // кабінет бізнесу</p>
+            <p class="tp-k" data-l="type" data-en>04 // business dashboard</p>
+            <h4 data-l="type" data-uk>Власник керує закладом із того ж застосунку</h4>
+            <h4 data-l="type" data-en>The owner runs the venue from the same app</h4>
+            <p data-l="type" data-uk>Розклад, записи, день майстра, клієнти й товари. Окремо аналітика воронки: перегляди картки, спроби записатись, взяті контакти. Це цифра, якої власник раніше не бачив.</p>
+            <p data-l="type" data-en>Schedule, bookings, a master's day, clients and products. Plus funnel analytics: page views, booking attempts, contacts taken. A number the owner never saw before.</p>
+            <ul class="chips" data-l="text"><li><span data-uk>розклад</span><span data-en>schedule</span></li><li><span data-uk>клієнти</span><span data-en>clients</span></li><li><span data-uk>воронка</span><span data-en>funnel</span></li></ul>
+          </div>
+          <div class="strip">
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Кабінет власника</span><span data-en>Owner dashboard</span></figcaption><img src="shots/41-biz-manage.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Записи закладу</span><span data-en>Venue bookings</span></figcaption><img src="shots/42-biz-bookings.png" width="860" height="1864" alt="" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>День майстра</span><span data-en>Master's day</span></figcaption><img src="shots/43-biz-day.png" width="860" height="1864" alt="" decoding="async"></figure>
+          </div>
+        </div>
+
+        <div class="tp solo" id="vp5" role="tabpanel" aria-labelledby="vt5" data-l="frame" hidden>
+          <div>
+            <p class="tp-k" data-l="type" data-uk>05 // дизайн</p>
+            <p class="tp-k" data-l="type" data-en>05 // design</p>
+            <h4 data-l="type" data-uk>Одна дизайн-система для iOS, Android і вебу</h4>
+            <h4 data-l="type" data-en>One design system for iOS, Android and the web</h4>
+            <p data-l="type" data-uk>Фірмовий знак, іконка застосунку, заставка й анімація запуску, усі екрани клієнта та кабінету бізнесу у світлій і темній темах. Компоненти, варіанти й стани живуть у Figma, ті самі токени використані в коді. Для App Store підготував іконку, скриншоти й банери.</p>
+            <p data-l="type" data-en>The brand mark, the app icon, the splash screen and launch animation, every client and business screen in light and dark themes. Components, variants and states live in Figma, and the same tokens are used in code. For the App Store I prepared the icon, screenshots and banners.</p>
+            <ul class="chips" data-l="text"><li>Figma</li><li>Auto Layout</li><li><span data-uk>компоненти й варіанти</span><span data-en>components and variants</span></li><li><span data-uk>токени</span><span data-en>tokens</span></li><li><span data-uk>світла й темна теми</span><span data-en>light and dark themes</span></li></ul>
+          </div>
+        </div>
+
+        <div class="tp solo" id="vp6" role="tabpanel" aria-labelledby="vt6" data-l="frame" hidden>
+          <div>
+            <p class="tp-k" data-l="type" data-uk>06 // код і реліз</p>
+            <p class="tp-k" data-l="type" data-en>06 // code and release</p>
+            <h4 data-l="type" data-uk>Від першого коміту до рев’ю Apple</h4>
+            <h4 data-l="type" data-en>From the first commit to Apple review</h4>
+            <p data-l="type" data-uk>React Native, Expo й TypeScript на клієнті, Node.js, PostgreSQL і Redis на сервері, усе в Docker на власному сервері. Понад 130 автотестів, 61 записане технічне рішення, окрема вебадмінка на React і Vite. Домен, юридичні сторінки й публікацію в App Store пройшов сам.</p>
+            <p data-l="type" data-en>React Native, Expo and TypeScript on the client, Node.js, PostgreSQL and Redis on the server, all in Docker on my own server. Over 130 automated tests, 61 recorded technical decisions, a separate web admin on React and Vite. I handled the domain, the legal pages and the App Store release myself.</p>
+            <ul class="chips" data-l="text"><li>React Native</li><li>Expo</li><li>TypeScript</li><li>Node.js</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li><li>React + Vite</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="links">
+        <a class="btn primary" data-l="frame" href="https://app.vyrii.com.ua/" target="_blank" rel="noopener"><span data-uk>Відкрити застосунок</span><span data-en>Open the app</span><i>Web</i></a>
+        <a class="btn" data-l="frame" href="https://apps.apple.com/ua/app/id6812688283" target="_blank" rel="noopener"><span>App Store</span><i>iOS</i></a>
+        <a class="btn" data-l="frame" href="https://vyrii.com.ua/" target="_blank" rel="noopener"><span>vyrii.com.ua</span><i><span data-uk>Лендинг</span><span data-en>Landing</span></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="onix">
+  <p class="kick" data-l="type" data-uk>Комерційний досвід</p>
+  <p class="kick" data-l="type" data-en>Commercial experience</p>
+  <h2 data-l="type">Onix Systems</h2>
+  <p class="lede" data-l="type" data-uk>Прийшов стажером у січні 2026, у травні оформили офіційно. Працюю над продакшн-продуктом для мережі роздрібних магазинів: мобільний застосунок, Telegram Mini App і програма лояльності.</p>
+  <p class="lede" data-l="type" data-en>I joined as an intern in January 2026 and was hired officially in May. I work on a production product for a retail chain: a mobile app, a Telegram Mini App and a loyalty programme.</p>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>Січень 2026 - зараз</span><span data-en>January 2026 - present</span></span><i class="dim"></i></div>
+    <div class="frame" data-l="frame">
+      <ol class="path">
+        <li data-l="frame"><b><span data-uk>Січень</span><span data-en>January</span></b><span data-uk>Стажування, бекенд на PHP</span><span data-en>Internship, PHP backend</span></li>
+        <li data-l="frame"><b><span data-uk>Травень</span><span data-en>May</span></b><span data-uk>Офіційне оформлення</span><span data-en>Hired officially</span></li>
+        <li data-l="frame"><b><span data-uk>Червень</span><span data-en>June</span></b><span data-uk>Напрям React Native і дизайн фічі</span><span data-en>React Native track and feature design</span></li>
+      </ol>
+      <div class="two">
+        <div class="stack">
+          <p class="sub4" data-l="type" data-uk>Розробка</p>
+          <p class="sub4" data-l="type" data-en>Development</p>
+          <ul class="ul">
+            <li data-l="type" data-uk>Проєктую й підтримую REST API на PHP, Laravel і Hyperf із сервером Swoole.</li>
+            <li data-l="type" data-en>I design and maintain REST APIs with PHP, Laravel and Hyperf on a Swoole server.</li>
+            <li data-l="type" data-uk>Переводжу старий процедурний код на ООП із патернами Factory Method і Strategy.</li>
+            <li data-l="type" data-en>I move legacy procedural code to OOP using the Factory Method and Strategy patterns.</li>
+            <li data-l="type" data-uk>Оптимізую SQL-запити в PostgreSQL, прибираю N+1 через eager loading.</li>
+            <li data-l="type" data-en>I optimise SQL queries in PostgreSQL and remove N+1 problems with eager loading.</li>
+            <li data-l="type" data-uk>Роблю ендпоінти для AI-бота підтримки: короткі валідовані JSON-відповіді, інтеграція зі службою підтримки.</li>
+            <li data-l="type" data-en>I build endpoints for an AI support bot: short validated JSON responses and a service desk integration.</li>
+            <li data-l="type" data-uk>Покриваю код тестами на PHPUnit, працюю із суворою типізацією, Docker і Docker Compose.</li>
+            <li data-l="type" data-en>I cover code with PHPUnit tests and work with strict typing, Docker and Docker Compose.</li>
+            <li data-l="type" data-uk>Проходжу регулярне код-рев’ю з менторами, оцінюю задачі разом із PM.</li>
+            <li data-l="type" data-en>I go through regular code review with mentors and estimate tasks together with the PM.</li>
+          </ul>
+        </div>
+        <div class="stack">
+          <p class="sub4" data-l="type" data-uk>Дизайн, 5 місяців</p>
+          <p class="sub4" data-l="type" data-en>Design, 5 months</p>
+          <ul class="ul">
+            <li data-l="type" data-uk>Вів дизайн фічі програми лояльності: накопичувальні штампи за покупки.</li>
+            <li data-l="type" data-en>I owned the design of a loyalty feature: collectable stamps for purchases.</li>
+            <li data-l="type" data-uk>Вісім задач у Jira, близько 30 екранів і станів.</li>
+            <li data-l="type" data-en>Eight Jira tasks, around 30 screens and states.</li>
+            <li data-l="type" data-uk>Зібрав у Figma набір компонентів на 15 варіантів і правила компонування для команди.</li>
+            <li data-l="type" data-en>I built a Figma component set with 15 variants and layout rules for the team.</li>
+            <li data-l="type" data-uk>Рішення узгоджував напряму з PM і маркетингом. Частину початкових вимог після обговорення переписали.</li>
+            <li data-l="type" data-en>I agreed decisions directly with the PM and marketing. Part of the initial requirements was rewritten after discussion.</li>
+            <li data-l="type" data-uk>Готував макети з думкою про передачу в розробку, бо знаю, як вони стають кодом.</li>
+            <li data-l="type" data-en>I prepared layouts with developer handoff in mind, because I know how they turn into code.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="take" data-l="frame">
+        <p class="sub4" data-uk>Що з цього забираю</p>
+        <p class="sub4" data-en>What I take from it</p>
+        <p data-uk>Код-рев’ю, роботу з тікетами й оцінками, розмову з PM і маркетингом мовою продукту, а не тільки задач.</p>
+        <p data-en>Code review, working with tickets and estimates, and talking to a PM and marketing in the language of the product, not only of tasks.</p>
+      </div>
+      <ul class="chips" data-l="text"><li>PHP</li><li>Laravel</li><li>Hyperf</li><li>Swoole</li><li>PostgreSQL</li><li>Docker</li><li>PHPUnit</li><li>React Native</li><li>Figma</li><li>Jira</li></ul>
+      <p class="note" data-l="type" data-uk>Назви клієнтських продуктів і макети під NDA, тому їх тут немає.</p>
+      <p class="note" data-l="type" data-en>Client product names and mockups are under NDA, so they are not shown here.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="flowers">
+  <p class="kick" data-l="type" data-uk>Комерційний проєкт</p>
+  <p class="kick" data-l="type" data-en>Commercial project</p>
+  <h2 data-l="type" data-uk>«Між нами»</h2>
+  <h2 data-l="type" data-en>Mizh Namy</h2>
+  <p class="lede" data-l="type" data-uk>Перший платний проєкт, який досі працює в продакшені. Платформа, якою квіткова крамниця в Кропивницькому торгує щодня: від макетів у Figma до бойового сервера.</p>
+  <p class="lede" data-l="type" data-en>My first paid project, still running in production. A platform a flower shop in Kropyvnytskyi sells through every day: from Figma mockups to the production server.</p>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>2025 - 2026, у продакшені</span><span data-en>2025 - 2026, in production</span></span><i class="dim"></i></div>
+    <div class="frame" data-l="frame">
+      <div class="two">
+        <div class="stack">
+          <p data-l="type" data-uk>Крамниця втрачала продажі на черзі: людина хотіла букет по дорозі й не хотіла чекати. Перше рішення було просте: вибір букета, оплата онлайн, самовивіз без черги.</p>
+          <p data-l="type" data-en>The shop was losing sales to the queue: people wanted a bouquet on the way and did not want to wait. The first solution was simple: choose a bouquet, pay online, pick it up without queueing.</p>
+          <p data-l="type" data-uk>Далі стало зрозуміло, що квіти купують по датах, а дати люди забувають. Тому головною роботою стала механіка повернення: щоб клієнт прийшов удруге і втретє й не мусив пам’ятати сам.</p>
+          <p data-l="type" data-en>Then it became clear that flowers are bought around dates, and people forget dates. So the main work became the mechanics of coming back: making the client return a second and a third time without having to remember.</p>
+          <div class="links">
+            <a class="btn" data-l="frame" href="https://t.me/mizhnamukvitu_bot" target="_blank" rel="noopener"><span data-uk>Відкрити бот</span><span data-en>Open the bot</span><i>Telegram</i></a>
+            <a class="btn" data-l="frame" href="https://mizhnamykvity.cliqo.com.ua" target="_blank" rel="noopener"><span data-uk>Сайт крамниці</span><span data-en>Shop website</span><i>Web</i></a>
+          </div>
+        </div>
+        <figure class="browser" data-l="frame" style="margin:0">
+          <div class="chrome"><i></i><i></i><i></i><span>mizhnamykvity.cliqo.com.ua</span></div>
+          <img src="shots/mizh-site.jpg" width="1440" height="900" alt="" decoding="async">
+        </figure>
+      </div>
+
+      <div class="part">
+        <p class="sub4" data-l="type" data-uk>Три поверхи в одній кодовій базі</p>
+        <p class="sub4" data-l="type" data-en>Three floors in one codebase</p>
+        <ul class="ul">
+          <li data-l="type" data-uk>Вітрина в Telegram: каталог, кошик, оформлення замовлення, оплата через LiqPay. Відкривається як Mini App просто з бота.</li>
+          <li data-l="type" data-en>A storefront inside Telegram: catalogue, cart, checkout, LiqPay payment. It opens as a Mini App straight from the bot.</li>
+          <li data-l="type" data-uk>Кабінет власника в браузері: канбан замовлень із живим оновленням, CRM клієнтів з історією покупок, каталог, свята, звіти.</li>
+          <li data-l="type" data-en>An owner dashboard in the browser: a live order kanban, a client CRM with purchase history, catalogue, holidays, reports.</li>
+          <li data-l="type" data-uk>Два боти: клієнтський і бот сповіщень для адміністраторів, куди нове замовлення падає одразу.</li>
+          <li data-l="type" data-en>Two bots: the customer bot and an admin notification bot, where a new order lands immediately.</li>
+        </ul>
+      </div>
+
+      <div class="part">
+        <p class="sub4" data-l="type" data-uk>Механіка повернення клієнта</p>
+        <p class="sub4" data-l="type" data-en>How a client comes back</p>
+        <div class="hooks">
+          <div class="hook" data-l="frame"><h4><span data-uk>Депозит</span><span data-en>Deposit</span></h4><p><span data-uk>10% від оплаченого замовлення. Живе два місяці, перед згорянням бот нагадує.</span><span data-en>10% of a paid order. It lives for two months, and the bot reminds the client before it expires.</span></p></div>
+          <div class="hook" data-l="frame"><h4><span data-uk>Відгук</span><span data-en>Review</span></h4><p><span data-uk>Після замовлення бот просить оцінку. За відгук теж нараховується депозит.</span><span data-en>After an order the bot asks for a rating. A review earns a deposit too.</span></p></div>
+          <div class="hook" data-l="frame"><h4><span data-uk>Свята</span><span data-en>Holidays</span></h4><p><span data-uk>Власник задає, за скільки днів попередити. Бот пише клієнтам заздалегідь.</span><span data-en>The owner sets how many days ahead to warn. The bot writes to clients in advance.</span></p></div>
+          <div class="hook" data-l="frame"><h4><span data-uk>Особисті дати</span><span data-en>Personal dates</span></h4><p><span data-uk>Клієнт додає день народження чи річницю, і бот нагадує рік за роком.</span><span data-en>Clients add a birthday or an anniversary, and the bot reminds them year after year.</span></p></div>
+        </div>
+      </div>
+
+      <div class="part">
+        <dl class="rows">
+          <div class="row" data-l="text"><dt><span data-uk>Роль</span><span data-en>Role</span></dt><dd><span data-uk>Один у проєкті: дизайн, код, база, деплой</span><span data-en>Solo: design, code, database, deployment</span></dd></div>
+          <div class="row" data-l="text"><dt><span data-uk>Стек</span><span data-en>Stack</span></dt><dd>PHP 8.4, Laravel 13, PostgreSQL 16, Redis, Docker, Nginx, Caddy, Laravel Reverb, LiqPay, Cloudflare Turnstile</dd></div>
+          <div class="row" data-l="text"><dt><span data-uk>Обсяг</span><span data-en>Scope</span></dt><dd><span data-uk>Близько 12 000 рядків PHP, 35 міграцій, 32 контролери, тести на PHPUnit. Усередині бота стейт-машина на дев’ять станів.</span><span data-en>Around 12,000 lines of PHP, 35 migrations, 32 controllers, PHPUnit tests. Inside the bot there is a nine-state state machine.</span></dd></div>
+          <div class="row" data-l="text"><dt><span data-uk>Дизайн</span><span data-en>Design</span></dt><dd><span data-uk>Темно-зелений мінімалізм із власним знаком. Лендінг на бенто-сітці, вітрина в Telegram успадковує ту саму палітру.</span><span data-en>Dark green minimalism with its own mark. A bento-grid landing page, and the Telegram storefront inherits the same palette.</span></dd></div>
+          <div class="row" data-l="text"><dt><span data-uk>Результат</span><span data-en>Result</span></dt><dd><span data-uk>Власник веде магазин самостійно, без моєї участі в щоденних операціях.</span><span data-en>The owner runs the shop on their own, without me in day-to-day operations.</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="learn">
+  <p class="kick" data-l="type" data-uk>Навчання</p>
+  <p class="kick" data-l="type" data-en>Learning</p>
+  <h2 data-l="type" data-uk>Постійно вчусь</h2>
+  <h2 data-l="type" data-en>Always learning</h2>
+  <p class="lede" data-l="type" data-uk>Університет, курси й навчальні проєкти йдуть паралельно з роботою. Кожну нову тему одразу пробую на живому продукті.</p>
+  <p class="lede" data-l="type" data-en>University, courses and learning projects run alongside work. I try every new topic on a live product right away.</p>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>2024 - зараз</span><span data-en>2024 - present</span></span><i class="dim"></i></div>
+    <div class="frame" data-l="frame">
+      <ol class="tl">
+        <li data-l="text">
+          <div><span class="now"><span data-uk>Зараз</span><span data-en>Now</span></span></div>
+          <div>
+            <h4><span data-uk>Курс підвищення кваліфікації з дизайну: Figma і графічний дизайн</span><span data-en>Professional development course in design: Figma and graphic design</span></h4>
+            <p><span data-uk>П’ять етапів по десять уроків. Два етапи закрито: компоненти, Auto Layout, змінні, дизайн-системи, робота з кітами спільноти, історія версій, спільні бібліотеки, Dev Mode. Кожну тему пробую на власних файлах: відступи, шкала шрифтів, обмежена палітра.</span><span data-en>Five stages of ten lessons each. Two stages are done: components, Auto Layout, variables, design systems, community kits, version history, shared libraries, Dev Mode. I try every topic on my own files: spacing, type scale, a limited palette.</span></p>
+            <div class="prog"><i class="f"></i><i class="f"></i><i></i><i></i><i></i><span><span data-uk>2 з 5 етапів</span><span data-en>2 of 5 stages</span></span></div>
+          </div>
+        </li>
+        <li data-l="text">
+          <div class="when"><span data-uk>Жовтень 2026</span><span data-en>October 2026</span></div>
+          <div>
+            <h4><span data-uk>RAG і векторний пошук</span><span data-en>RAG and vector search</span></h4>
+            <p><span data-uk>Навчальний проєкт від керівника департаменту: вебзастосунок, API, PostgreSQL із pgvector, сервіс синхронізації файлів і локальна модель через Ollama. Node.js і TypeScript.</span><span data-en>A learning project from the head of department: a web app, an API, PostgreSQL with pgvector, a file sync service and a local model through Ollama. Node.js and TypeScript.</span></p>
+          </div>
+        </li>
+        <li data-l="text">
+          <div class="when"><span data-uk>Червень 2026</span><span data-en>June 2026</span></div>
+          <div>
+            <h4>React Native</h4>
+            <p><span data-uk>Новий напрям у компанії, щоб брати мобільні задачі самостійно. Закріпив на власному продукті: Vyrii вийшов у App Store у вересні 2026.</span><span data-en>A new track at the company, so I can take mobile tasks on my own. I cemented it on my own product: Vyrii reached the App Store in September 2026.</span></p>
+          </div>
+        </li>
+        <li data-l="text">
+          <div class="when"><span data-uk>Січень 2026</span><span data-en>January 2026</span></div>
+          <div>
+            <h4><span data-uk>Стажування в Onix Systems</span><span data-en>Internship at Onix Systems</span></h4>
+            <p><span data-uk>PHP, Laravel, Hyperf і Swoole з менторами та регулярним код-рев’ю. Через чотири місяці оформили офіційно.</span><span data-en>PHP, Laravel, Hyperf and Swoole with mentors and regular code review. Hired officially four months later.</span></p>
+          </div>
+        </li>
+        <li data-l="text">
+          <div class="when">2024 - 2028</div>
+          <div>
+            <h4><span data-uk>ЦНТУ, комп’ютерні науки</span><span data-en>CNTU, Computer Science</span></h4>
+            <p><span data-uk>Центральноукраїнський національний технічний університет. Поєдную навчання з повною зайнятістю.</span><span data-en>Central Ukrainian National Technical University. I combine my studies with a full-time job.</span></p>
+          </div>
+        </li>
+        <li data-l="text">
+          <div class="when"><span data-uk>Постійно</span><span data-en>Ongoing</span></div>
+          <div>
+            <h4><span data-uk>Англійська C1</span><span data-en>English C1</span></h4>
+            <p><span data-uk>Читаю документацію, веду листування й можу пройти співбесіду англійською.</span><span data-en>I read documentation, handle correspondence and can do an interview in English.</span></p>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="frame figrow" data-l="frame">
+      <p><span data-uk>Навчальні роботи зібрані в окремому файлі Figma: вправи з курсу, концепція фотопрогулянок «Поза кадром» і рекламні макети Aisance.</span><span data-en>Learning work lives in a separate Figma file: course exercises, the Poza kadrom photo-walk concept and Aisance advertising layouts.</span></p>
+      <a class="btn primary" href="https://www.figma.com/design/2evt2stRCB1pQFjfOjIkJQ/Portfolio---public" target="_blank" rel="noopener"><span data-uk>Відкрити файл</span><span data-en>Open the file</span><i>Figma</i></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="skills">
+  <p class="kick" data-l="type" data-uk>Стек</p>
+  <p class="kick" data-l="type" data-en>Stack</p>
+  <h2 data-l="type" data-uk>Навички й інструменти</h2>
+  <h2 data-l="type" data-en>Skills and tools</h2>
+  <div class="block skills">
+    <div class="sk wide" data-l="frame"><h4><span data-uk>Дизайн</span><span data-en>Design</span></h4><ul class="chips"><li>Figma</li><li>Auto Layout</li><li><span data-uk>компоненти й варіанти</span><span data-en>components and variants</span></li><li><span data-uk>дизайн-токени</span><span data-en>design tokens</span></li><li><span data-uk>дизайн-системи</span><span data-en>design systems</span></li><li>UI/UX</li><li><span data-uk>адаптивні макети</span><span data-en>responsive layouts</span></li><li><span data-uk>світла й темна теми</span><span data-en>light and dark themes</span></li><li>Dev Mode</li></ul></div>
+    <div class="sk" data-l="frame"><h4><span data-uk>Мобайл і фронтенд</span><span data-en>Mobile and frontend</span></h4><ul class="chips"><li>React Native</li><li>Expo</li><li>React</li><li>HTML</li><li>CSS</li></ul></div>
+    <div class="sk" data-l="frame"><h4><span data-uk>Мови</span><span data-en>Languages</span></h4><ul class="chips"><li>TypeScript</li><li>PHP</li><li>JavaScript</li><li>SQL</li></ul></div>
+    <div class="sk" data-l="frame"><h4><span data-uk>Бекенд</span><span data-en>Backend</span></h4><ul class="chips"><li>Node.js</li><li>Laravel</li><li>Hyperf</li><li>Swoole</li><li>REST API</li></ul></div>
+    <div class="sk" data-l="frame"><h4><span data-uk>Дані</span><span data-en>Data</span></h4><ul class="chips"><li>PostgreSQL</li><li>Redis</li><li>pgvector</li><li><span data-uk>міграції</span><span data-en>migrations</span></li></ul></div>
+    <div class="sk" data-l="frame"><h4><span data-uk>Інфраструктура</span><span data-en>Infrastructure</span></h4><ul class="chips"><li>Docker</li><li>Nginx</li><li>Caddy</li><li>Git</li><li>CI</li></ul></div>
+    <div class="sk wide" data-l="frame"><h4><span data-uk>Робота в команді</span><span data-en>Ways of working</span></h4><ul class="chips"><li>Jira</li><li><span data-uk>код-рев’ю</span><span data-en>code review</span></li><li><span data-uk>автотести</span><span data-en>automated tests</span></li><li><span data-uk>документація</span><span data-en>documentation</span></li><li><span data-uk>AI-інструменти</span><span data-en>AI tools</span></li></ul></div>
+  </div>
+</section>
+
+<section class="sec" id="pricing">
+  <p class="kick" data-l="type" data-uk>Вартість</p>
+  <p class="kick" data-l="type" data-en>Pricing</p>
+  <h2 data-l="type" data-uk>Скільки коштує моя робота</h2>
+  <h2 data-l="type" data-en>What my work costs</h2>
+  <p class="lede" data-l="type" data-uk>Два формати: погодинна оплата або фіксована ціна за готовий результат.</p>
+  <p class="lede" data-l="type" data-en>Two formats: an hourly rate or a fixed price for a finished result.</p>
+  <div class="block prices">
+    <article class="price" data-l="frame">
+      <p class="sub4" data-l="type" data-uk>Погодинно</p>
+      <p class="sub4" data-l="type" data-en>Hourly</p>
+      <p class="amt" data-l="text"><b data-n="10">10</b><span data-uk>USDT / година</span><span data-en>USDT / hour</span></p>
+      <p data-l="type" data-uk>Проєктна робота: дизайн у Figma, верстка, доробки й інтеграції.</p>
+      <p data-l="type" data-en>Project work: design in Figma, markup, improvements and integrations.</p>
+      <ul class="ul">
+        <li data-l="type" data-uk>Нові екрани й правки в макетах</li>
+        <li data-l="type" data-en>New screens and changes to layouts</li>
+        <li data-l="type" data-uk>Доробки на сайті чи в боті</li>
+        <li data-l="type" data-en>Improvements to a site or a bot</li>
+        <li data-l="type" data-uk>Оцінка в годинах до старту</li>
+        <li data-l="type" data-en>An estimate in hours before I start</li>
+      </ul>
+    </article>
+    <article class="price" data-l="frame">
+      <p class="sub4" data-l="type" data-uk>За проєкт</p>
+      <p class="sub4" data-l="type" data-en>Per project</p>
+      <p class="amt" data-l="text"><b data-n="150" data-pre="від " data-suf=" $" data-uk>від 150 $</b><b data-n="150" data-pre="from " data-suf=" $" data-en>from 150 $</b><span data-uk>за проєкт</span><span data-en>per project</span></p>
+      <p data-l="type" data-uk>Сайт під замовлення або Telegram-бот для магазину.</p>
+      <p data-l="type" data-en>A custom website or a Telegram bot for a shop.</p>
+      <ul class="ul">
+        <li data-l="type" data-uk>Дизайн і розробка в одних руках</li>
+        <li data-l="type" data-en>Design and development by one person</li>
+        <li data-l="type" data-uk>Каталог, кошик, оформлення замовлення</li>
+        <li data-l="type" data-en>Catalogue, cart, checkout</li>
+        <li data-l="type" data-uk>Запуск на сервері</li>
+        <li data-l="type" data-en>Deployment to a server</li>
+      </ul>
+    </article>
+  </div>
+  <div class="pfoot">
+    <p data-l="type" data-uk>Точну суму називаю після короткого брифу.</p>
+    <p data-l="type" data-en>I name the exact amount after a short brief.</p>
+    <a class="btn primary" data-l="frame" href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener"><span data-uk>Обговорити задачу</span><span data-en>Discuss a task</span><i>Telegram</i></a>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <p class="kick" data-l="type" data-uk>Контакти</p>
+  <p class="kick" data-l="type" data-en>Contact</p>
+  <h2 data-l="type" data-uk>Шукаю дистанційну роботу</h2>
+  <h2 data-l="type" data-en>Looking for remote work</h2>
+  <p class="lede" data-l="type" data-uk>UI/UX, вебдизайн або створення рекламних матеріалів. Розглядаю повну, часткову й проєктну зайнятість, бажаний графік 5/2.</p>
+  <p class="lede" data-l="type" data-en>UI/UX, web design or advertising design. Open to full-time, part-time and project work, preferably on a five-day workweek.</p>
+  <div class="block">
+    <div class="fname" data-l="text"><span><span data-uk>Напишіть мені</span><span data-en>Get in touch</span></span><i class="dim"></i></div>
+    <div class="frame contact" data-l="frame">
+      <div class="stack">
+        <p class="sub4" data-l="type" data-uk>Пошта</p>
+        <p class="sub4" data-l="type" data-en>Email</p>
+        <a class="mail" data-l="type" href="mailto:roman.sarvadi@gmail.com">roman.sarvadi@gmail.com</a>
+        <p data-l="type" data-uk>Відповідаю протягом дня. Зручніше в Telegram.</p>
+        <p data-l="type" data-en>I reply within a day. Telegram is the fastest way.</p>
+      </div>
+      <div class="clist">
+        <a data-l="text" href="https://t.me/whxrxmysxxl" target="_blank" rel="noopener"><span>@whxrxmysxxl</span><i>Telegram</i></a>
+        <a data-l="text" href="tel:+380661440475"><span>+38 066 144 04 75</span><i><span data-uk>Телефон</span><span data-en>Phone</span></i></a>
+        <a data-l="text" href="https://www.figma.com/design/2evt2stRCB1pQFjfOjIkJQ/Portfolio---public" target="_blank" rel="noopener"><span><span data-uk>Портфоліо у Figma</span><span data-en>Figma portfolio</span></span><i>Figma</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot" data-l="text">
+  <span><span data-uk>Роман Сарваді, 2026. Збірка сторінки за мотивами Swarm від Joel Califa.</span><span data-en>Roman Sarvadi, 2026. Page build inspired by Swarm by Joel Califa.</span></span>
+  <button id="again" type="button"><span data-uk>Зібрати сторінку ще раз</span><span data-en>Rebuild the page</span></button>
+</footer>
+
 </main>
-</div>
+
+<div id="sp" aria-hidden="true"></div>
+<div id="me" aria-hidden="true"><span data-uk>Ви</span><span data-en>You</span></div>
+<div id="rul" aria-hidden="true"><div class="rt"></div><div class="rl"></div></div>
+<div id="stage" aria-hidden="true"></div>
+<div id="flock" aria-hidden="true"></div>
+
+<div class="hud" id="hud" role="group" aria-label="Page build" data-st="scan">
+  <span data-on="scan"><span data-uk>Сканую сторінку…</span><span data-en>Scanning the page…</span></span>
+  <span class="avs" id="avs" data-on="run" aria-hidden="true"></span>
+  <span class="ag" data-on="run"><b id="ac">16</b> <span data-uk>агентів</span><span data-en>agents</span></span>
+  <span class="sep" data-on="run"></span>
+  <span class="cnt" data-on="run skip"><b id="n">0</b> / <span id="t">0</span> <span data-uk>шарів</span><span data-en>layers</span></span>
+  <span class="bar" data-on="run"><i id="bar"></i></span>
+  <span class="cnt" data-on="done"><span data-uk>Зібрано <b class="fa">16</b> агентами за <b class="ft">0</b> с</span><span data-en>Rebuilt by <b class="fa">16</b> agents in <b class="ft">0</b> s</span></span>
+  <span class="acts" data-on="scan run">
+    <button id="tour" type="button" aria-pressed="true"><span data-uk>Автотур</span><span data-en>Auto tour</span></button>
+    <button id="speed" type="button" aria-label="Speed">1×</button>
+    <button id="skip" type="button"><span data-uk>Пропустити</span><span data-en>Skip</span></button>
+  </span>
+  <span class="acts" data-on="skip"><button id="again2" type="button"><span data-uk>Ще раз</span><span data-en>Replay</span></button></span>
+  <span class="acts" data-on="done">
+    <button id="again3" type="button"><span data-uk>Ще раз</span><span data-en>Replay</span></button>
+    <button id="close" type="button" aria-label="Закрити / Close">×</button>
+  </span>
 </div>
 
 <script>
 (function () {
-  var langBtn = document.getElementById('lang');
-  var themeBtn = document.getElementById('theme');
-  var uk = document.querySelectorAll('[data-uk]');
-  var en = document.querySelectorAll('[data-en]');
+  var d = document.documentElement;
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var $$in = function (el, s) { return Array.prototype.slice.call(el.querySelectorAll(s)); };
+
+  var TITLES = {
+    uk: 'Роман Сарваді - UI/UX-дизайнер і розробник',
+    en: 'Roman Sarvadi - UI/UX designer and developer'
+  };
+  var langBtn = $('#lang'), themeBtn = $('#theme');
 
   function setLang(l) {
-    document.documentElement.lang = l;
-    for (var i = 0; i < uk.length; i++) uk[i].hidden = l !== 'uk';
-    for (var j = 0; j < en.length; j++) en[j].hidden = l !== 'en';
+    d.lang = l;
+    document.title = TITLES[l];
     langBtn.textContent = l === 'uk' ? 'EN' : 'UA';
+    langBtn.setAttribute('aria-label', l === 'uk' ? 'Switch to English' : 'Перемкнути на українську');
     try { localStorage.setItem('lang', l); } catch (e) {}
   }
-
   function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    themeBtn.textContent = t === 'dark' ? '☾' : '☀';
+    d.setAttribute('data-theme', t);
+    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Світла тема / Light theme' : 'Темна тема / Dark theme');
     try { localStorage.setItem('theme', t); } catch (e) {}
   }
-
-  var savedLang = 'uk';
-  var savedTheme = 'dark';
-  try {
-    savedLang = localStorage.getItem('lang') || 'uk';
-    savedTheme = localStorage.getItem('theme') || 'dark';
-  } catch (e) {}
-
-  setLang(savedLang);
-  setTheme(savedTheme);
-
-  langBtn.addEventListener('click', function () {
-    setLang(document.documentElement.lang === 'uk' ? 'en' : 'uk');
-  });
+  setLang(d.lang === 'en' ? 'en' : 'uk');
+  setTheme(d.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  langBtn.addEventListener('click', function () { setLang(d.lang === 'uk' ? 'en' : 'uk'); count(); });
   themeBtn.addEventListener('click', function () {
-    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    setTheme(d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
+
+  var navEl = $('.nav'), menuBtn = $('#menu');
+  function setMenu(v) {
+    navEl.classList.toggle('open', v);
+    menuBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+  }
+  menuBtn.addEventListener('click', function () { setMenu(!navEl.classList.contains('open')); });
+  $$('.nav a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); setTour(false); });
+  });
+
+  var tabs = $$('[role="tab"]');
+  function pick(t, focus) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      x.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(x.getAttribute('aria-controls'));
+      panel.hidden = !on;
+      if (on && focus !== 0) { panel.classList.remove('in'); void panel.offsetWidth; panel.classList.add('in'); }
+    });
+    if (focus) t.focus();
+    count();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') pick(tabs[(i + 1) % tabs.length], true);
+      else if (e.key === 'ArrowLeft') pick(tabs[(i + tabs.length - 1) % tabs.length], true);
+    });
+  });
+
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function (entries) {
+      entries.forEach(function (e) {
+        var f = e.target, n = f.previousElementSibling && f.previousElementSibling.querySelector('.dim');
+        if (n) n.textContent = Math.round(f.offsetWidth) + ' × ' + Math.round(f.offsetHeight);
+      });
+    });
+    $$('.fname + .frame').forEach(function (f) { ro.observe(f); });
+  }
+
+
+  /* живі деталі: прогрес, виділення як у Figma, підсвітка, телефон, гість */
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var sp = $('#sp'), giant = $('.giant'), ticking = false;
+  function onScroll() {
+    ticking = false;
+    var max = d.scrollHeight - window.innerHeight;
+    sp.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+    if (!calm && window.scrollY < 900) giant.style.translate = '0 ' + (window.scrollY * 0.24).toFixed(1) + 'px';
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  if (!calm) {
+    var screens = $$('.scr img'), si = 0;
+    setInterval(function () {
+      if (document.hidden) return;
+      screens[si].classList.remove('act');
+      si = (si + 1) % screens.length;
+      screens[si].classList.add('act');
+    }, 3400);
+  }
+
+  if (fine) {
+    $$('.frame').forEach(function (f) {
+      f.addEventListener('mousemove', function (e) {
+        var r = f.getBoundingClientRect();
+        f.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        f.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    var SEL = '.idx,.tile,.hook,.sk,.price,.shot,.path li', picked = null;
+    var sb = document.createElement('div');
+    sb.className = 'bx selbox';
+    sb.innerHTML = '<i></i><i></i><i></i><i></i><b></b>';
+    document.addEventListener('mouseover', function (e) {
+      var h = live ? null : e.target.closest(SEL);
+      if (h === picked) return;
+      picked = h;
+      if (!h) { sb.remove(); return; }
+      sb.lastChild.textContent = Math.round(h.offsetWidth) + ' × ' + Math.round(h.offsetHeight);
+      h.appendChild(sb);
+    });
+
+    if (!calm) {
+      var phone = $('.phone'), hero = $('.hero');
+      hero.addEventListener('mousemove', function (e) {
+        var r = phone.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) / window.innerWidth;
+        var dy = (e.clientY - r.top - r.height / 2) / window.innerHeight;
+        phone.style.setProperty('--ry', (dx * 16).toFixed(2) + 'deg');
+        phone.style.setProperty('--rx', (-dy * 12).toFixed(2) + 'deg');
+      });
+      hero.addEventListener('mouseleave', function () {
+        phone.style.setProperty('--ry', '0deg');
+        phone.style.setProperty('--rx', '0deg');
+      });
+
+      var me = $('#me'), mx = 0, my2 = 0, cx = 0, cy = 0, meRaf = 0;
+      function meTick() {
+        cx += (mx - cx) * 0.22; cy += (my2 - cy) * 0.22;
+        me.style.transform = 'translate(' + (cx + 14).toFixed(1) + 'px,' + (cy + 16).toFixed(1) + 'px)';
+        meRaf = Math.abs(mx - cx) + Math.abs(my2 - cy) > 0.3 ? requestAnimationFrame(meTick) : 0;
+      }
+      document.addEventListener('mousemove', function (e) {
+        mx = e.clientX; my2 = e.clientY;
+        if (!me.classList.contains('on')) { cx = mx; cy = my2; me.classList.add('on'); }
+        if (!meRaf) meRaf = requestAnimationFrame(meTick);
+      });
+      d.addEventListener('mouseleave', function () { me.classList.remove('on'); });
+    }
+  }
+
+  /* рій агентів, що збирає сторінку: рамки, набір тексту, напрямні, дублювання блоків */
+  var NAMES = ['Layout', 'Type', 'Copy', 'Media', 'Grid', 'Color', 'Code', 'QA'];
+  var PAL = [
+    ['#0d99ff', '#fff'], ['#9747ff', '#fff'], ['#ff24bd', '#fff'], ['#ffa629', '#17191b'],
+    ['#14ae5c', '#fff'], ['#f24822', '#fff'], ['#00b5ce', '#fff'], ['#ffcd29', '#17191b']
+  ];
+  var ARROW = 'M2 1.5 15.6 8.2 9.7 9.9 7.4 16z';
+  var GLYPHS =
+    '<svg class="g-move" viewBox="0 0 18 18"><path d="' + ARROW + '" fill="currentColor" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>' +
+    '<svg class="g-dup" viewBox="0 0 18 18"><path d="' + ARROW + '" fill="currentColor" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><circle cx="13.6" cy="13.6" r="4" fill="#fff"/><path d="M13.6 11.4v4.4M11.4 13.6h4.4" stroke="#111" stroke-width="1.3" stroke-linecap="round"/></svg>' +
+    '<svg class="g-draw" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="#fff" stroke-width="4.4" stroke-linecap="round"/><path d="M9 2v14M2 9h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>' +
+    '<svg class="g-type" viewBox="0 0 18 18"><path d="M6 2.5h6M6 15.5h6M9 2.5v13" stroke="#fff" stroke-width="3.8" stroke-linecap="round"/><path d="M6 2.5h6M6 15.5h6M9 2.5v13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' +
+    '<svg class="g-fly" viewBox="0 0 18 18"><path d="M16.5 9 2.5 3 6 9 2.5 15z" fill="currentColor" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+  var PH = '<svg class="ph" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="3" width="14" height="12" rx="1.5"/><circle cx="6.4" cy="7.3" r="1.3"/><path d="m3 13.5 4-3.6 2.6 2.2 2.4-2.6 3.2 3.2"/></svg>';
+
+  /* повторювані компоненти: перший малюється, решту агенти дублюють і переписують */
+  var FAN = '.hero-side .idx,.tiles .tile,.hooks .hook,.prices .price,.skills .sk,.path li,.strip .shot';
+  var CHAIN = '.nav nav a,.tabs button,.chips li,.mini li,.cta .btn,.links .btn,.clist a';
+
+  function shown(el) { return el.getClientRects().length > 0; }
+
+  var srcOf = new Map(), fastSet = new Set();
+  function group(sel, chain) {
+    var byParent = new Map();
+    $$(sel).forEach(function (el) {
+      if (!shown(el)) return;
+      var list = byParent.get(el.parentElement);
+      if (!list) byParent.set(el.parentElement, list = []);
+      list.push(el);
+    });
+    byParent.forEach(function (list) {
+      if (list.length < 2) return;
+      if (!list[0].hasAttribute('data-l')) list[0].setAttribute('data-l', 'comp');
+      for (var i = 1; i < list.length; i++) {
+        list[i].setAttribute('data-l', 'dup');
+        srcOf.set(list[i], chain ? list[(i - 1) >> 1] : list[0]);
+        if (chain) fastSet.add(list[i]);
+      }
+    });
+  }
+  group(FAN, false);
+  group(CHAIN, true);
+
+  var stage = $('#stage'), hud = $('#hud'), rul = $('#rul'), sky = $('#flock');
+  var layerOf = new Map();
+  var L = $$('[data-l]').map(function (el) {
+    var o = { el: el, s: 0, p: null, kids: [], src: null, fast: fastSet.has(el) };
+    layerOf.set(el, o);
+    return o;
+  });
+  L.forEach(function (o) {
+    var pe = o.el.parentElement && o.el.parentElement.closest('[data-l]');
+    if (pe) o.p = layerOf.get(pe);
+    for (var q = o.p; q; q = q.p) q.kids.push(o);
+    if (srcOf.has(o.el)) o.src = layerOf.get(srcOf.get(o.el));
+  });
+
+  var END = {};
+  var run = 0, fl = 0, speed = 1, tour = true, live = false, head = 0, active = 0, hideTimer = 0, t0 = 0;
+  var tourRaf = 0, tv = 0, ty = 0, tlast = 0, hold = -1;
+  var team = [], jobs = [], undo = [];
+
+  function count() {
+    var total = 0, on = 0, building = d.classList.contains('build');
+    L.forEach(function (o) {
+      if (!shown(o.el)) return;
+      total++;
+      if (!building || o.s === 2) on++;
+    });
+    $('#n').textContent = on;
+    $('#t').textContent = total;
+    $('#bar').style.width = (total ? on / total * 100 : 0) + '%';
+  }
+
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms / speed); }); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function ease(p) { return 1 - Math.pow(1 - p, 3); }
+  function tween(ms, fn, my) {
+    return new Promise(function (res) {
+      var start = performance.now(), dur = Math.max(1, ms / speed);
+      function f(now) {
+        if (my !== run) return res();
+        var p = Math.min(1, (now - start) / dur);
+        fn(ease(p));
+        if (p < 1) requestAnimationFrame(f); else res();
+      }
+      requestAnimationFrame(f);
+    });
+  }
+
+  function agent(i) {
+    var c = PAL[i % PAL.length], el = document.createElement('div');
+    el.className = 'cur';
+    el.style.color = c[0];
+    el.setAttribute('data-m', 'fly');
+    el.innerHTML = GLYPHS + (i < NAMES.length ? '<span><b style="color:' + c[1] + '">' + NAMES[i] + '</b></span>' : '') + '<em></em>';
+    stage.appendChild(el);
+    return { el: el, tag: el.lastChild, x: 0, y: 0, idle: 0 };
+  }
+  function place(a, x, y) {
+    a.x = x; a.y = y;
+    a.el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    a.el.classList.toggle('flip', x > d.clientWidth - 110);
+  }
+  function mode(a, m) { a.el.setAttribute('data-m', m); }
+  function go(a, x, y, my, quick) {
+    var top = window.scrollY - 40, bottom = window.scrollY + window.innerHeight + 40;
+    if (a.y < top) place(a, a.x, top); else if (a.y > bottom) place(a, a.x, bottom);
+    a.el.classList.add('show');
+    var x0 = a.x, y0 = a.y, dist = Math.hypot(x - x0, y - y0);
+    return tween(quick ? Math.min(200, 60 + dist * 0.14) : Math.min(360, 110 + dist * 0.22), function (p) {
+      place(a, x0 + (x - x0) * p, y0 + (y - y0) * p);
+    }, my);
+  }
+
+  function clipped(el, r) {
+    var s = el.closest('.strip');
+    if (!s) return false;
+    var sr = s.getBoundingClientRect();
+    return r.left > sr.right - 24 || r.right < sr.left + 24;
+  }
+  function atBottom() { return window.scrollY + window.innerHeight >= d.scrollHeight - 2; }
+  function settled(o) {
+    if (o.s !== 2) return false;
+    for (var i = 0; i < o.kids.length; i++) if (o.kids[i].s !== 2) return false;
+    return true;
+  }
+
+  function claim() {
+    var belowN = 0, dirty = false;
+    for (var i = head; i < L.length; i++) {
+      var o = L[i];
+      if (o.s === 2) { if (i === head) head++; continue; }
+      if (o.s === 1) continue;
+      var r = o.el.getBoundingClientRect();
+      if ((!r.width && !r.height) || r.bottom < 0 || clipped(o.el, r)) {
+        o.el.classList.add('on'); o.s = 2; dirty = true;
+        if (i === head) head++;
+        continue;
+      }
+      if (r.top > window.innerHeight - 90 && !atBottom()) {
+        if (++belowN > 60) break;
+        continue;
+      }
+      if (o.p && o.p.s !== 2) continue;
+      if (o.src && !settled(o.src)) continue;
+      o.s = 1;
+      if (dirty) count();
+      return o;
+    }
+    if (dirty) count();
+    if (head >= L.length) return END;
+    return null;
+  }
+
+  /* автотур: сторінка плавно їде за «фронтом» збірки, без ривків */
+  function frontier() {
+    for (var i = head; i < L.length; i++) {
+      if (L[i].s === 2) continue;
+      var r = L[i].el.getBoundingClientRect();
+      if (r.width || r.height) return r.top;
+    }
+    return null;
+  }
+  function tourTick(now) {
+    tourRaf = 0;
+    if (!tour || !d.classList.contains('build')) { tv = 0; return; }
+    var dt = Math.min(0.05, Math.max(0.001, (now - tlast) / 1000));
+    tlast = now;
+    if (Math.abs(window.scrollY - ty) > 3) ty = window.scrollY;
+    var room = d.scrollHeight - window.innerHeight - ty;
+    var f = active ? frontier() : 0;
+    var dist = f === null ? room : Math.min(room, f - window.innerHeight * 0.4);
+    if (hold < 0 && active && (f === null || f > window.innerHeight - 100 || window.scrollY > 40)) hold = now + 1100;
+    if (hold < 0 || now < hold) dist = 0;
+    var want = dist > 0 ? Math.min(720 * speed, Math.max(150 * speed, dist * 2.6)) : 0;
+    if (!want && hold > 0 && now >= hold && room > 0 && f !== null && f > window.innerHeight * 0.2) want = 130 * speed;
+    var acc = 900 * speed * dt;
+    tv += Math.max(-acc * 3, Math.min(acc, want - tv));
+    if (tv > 0.5) {
+      ty += tv * dt;
+      window.scrollTo({ top: ty, behavior: 'instant' });
+    }
+    tourRaf = requestAnimationFrame(tourTick);
+  }
+  function kickTour() {
+    if (tourRaf || !tour) return;
+    tlast = performance.now();
+    ty = window.scrollY;
+    tv = 0;
+    tourRaf = requestAnimationFrame(tourTick);
+  }
+
+  function countUp(b) {
+    var end = +b.getAttribute('data-n'), suf = b.getAttribute('data-suf') || '', pre = b.getAttribute('data-pre') || '', start = performance.now();
+    function f(now) {
+      var p = Math.min(1, (now - start) / 900);
+      b.textContent = pre + Math.round(end * ease(p)) + suf;
+      if (p < 1) requestAnimationFrame(f);
+    }
+    requestAnimationFrame(f);
+  }
+
+  async function typeIn(el, a, my) {
+    var html = el.innerHTML, txt = el.textContent, n = txt.length;
+    el.innerHTML = '<span></span><i class="car"></i><span class="rest"></span>';
+    var s1 = el.firstChild, car = s1.nextSibling, s2 = el.lastChild;
+    s2.textContent = txt;
+    el.classList.add('on');
+    var frames = Math.max(4, Math.min(18, Math.round(n / 3))), step = Math.ceil(n / frames);
+    for (var i = step; ; i += step) {
+      if (my !== run) break;
+      var k = Math.min(i, n);
+      s1.textContent = txt.slice(0, k);
+      s2.textContent = txt.slice(k);
+      var c = car.getBoundingClientRect();
+      place(a, c.left + window.scrollX, c.top + window.scrollY + c.height / 2);
+      await sleep(17);
+      if (k >= n) break;
+    }
+    el.innerHTML = html;
+  }
+
+  /* текстові «листки» компонента: елементи без дочірніх елементів, у яких є видимий текст */
+  function leaves(el) {
+    var out = [];
+    (function walk(n) {
+      var kids = n.children;
+      if (!kids.length) { if (n.textContent.trim()) out.push(n); return; }
+      for (var i = 0; i < kids.length; i++) if (shown(kids[i])) walk(kids[i]);
+    })(el);
+    return out;
+  }
+  var rng = document.createRange();
+  function tail(n) {
+    rng.selectNodeContents(n);
+    var rs = rng.getClientRects();
+    return rs.length ? rs[rs.length - 1] : n.getBoundingClientRect();
+  }
+  async function retype(n, txt, a, my, select, fast) {
+    var r = tail(n);
+    place(a, r.right + window.scrollX, r.top + window.scrollY + r.height / 2);
+    if (select) {
+      n.classList.add('selx');
+      await sleep(fast ? 45 : 90);
+      n.classList.remove('selx');
+    }
+    var len = txt.length, frames = Math.max(2, Math.min(fast ? 6 : 14, Math.round(len / 3))), step = Math.ceil(len / frames);
+    for (var i = step; ; i += step) {
+      if (my !== run) break;
+      var k = Math.min(i, len);
+      n.textContent = txt.slice(0, k);
+      r = tail(n);
+      place(a, r.right + window.scrollX, r.top + window.scrollY + r.height / 2);
+      await sleep(17);
+      if (k >= len) break;
+    }
+    n.textContent = txt;
+  }
+
+  /* перший елемент групи: рамка, потім текст набирається з нуля */
+  async function compose(o, a, my) {
+    var lt = leaves(o.el), real = lt.map(function (n) { return n.textContent; });
+    var restore = function () { lt.forEach(function (n, i) { n.textContent = real[i]; }); };
+    undo.push(restore);
+    try {
+      lt.forEach(function (n) { n.textContent = ''; });
+      o.el.classList.add('on');
+      mode(a, 'type');
+      for (var i = 0; i < lt.length; i++) {
+        if (my !== run) return;
+        await retype(lt[i], real[i], a, my, false, true);
+      }
+    } finally {
+      restore();
+      undo.splice(undo.indexOf(restore), 1);
+    }
+  }
+
+  /* дубль: агент бере готовий сусідній блок, тягне копію на місце й переписує вміст */
+  async function dupe(o, a, my) {
+    var el = o.el, src = o.src.el, fast = o.fast;
+    var ls = leaves(src), lt = leaves(el), real = lt.map(function (n) { return n.textContent; });
+    var imS = $$in(src, 'img'), imT = $$in(el, 'img'), realSrc = imT.map(function (im) { return im.getAttribute('src'); });
+    var restore = function () {
+      lt.forEach(function (n, i) { n.textContent = real[i]; n.classList.remove('selx'); });
+      imT.forEach(function (im, i) { if (im.getAttribute('src') !== realSrc[i]) im.setAttribute('src', realSrc[i]); });
+      el.style.transform = el.style.zIndex = el.style.position = '';
+      el.classList.remove('ghost');
+      src.classList.remove('pick');
+    };
+    undo.push(restore);
+    try {
+      var rs = src.getBoundingClientRect();
+      var gx = Math.min(rs.width / 2, 18), gy = Math.min(rs.height / 2, 14);
+      mode(a, 'move');
+      await go(a, rs.left + window.scrollX + gx, rs.top + window.scrollY + gy, my, fast);
+      if (my !== run) return;
+      src.classList.add('pick');
+      mode(a, 'dup');
+      a.tag.textContent = '0';
+      await sleep(fast ? 40 : 90);
+      if (my !== run) return;
+
+      if (ls.length) lt.forEach(function (n, i) { n.textContent = ls[i % ls.length].textContent; });
+      imT.forEach(function (im, i) { if (imS[i]) im.setAttribute('src', imS[i].getAttribute('src')); });
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      el.style.zIndex = 6;
+      el.classList.add('on', 'ghost');
+      o.kids.forEach(function (k) { k.el.classList.add('on'); });
+
+      rs = src.getBoundingClientRect();
+      var sx0 = rs.left + window.scrollX, sy0 = rs.top + window.scrollY, tx = 0, tty = 0;
+      var frame = function (p) {
+        var r = el.getBoundingClientRect();
+        var bx = r.left + window.scrollX - tx, by = r.top + window.scrollY - tty;
+        var x = sx0 + (bx - sx0) * p, y = sy0 + (by - sy0) * p;
+        tx = x - bx; tty = y - by;
+        el.style.transform = 'translate(' + tx + 'px,' + tty + 'px)';
+        place(a, x + gx, y + gy);
+        a.tag.textContent = Math.round(Math.hypot(x - sx0, y - sy0));
+      };
+      frame(0);
+      var dist = Math.hypot(tx, tty);
+      await tween(fast ? Math.min(220, 100 + dist * 0.45) : Math.min(480, 200 + dist * 0.4), frame, my);
+      el.style.transform = '';
+      src.classList.remove('pick');
+      if (my !== run) return;
+      await sleep(fast ? 20 : 60);
+      el.classList.remove('ghost');
+
+      mode(a, 'type');
+      for (var i = 0; i < lt.length; i++) {
+        if (my !== run) return;
+        if (lt[i].textContent !== real[i]) await retype(lt[i], real[i], a, my, true, fast || lt.length > 3);
+      }
+    } finally {
+      restore();
+      undo.splice(undo.indexOf(restore), 1);
+    }
+  }
+
+  /* лінійки й напрямні, як на полотні редактора */
+  function rulers() {
+    var W = window.innerWidth, H = d.scrollHeight, h = '';
+    for (var x = 100; x < W; x += 100) h += '<i style="left:' + x + 'px">' + x + '</i>';
+    $('.rt').innerHTML = h;
+    h = '';
+    for (var y = 100; y < H; y += 100) h += '<i style="top:' + y + 'px">' + y + '</i>';
+    var rl = $('.rl');
+    rl.innerHTML = h;
+    rl.style.height = H + 'px';
+  }
+  function guide(vertical, target) {
+    return async function (a, my) {
+      var g = document.createElement('div');
+      g.className = 'gd ' + (vertical ? 'v' : 'h');
+      var from = vertical ? 8 : window.scrollY + 8;
+      var sx = window.scrollX + window.innerWidth * (0.25 + Math.random() * 0.5);
+      var sy = window.scrollY + window.innerHeight * (0.25 + Math.random() * 0.5);
+      mode(a, 'move');
+      await go(a, vertical ? from : sx, vertical ? sy : from, my);
+      if (my !== run) return;
+      if (vertical) g.style.height = d.scrollHeight + 'px';
+      rul.appendChild(g);
+      mode(a, 'guide');
+      await tween(460, function (p) {
+        var v = from + (target - from) * p;
+        if (vertical) { g.style.left = v + 'px'; place(a, v, sy); }
+        else { g.style.top = v + 'px'; place(a, sx, v); }
+        a.tag.textContent = Math.round(v);
+      }, my);
+      mode(a, 'move');
+    };
+  }
+
+  async function work(a, my) {
+    while (my === run) {
+      if (jobs.length) { await jobs.shift()(a, my); continue; }
+      var o = claim();
+      if (o === END) break;
+      if (!o) {
+        if (++a.idle > 5) a.el.classList.remove('show');
+        await wait(110);
+        continue;
+      }
+      a.idle = 0;
+      var el = o.el, kind = el.getAttribute('data-l');
+
+      if (kind === 'dup') {
+        o.kids.forEach(function (k) { k.s = 1; });
+        await dupe(o, a, my);
+        if (my !== run) return;
+        o.kids.forEach(function (k) { k.s = 2; });
+        o.s = 2;
+        mode(a, 'move');
+        count();
+        continue;
+      }
+
+      var r = el.getBoundingClientRect();
+      var x = r.left + window.scrollX, y = r.top + window.scrollY, w = r.width, h = r.height;
+      mode(a, 'move');
+      await go(a, x, y, my, kind === 'comp');
+      if (my !== run) return;
+      mode(a, 'draw');
+      var b = document.createElement('div');
+      b.className = kind === 'frame' ? 'bx fill' : 'bx';
+      b.innerHTML = '<i></i><i></i><i></i><i></i><b></b>' + (kind === 'frame' && w > 60 && h > 44 && el.matches('figure,.giant') ? PH : '');
+      b.style.left = x + 'px';
+      b.style.top = y + 'px';
+      stage.appendChild(b);
+      var lab = b.querySelector('b');
+      await tween(kind === 'comp' ? 130 : Math.min(340, 170 + Math.hypot(w, h) * 0.13), function (p) {
+        var cw = w * p, ch = h * p;
+        b.style.width = cw + 'px';
+        b.style.height = ch + 'px';
+        lab.textContent = Math.round(cw) + ' × ' + Math.round(ch);
+        place(a, x + cw, y + ch);
+      }, my);
+      if (my !== run) return;
+      if (kind === 'type') {
+        mode(a, 'type');
+        await typeIn(el, a, my);
+      } else if (kind === 'comp') {
+        await compose(o, a, my);
+      } else if (kind === 'frame') {
+        await sleep(130);
+        el.classList.add('on');
+        b.classList.remove('fill');
+        await sleep(60);
+      } else {
+        el.classList.add('on');
+        await sleep(70);
+      }
+      if (my !== run) return;
+      o.s = 2;
+      fade(b);
+      $$in(el, '[data-n]').forEach(countUp);
+      mode(a, 'move');
+      count();
+    }
+    if (my !== run) return;
+    if (--active === 0) settle(true);
+  }
+
+  function fade(b) {
+    b.style.opacity = 0;
+    setTimeout(function () { b.remove(); }, 200);
+  }
+
+  /* вступ: сторінку видно, рій злітається й «сканує» її, після чого полотно очищується */
+  function intro(my) {
+    var W = d.clientWidth, H = window.innerHeight, sx = window.scrollX, sy = window.scrollY;
+    team.forEach(function (a, i) {
+      var side = i % 4, t = Math.random();
+      var x0 = side === 0 ? -30 : side === 1 ? W + 30 : t * W;
+      var y0 = side === 2 ? -30 : side === 3 ? H + 30 : t * H;
+      var ang = Math.random() * 6.283, rad = 50 + Math.random() * Math.min(W, H) * 0.3;
+      a.i0 = [x0 + sx, y0 + sy];
+      a.i1 = [W / 2 + Math.cos(ang) * rad + sx, H * 0.46 + Math.sin(ang) * rad * 0.7 + sy];
+      a.bend = (Math.random() - 0.5) * 260;
+      place(a, a.i0[0], a.i0[1]);
+      mode(a, 'fly');
+      a.el.classList.add('show');
+    });
+    setTimeout(function () { if (my === run) d.classList.add('wipe'); }, 480);
+    return tween(1200, function (p) {
+      team.forEach(function (a) {
+        var vx = a.i1[0] - a.i0[0], vy = a.i1[1] - a.i0[1], vl = Math.hypot(vx, vy) || 1;
+        var bend = Math.sin(p * Math.PI) * a.bend;
+        var x = a.i0[0] + vx * p - vy / vl * bend, y = a.i0[1] + vy * p + vx / vl * bend;
+        if (Math.abs(x - a.x) + Math.abs(y - a.y) > 0.4) a.el.style.setProperty('--rot', Math.atan2(y - a.y, x - a.x) + 'rad');
+        place(a, x, y);
+      });
+    }, my).then(function () { return wait(180); });
+  }
+
+  /* фінал: рій кружляє над готовою сторінкою, потім розлітається */
+  function flock() {
+    var my = ++fl, start = performance.now(), last = start, crew = team.slice();
+    crew.forEach(function (a) {
+      a.fx = a.x - window.scrollX;
+      a.fy = a.y - window.scrollY;
+      a.vx = (Math.random() - 0.5) * 200;
+      a.vy = (Math.random() - 0.5) * 200;
+      a.rad = 60 + Math.random() * 110;
+      sky.appendChild(a.el);
+      mode(a, 'fly');
+      a.el.classList.remove('flip');
+      a.el.classList.add('show');
+    });
+    function tick(now) {
+      if (my !== fl) return;
+      var dt = Math.min(0.05, (now - last) / 1000), t = (now - start) / 1000;
+      last = now;
+      var W = window.innerWidth, H = window.innerHeight, leaving = t > 11;
+      var cx = W * (0.5 + 0.3 * Math.sin(t * 0.55 + 1.3)), cy = H * (0.45 + 0.24 * Math.sin(t * 0.83));
+      for (var i = 0; i < crew.length; i++) {
+        var a = crew[i];
+        var dx = a.fx - cx, dy = a.fy - cy, dist = Math.hypot(dx, dy) || 1, ux = dx / dist, uy = dy / dist;
+        var k = Math.max(-1.6, Math.min(1.6, (a.rad - dist) / 60));
+        var wx = -uy + ux * k, wy = ux + uy * k;
+        if (leaving) { wx = ux * 2 - uy * 0.4; wy = uy * 2 + ux * 0.4; }
+        for (var j = 0; j < crew.length; j++) {
+          if (j === i) continue;
+          var ex = a.fx - crew[j].fx, ey = a.fy - crew[j].fy, e = ex * ex + ey * ey;
+          if (e < 900 && e > 0.01) { wx += ex / e * 16; wy += ey / e * 16; }
+        }
+        var wl = Math.hypot(wx, wy) || 1, sp = leaving ? 520 : 310, turn = Math.min(1, dt * 3.4);
+        a.vx += (wx / wl * sp - a.vx) * turn;
+        a.vy += (wy / wl * sp - a.vy) * turn;
+        a.fx += a.vx * dt;
+        a.fy += a.vy * dt;
+        a.el.style.transform = 'translate(' + a.fx.toFixed(1) + 'px,' + a.fy.toFixed(1) + 'px)';
+        a.el.style.setProperty('--rot', Math.atan2(a.vy, a.vx) + 'rad');
+      }
+      if (t > 13) { sky.innerHTML = ''; hud.classList.remove('show'); return; }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function settle(natural) {
+    var secs = t0 ? ((performance.now() - t0) / 1000).toFixed(1) : '0';
+    run++;
+    active = 0;
+    live = false;
+    jobs = [];
+    undo.splice(0).forEach(function (f) { f(); });
+    L.forEach(function (o) { o.s = 2; o.el.classList.remove('on'); });
+    d.classList.remove('build', 'wipe', 'rulers');
+    $$('#stage .bx').forEach(function (b) { b.remove(); });
+    $$('#rul .gd').forEach(function (g) { g.remove(); });
+    $('.rl').style.height = '0';
+    count();
+    $$('.fa').forEach(function (n) { n.textContent = team.length; });
+    $$('.ft').forEach(function (n) { n.textContent = secs; });
+    hud.setAttribute('data-st', natural ? 'done' : 'skip');
+    clearTimeout(hideTimer);
+    if (natural && team.length) flock();
+    else {
+      fl++;
+      stage.innerHTML = '';
+      sky.innerHTML = '';
+      hideTimer = setTimeout(function () { hud.classList.remove('show'); }, 3200);
+    }
+  }
+
+  function start() {
+    var my = ++run;
+    fl++;
+    live = true;
+    clearTimeout(hideTimer);
+    head = 0;
+    hold = -1;
+    t0 = 0;
+    jobs = [];
+    L.forEach(function (o) { o.s = 0; });
+    stage.innerHTML = '';
+    sky.innerHTML = '';
+    var wide = window.innerWidth >= 700, n = wide ? 16 : 6;
+    team = [];
+    for (var i = 0; i < n; i++) team.push(agent(i));
+    $('#ac').textContent = n;
+    $('#avs').innerHTML = PAL.slice(0, 5).map(function (c, i) {
+      return '<i style="background:' + c[0] + ';color:' + c[1] + '">' + NAMES[i].charAt(0) + '</i>';
+    }).join('');
+    hud.setAttribute('data-st', 'scan');
+    hud.classList.add('show');
+    count();
+    var fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    Promise.race([fonts, wait(1500)]).then(function () {
+      return my === run ? intro(my) : null;
+    }).then(function () {
+      if (my !== run) return;
+      L.forEach(function (o) { o.el.classList.remove('on'); });
+      d.classList.add('build');
+      d.classList.remove('wipe');
+      if (wide) {
+        rulers();
+        d.classList.add('rulers');
+        var hr = $('.hero').getBoundingClientRect(), gr = $('.hero-grid').getBoundingClientRect();
+        jobs = [guide(true, hr.left + window.scrollX), guide(true, hr.right + window.scrollX), guide(false, gr.top + window.scrollY)];
+      }
+      hud.setAttribute('data-st', 'run');
+      t0 = performance.now();
+      active = team.length;
+      count();
+      kickTour();
+      team.forEach(function (a, i) {
+        setTimeout(function () { work(a, my).catch(function () { settle(false); }); }, i * 40);
+      });
+    }).catch(function () { settle(false); });
+  }
+
+  function replay() {
+    settle(false);
+    hud.classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTour(true);
+    start();
+  }
+
+  function setTour(v) {
+    tour = v;
+    $('#tour').setAttribute('aria-pressed', v ? 'true' : 'false');
+    if (v) kickTour();
+  }
+
+  $('#skip').addEventListener('click', function () { settle(false); });
+  $('#again').addEventListener('click', replay);
+  $('#again2').addEventListener('click', replay);
+  $('#again3').addEventListener('click', replay);
+  $('#close').addEventListener('click', function () {
+    fl++;
+    sky.innerHTML = '';
+    hud.classList.remove('show');
+  });
+  $('#tour').addEventListener('click', function () { setTour(!tour); });
+  $('#speed').addEventListener('click', function () {
+    speed = speed === 1 ? 2 : 1;
+    this.textContent = speed + '×';
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!live) return;
+    if (e.key === 'Escape') settle(false);
+    else if (/^(Arrow|Page|Home|End| )/.test(e.key) && !e.target.closest('[role="tab"]')) setTour(false);
+  });
+  window.addEventListener('wheel', function () { setTour(false); }, { passive: true });
+  window.addEventListener('touchmove', function () { setTour(false); }, { passive: true });
+
+  count();
+  if (!calm) {
+    try { start(); } catch (e) { settle(false); }
+  }
 })();
 </script>
 </body>
