@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Oswald:wght@600;700&family=Unbounded:wght@400;500;800&display=swap" rel="stylesheet">
+<script src="motion-audio.js" defer></script>
 <script>
 (function () {
   var d = document.documentElement;
@@ -77,11 +78,11 @@ img{max-width:100%}
 button{font:inherit;color:inherit}
 p{margin:0}
 .nw{white-space:nowrap}
-.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+.stack{display:flex;flex-direction:column;gap:18px;min-width:0}
 ::selection{background:var(--sel);color:#fff}
 :focus-visible{outline:2px solid var(--sel);outline-offset:3px}
 
-.wrap{max-width:1168px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1680px;margin:0 auto;padding:0 clamp(24px,3vw,48px)}
 
 /* навігація */
 .nav{
@@ -109,7 +110,7 @@ p{margin:0}
 #menu{display:none}
 
 /* перший екран */
-.hero{position:relative;isolation:isolate;padding-top:90px}
+.hero{position:relative;isolation:isolate;max-width:1360px;margin:0 auto;padding-top:110px}
 .hero::before{
   content:"";position:absolute;z-index:-1;left:50%;top:-40px;width:min(1100px,120vw);height:640px;
   transform:translateX(-50%);pointer-events:none;
@@ -118,7 +119,7 @@ p{margin:0}
 .giant{display:block;width:100%;height:auto;overflow:visible;user-select:none}
 .giant text{font-family:var(--tall);font-weight:700;font-size:300px;fill:url(#gg);stroke:var(--sel);stroke-opacity:.8;stroke-width:1.6px}
 .hero-grid{
-  display:grid;grid-template-columns:minmax(0,1fr) 286px minmax(0,340px);gap:44px;align-items:start;
+  display:grid;grid-template-columns:minmax(0,1fr) 380px minmax(0,340px);gap:clamp(32px,3vw,56px);align-items:start;
   margin-top:clamp(-64px,-4.4vw,-18px);
 }
 .hi{margin:0 0 12px;font:400 italic 22px/1 var(--sans);color:var(--ink)}
@@ -155,6 +156,17 @@ h1{margin:0;font:800 clamp(36px,4.9vw,58px)/1 var(--display);letter-spacing:-.03
 .mini b{display:block;margin-bottom:4px;font:600 30px/1 var(--tall);color:var(--ink)}
 .mini li:first-child b{color:var(--sel-ink)}
 
+/* Cutout portrait on a blue editorial panel, kept native and theme-aware. */
+.portrait{position:relative;isolation:isolate;align-self:start;margin:0;width:100%;height:500px}
+.portrait-panel{position:absolute;z-index:-1;inset:48px 0 24px 12px;transform:translate(10px,-8px);border:1px solid var(--sel);border-radius:2px;background:var(--sel);box-shadow:0 28px 80px -40px rgba(13,153,255,.45)}
+.portrait::after{content:"";position:absolute;z-index:2;inset:48px 12px 24px 0;border:1px solid color-mix(in srgb,var(--ink) 32%,transparent);pointer-events:none}
+.portrait > img{position:relative;display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(-12px 8px 20px rgba(0,25,60,.2));mask-image:linear-gradient(#000 91%,transparent 100%)}
+.portrait-badge{position:absolute;z-index:3;bottom:12px;left:12px;right:12px;display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--sel) 70%,var(--line-2));border-radius:2px;background:var(--frame);font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;box-shadow:0 12px 32px rgba(0,0,0,.15)}
+.strip.product-preview{align-items:center;justify-content:center;gap:32px;padding:12px 12px 28px}
+.product-preview .phone{width:242px;flex:0 0 242px}
+.product-preview .shot{max-width:190px}
+.product-preview .badge{left:-14px;bottom:42px}
+
 .phone{
   position:relative;margin:0;width:100%;padding:9px;border-radius:44px;
   background:#050506;border:1px solid var(--line-2);
@@ -180,18 +192,25 @@ h1{margin:0;font:800 clamp(36px,4.9vw,58px)/1 var(--display);letter-spacing:-.03
 .chips li{padding:5px 10px;border:1px solid var(--line);border-radius:6px;font:400 12px/1.3 var(--mono);color:var(--ink-2)}
 
 /* розділи */
-.sec{margin-top:120px;scroll-margin-top:84px}
+/* Large case studies breathe; supporting sections stay closer together. */
+.sec{margin-top:clamp(104px,10vw,176px);scroll-margin-top:104px}
+#about{margin-top:clamp(88px,8vw,136px)}
+#vyrii,#flowers{margin-top:clamp(128px,12vw,200px)}
+#skills{margin-top:clamp(72px,6vw,104px)}
+#pricing{margin-top:clamp(104px,9vw,152px)}
+#contact{margin-top:clamp(128px,12vw,200px)}
+.sec > h2{max-width:24ch}
 .kick{margin:0 0 16px;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--sel-ink)}
 h2{margin:0;font:500 clamp(28px,4.2vw,48px)/1.06 var(--display);letter-spacing:-.035em;text-wrap:balance}
-.lede{margin:18px 0 0;max-width:40em;font-size:18px;line-height:1.55;color:var(--ink-2)}
-.block{margin-top:38px}
+.lede{margin:16px 0 0;max-width:38em;font-size:18px;line-height:1.55;color:var(--ink-2)}
+.block{margin-top:48px}
 .fname{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
   padding:0 4px 9px;font:500 12.5px/1.2 var(--sans);color:var(--ink-3);
 }
 .fname .dim{font:400 11px/1 var(--mono);font-style:normal}
 .frame{
-  --pad:38px;position:relative;padding:var(--pad);
+  --pad:32px;position:relative;padding:var(--pad);
   background:var(--frame);border:1px solid var(--line);border-radius:var(--r);
 }
 .frame::after{
@@ -204,7 +223,7 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 .sub4{font:500 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase}
 .frame p{color:var(--ink-2)}
 .frame p.sub4{color:var(--ink-3)}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,4vw,72px)}
 .quote{margin-top:10px;padding:4px 0 4px 20px;border-left:2px solid var(--sel);font-size:18px;line-height:1.5;font-style:italic}
 .frame p.quote{color:var(--ink)}
 .prin{list-style:none;margin:0;padding:0}
@@ -215,16 +234,16 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 .prin h4{margin-bottom:4px}
 .prin p{font-size:15px}
 
-.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;margin-bottom:26px}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-bottom:32px}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;background:var(--sel-soft);border:1px solid color-mix(in srgb,var(--sel) 45%,transparent);font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sel-ink)}
 .pill::before{content:"";width:6px;height:6px;background:var(--sel)}
 .meta{font:400 12px/1.4 var(--mono);color:var(--ink-3)}
-.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:30px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:32px}
 .tile{padding:18px 18px 16px;background:var(--inset);border:1px solid var(--line);border-radius:12px}
 .tile b{display:block;font:600 44px/1 var(--tall);color:var(--sel-ink)}
 .tile span{display:block;margin-top:8px;font:400 12px/1.4 var(--mono);color:var(--ink-2)}
 
-.part{margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+.part{margin-top:40px;padding-top:32px;border-top:1px solid var(--line)}
 .part > .sub4{margin-bottom:16px}
 .tabs{display:flex;flex-wrap:wrap;gap:6px}
 .tabs button{
@@ -233,14 +252,14 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 }
 .tabs button:hover{color:var(--ink);border-color:var(--ink-2)}
 .tabs button[aria-selected="true"]{background:var(--sel);border-color:var(--sel);color:#04121d}
-.tp{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;margin-top:14px;padding:28px;align-items:center;background:var(--inset);border:1px solid var(--line);border-radius:14px}
+.tp{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,64px);margin-top:20px;padding:32px;align-items:center;background:var(--inset);border:1px solid var(--line);border-radius:14px}
 .tp.solo{grid-template-columns:minmax(0,1fr)}
 .tp.solo p{max-width:46em}
 .tp-k{margin:0 0 14px;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
 .frame p.tp-k{color:var(--sel-ink)}
 .tp h4{font:500 19px/1.25 var(--display);letter-spacing:-.02em;margin-bottom:12px}
 .strip{display:flex;gap:14px;justify-content:flex-end;min-width:0}
-.shot{flex:1 1 0;min-width:0;max-width:182px;margin:0}
+.shot{flex:1 1 0;min-width:0;max-width:210px;margin:0}
 .shot figcaption{margin:0 0 8px 2px;font:500 12px/1.3 var(--sans);color:var(--ink-3)}
 .shot img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:var(--frame-2)}
 .shot img{transition:transform .25s ease,border-color .2s}
@@ -264,7 +283,7 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 .browser .chrome i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2)}
 .browser .chrome span{flex:1;margin-right:38px;text-align:center;font:400 11px/1 var(--mono);color:rgba(255,255,255,.55)}
 .browser img{display:block;width:100%;height:auto;aspect-ratio:1440 / 636;object-fit:cover;object-position:top}
-.hooks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hooks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .hook{padding:18px;background:var(--inset);border:1px solid var(--line);border-radius:12px}
 .hook h4{margin-bottom:6px}
 .hook p{font-size:14.5px;line-height:1.5}
@@ -291,13 +310,13 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 .figrow p{max-width:36em}
 .frame.figrow p{color:var(--ink)}
 
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .sk{padding:20px;background:var(--frame);border:1px solid var(--line);border-radius:14px}
 .sk h4{margin:0;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sel-ink)}
 .sk .chips{margin-top:14px}
 .sk.wide{grid-column:span 2}
 
-.contact{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:44px;align-items:center;--pad:46px}
+.contact{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,88px);align-items:center;--pad:48px}
 .mail{
   display:block;margin:0;text-decoration:none;overflow-wrap:anywhere;
   font:500 clamp(16px,2.8vw,31px)/1.2 var(--display);letter-spacing:-.025em;
@@ -320,7 +339,7 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
   padding:4px 8px;border-radius:999px;background:var(--ink);color:var(--canvas);font:500 11px/1 var(--sans);white-space:nowrap;
 }
 #me.on{opacity:1}
-.mq{overflow:hidden;margin:76px calc(50% - 50vw) 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--frame) 55%,transparent)}
+.mq{overflow:hidden;margin:96px calc(50% - 50vw) 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--frame) 55%,transparent)}
 .mq-t{display:flex;align-items:center;gap:34px;width:max-content;padding-left:34px}
 .mq-t span{font:600 30px/1 var(--tall);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
 .mq-t span:nth-of-type(even){color:transparent;-webkit-text-stroke:1.2px var(--ink-2)}
@@ -329,8 +348,8 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 .tp.in{animation:tpIn .4s ease}
 @keyframes tpIn{from{opacity:0;translate:0 10px}}
 
-.prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.price{position:relative;display:flex;flex-direction:column;gap:14px;padding:28px;background:var(--frame);border:1px solid var(--line);border-radius:var(--r)}
+.prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.price{position:relative;display:flex;flex-direction:column;gap:20px;padding:32px;background:var(--frame);border:1px solid var(--line);border-radius:var(--r)}
 .price p{color:var(--ink-2)}
 .price p.sub4{color:var(--sel-ink)}
 .amt{display:block}
@@ -357,7 +376,7 @@ h4{margin:0 0 10px;font:600 16px/1.35 var(--sans)}
 /* збірка сторінки: шари сховані, поки агент їх не «намалює» */
 html.build [data-l]{opacity:0}
 html.wipe [data-l]{opacity:0;transition:opacity .5s ease}
-html.build [data-l].on{opacity:1;transition:opacity .2s ease}
+html.build [data-l].on{opacity:1;transition:opacity .42s ease}
 .rest{opacity:0}
 .car{position:relative}
 .car::after{content:"";position:absolute;left:1px;top:.1em;width:2px;height:.95em;background:var(--sel)}
@@ -390,6 +409,19 @@ html.build [data-l].on{opacity:1;transition:opacity .2s ease}
 .cur em{display:none;position:absolute;left:17px;top:-13px;padding:2px 4px;border-radius:3px;background:#ff5c3a;color:#fff;font:500 10px/1 var(--mono);font-style:normal;white-space:nowrap}
 .cur[data-m="dup"] em,.cur[data-m="guide"] em{display:block}
 #flock{position:fixed;inset:0;z-index:50;overflow:hidden;pointer-events:none}
+
+/* Temporary editor measurements, derived from actual layout geometry. */
+.measure{position:absolute;height:1px;background:#ff966b;color:#ffb28f;z-index:8}
+.measure::before,.measure::after{content:"";position:absolute;top:-4px;width:1px;height:9px;background:currentColor}
+.measure::before{left:0}.measure::after{right:0}
+.measure.vertical{width:1px;height:auto}
+.measure.vertical::before,.measure.vertical::after{left:-4px;top:0;width:9px;height:1px}
+.measure.vertical::after{top:auto;bottom:0}
+.measure span{position:absolute;left:50%;top:4px;transform:translateX(-50%);padding:3px 5px;border-radius:3px;background:var(--frame-2);color:inherit;font:500 10px/1 var(--mono);white-space:nowrap}
+.measure.vertical span{left:6px;top:50%;transform:translateY(-50%)}
+.snap-guide{position:absolute;border-top:1px dashed #ff966b;opacity:.7;z-index:7}
+@media (max-width:640px){.measure,.snap-guide{display:none}}
+
 .ghost{outline:1px solid #ff5c3a;outline-offset:1px}
 .pick{outline:1px solid var(--sel);outline-offset:1px}
 .selx{background:rgba(13,153,255,.42) !important;color:#fff !important}
@@ -438,11 +470,13 @@ html.rulers #rul{opacity:1}
 .hud[data-st="scan"] .acts[data-on~="scan"],.hud[data-st="run"] .acts[data-on~="run"],.hud[data-st="skip"] .acts[data-on~="skip"],.hud[data-st="done"] .acts[data-on~="done"],.hud[data-st="run"] .avs{display:flex;gap:4px}
 .hud[data-st="run"] .avs{gap:0}
 .hud[data-st="run"] .bar,.hud[data-st="run"] .sep{display:block}
+#sound[data-audio="pending"]{padding:0 13px;background:var(--sel-soft);color:var(--sel-ink)}
 #close{padding:0 11px;font-size:15px}
 
 @media (max-width:1080px){
   .avail{display:none}
-  .hero-grid{grid-template-columns:minmax(0,1fr) 260px;gap:36px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 320px;gap:36px}
+  .portrait{height:440px}
   .hero-side{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .hero-side .idx + .idx{margin-top:0}
   .tp{grid-template-columns:minmax(0,1fr);gap:24px}
@@ -468,15 +502,27 @@ html.rulers #rul{opacity:1}
   .lead{font-size:17px}
   .btn{flex:1 1 auto;justify-content:space-between}
   .phone{max-width:264px;justify-self:center}
+  .portrait{width:min(100%,360px);height:460px;justify-self:center}
+  .product-preview .phone{width:226px;flex-basis:226px}
+  .product-preview .shot{max-width:none;width:156px}
+  .strip.product-preview{justify-content:flex-start;gap:28px;padding-top:16px;padding-bottom:28px}
   .badge{left:-12px}
   .hero-side{grid-template-columns:minmax(0,1fr)}
-  .sec{margin-top:84px}
+  .sec{margin-top:88px;scroll-margin-top:88px}
+  #about{margin-top:72px}
+  #vyrii,#flowers,#contact{margin-top:112px}
+  #skills{margin-top:64px}
+  #pricing{margin-top:88px}
   .mq{margin-top:56px;padding:14px 0}
   .mq-t span{font-size:22px}
   .amt b{font-size:52px}
   .price{padding:22px}
   .lede{font-size:17px}
-  .block{margin-top:28px}
+  .block{margin-top:32px}
+  .part{margin-top:32px;padding-top:24px}
+  .tiles,.hooks,.skills{gap:12px}
+  .prices{gap:16px}
+  .stack{gap:16px}
   .frame{--pad:22px}
   .contact{--pad:24px}
   .tile b{font-size:36px}
@@ -490,7 +536,8 @@ html.rulers #rul{opacity:1}
   .prog i{width:34px}
   .fname .dim{display:none}
   .foot{flex-direction:column;align-items:flex-start;gap:6px}
-  .hud{gap:10px;padding-left:14px}
+  .hud{max-width:calc(100vw - 24px);height:auto;min-height:46px;flex-wrap:wrap;justify-content:center;gap:4px 8px;padding:6px 8px;border-radius:22px}
+  .hud .cnt{font-size:10px}
   .hud .avs,.hud .bar,.hud .sep,.hud .ag{display:none !important}
   #rul{display:none}
   .cur > span{display:none}
@@ -553,9 +600,10 @@ html.rulers #rul{opacity:1}
       </ul>
     </div>
 
-    <figure class="phone" data-l="frame">
-      <div class="scr"><img class="act" src="shots/03-map.png" width="860" height="1864" alt=""><img src="shots/15-business-barber.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/18-shop-flowers.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/42-biz-bookings.png" width="860" height="1864" alt="" loading="lazy"></div>
-      <figcaption class="badge" data-l="frame"><i class="dot"></i><span data-uk>Vyrii 1.0 в App Store</span><span data-en>Vyrii 1.0 in the App Store</span></figcaption>
+    <figure class="portrait" data-l="frame">
+      <div class="portrait-panel" aria-hidden="true"></div>
+      <img src="shots/roman-portrait-noir.webp" width="1086" height="1448" alt="Роман Сарваді" fetchpriority="high" decoding="async">
+      <figcaption class="portrait-badge" data-l="frame"><i class="dot"></i><span data-uk>Від ідеї до релізу</span><span data-en>From idea to release</span></figcaption>
     </figure>
 
     <div class="hero-side">
@@ -653,8 +701,11 @@ html.rulers #rul{opacity:1}
             <p data-l="type" data-en>I assembled the catalogue from OpenStreetMap open data and checked it by hand. Search, categories with filters and a map with marker clustering, so the city centre does not merge into one blob.</p>
             <ul class="chips" data-l="text"><li>OpenStreetMap</li><li>Apple Maps</li><li><span data-uk>фільтри</span><span data-en>filters</span></li><li><span data-uk>пошук</span><span data-en>search</span></li></ul>
           </div>
-          <div class="strip">
-            <figure class="shot" data-l="frame"><figcaption><span data-uk>Карта міста</span><span data-en>City map</span></figcaption><img src="shots/03-map.png" width="860" height="1864" alt="" decoding="async"></figure>
+          <div class="strip product-preview">
+    <figure class="phone" data-l="frame">
+      <div class="scr"><img class="act" src="shots/03-map.png" width="860" height="1864" alt=""><img src="shots/15-business-barber.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/18-shop-flowers.png" width="860" height="1864" alt="" loading="lazy"><img src="shots/42-biz-bookings.png" width="860" height="1864" alt="" loading="lazy"></div>
+      <figcaption class="badge" data-l="frame"><i class="dot"></i><span data-uk>Vyrii 1.0 в App Store</span><span data-en>Vyrii 1.0 in the App Store</span></figcaption>
+    </figure>
             <figure class="shot" data-l="frame"><figcaption><span data-uk>Категорія з фільтрами</span><span data-en>Category with filters</span></figcaption><img src="shots/07-cat-barber.png" width="860" height="1864" alt="" decoding="async"></figure>
           </div>
         </div>
@@ -710,7 +761,7 @@ html.rulers #rul{opacity:1}
           </div>
         </div>
 
-        <div class="tp solo" id="vp5" role="tabpanel" aria-labelledby="vt5" data-l="frame" hidden>
+        <div class="tp" id="vp5" role="tabpanel" aria-labelledby="vt5" data-l="frame" hidden>
           <div>
             <p class="tp-k" data-l="type" data-uk>05 // дизайн</p>
             <p class="tp-k" data-l="type" data-en>05 // design</p>
@@ -719,6 +770,12 @@ html.rulers #rul{opacity:1}
             <p data-l="type" data-uk>Фірмовий знак, іконка застосунку, заставка й анімація запуску, усі екрани клієнта та кабінету бізнесу у світлій і темній темах. Компоненти, варіанти й стани живуть у Figma, ті самі токени використані в коді. Для App Store підготував іконку, скриншоти й банери.</p>
             <p data-l="type" data-en>The brand mark, the app icon, the splash screen and launch animation, every client and business screen in light and dark themes. Components, variants and states live in Figma, and the same tokens are used in code. For the App Store I prepared the icon, screenshots and banners.</p>
             <ul class="chips" data-l="text"><li>Figma</li><li>Auto Layout</li><li><span data-uk>компоненти й варіанти</span><span data-en>components and variants</span></li><li><span data-uk>токени</span><span data-en>tokens</span></li><li><span data-uk>світла й темна теми</span><span data-en>light and dark themes</span></li></ul>
+            <p data-l="type" data-uk>На екранах нижче — два різні сценарії: клієнт переглядає послуги закладу, власник керує записами. Спільні картки й типографіка зберігають цілісність, а щільність інформації змінюється під задачу.</p>
+            <p data-l="type" data-en>Two different tasks below: a customer explores a venue's services, while an owner manages bookings. Shared cards and typography keep the product consistent, with information density adapted to each task.</p>
+          </div>
+          <div class="strip">
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Клієнт · послуги закладу</span><span data-en>Customer · venue services</span></figcaption><img src="shots/15-business-barber.png" width="860" height="1864" alt="Vyrii: venue services interface" loading="lazy" decoding="async"></figure>
+            <figure class="shot" data-l="frame"><figcaption><span data-uk>Бізнес · керування записами</span><span data-en>Business · managing bookings</span></figcaption><img src="shots/42-biz-bookings.png" width="860" height="1864" alt="Vyrii: business bookings interface" loading="lazy" decoding="async"></figure>
           </div>
         </div>
 
@@ -1049,10 +1106,11 @@ html.rulers #rul{opacity:1}
     <button id="skip" type="button"><span data-uk>Пропустити</span><span data-en>Skip</span></button>
   </span>
   <span class="acts" data-on="skip"><button id="again2" type="button"><span data-uk>Ще раз</span><span data-en>Replay</span></button></span>
+  <button id="sound" type="button" aria-label="Увімкнути звук / Enable sound" aria-pressed="false">♪</button>
   <span class="acts" data-on="done">
     <button id="again3" type="button"><span data-uk>Ще раз</span><span data-en>Replay</span></button>
-    <button id="close" type="button" aria-label="Закрити / Close">×</button>
   </span>
+  <button id="close" data-on="done skip" type="button" aria-label="Закрити / Close">×</button>
 </div>
 
 <script>
@@ -1177,15 +1235,15 @@ html.rulers #rul{opacity:1}
     });
 
     if (!calm) {
-      var phone = $('.phone'), hero = $('.hero');
-      hero.addEventListener('mousemove', function (e) {
+      var phone = $('.phone'), phoneArea = phone.closest('.tp') || phone;
+      phoneArea.addEventListener('mousemove', function (e) {
         var r = phone.getBoundingClientRect();
         var dx = (e.clientX - r.left - r.width / 2) / window.innerWidth;
         var dy = (e.clientY - r.top - r.height / 2) / window.innerHeight;
         phone.style.setProperty('--ry', (dx * 16).toFixed(2) + 'deg');
         phone.style.setProperty('--rx', (-dy * 12).toFixed(2) + 'deg');
       });
-      hero.addEventListener('mouseleave', function () {
+      phoneArea.addEventListener('mouseleave', function () {
         phone.style.setProperty('--ry', '0deg');
         phone.style.setProperty('--rx', '0deg');
       });
@@ -1263,9 +1321,13 @@ html.rulers #rul{opacity:1}
   });
 
   var END = {};
+  var pace = 1.45; // Base tempo; the 1× / 2× control multiplies this pace.
   var run = 0, fl = 0, speed = 1, tour = true, live = false, head = 0, active = 0, hideTimer = 0, t0 = 0;
   var tourRaf = 0, tv = 0, ty = 0, tlast = 0, hold = -1;
   var team = [], jobs = [], undo = [];
+  var pointer = { x: innerWidth / 2, y: innerHeight / 2, seen: false };
+  window.addEventListener('pointermove', function (e) { if (e.pointerType !== 'touch') { pointer.x = e.clientX; pointer.y = e.clientY; pointer.seen = true; } }, { passive: true });
+  function sound(action, a) { if (window.PortfolioSound) window.PortfolioSound.play(action, a ? a.x - scrollX : innerWidth / 2); }
 
   function count() {
     var total = 0, on = 0, building = d.classList.contains('build');
@@ -1279,12 +1341,12 @@ html.rulers #rul{opacity:1}
     $('#bar').style.width = (total ? on / total * 100 : 0) + '%';
   }
 
-  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms / speed); }); }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms / (speed * pace)); }); }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function ease(p) { return 1 - Math.pow(1 - p, 3); }
   function tween(ms, fn, my) {
     return new Promise(function (res) {
-      var start = performance.now(), dur = Math.max(1, ms / speed);
+      var start = performance.now(), dur = Math.max(1, ms / (speed * pace));
       function f(now) {
         if (my !== run) return res();
         var p = Math.min(1, (now - start) / dur);
@@ -1301,12 +1363,12 @@ html.rulers #rul{opacity:1}
     el.style.color = c[0];
     el.setAttribute('data-m', 'fly');
     el.innerHTML = GLYPHS + (i < NAMES.length ? '<span><b style="color:' + c[1] + '">' + NAMES[i] + '</b></span>' : '') + '<em></em>';
-    stage.appendChild(el);
-    return { el: el, tag: el.lastChild, x: 0, y: 0, idle: 0 };
+    sky.appendChild(el);
+    return { el: el, tag: el.lastChild, x: 0, y: 0, idle: 0, busy: true, seed: i * 2.399 };
   }
   function place(a, x, y) {
     a.x = x; a.y = y;
-    a.el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    a.el.style.transform = 'translate(' + (x - scrollX) + 'px,' + (y - scrollY) + 'px)';
     a.el.classList.toggle('flip', x > d.clientWidth - 110);
   }
   function mode(a, m) { a.el.setAttribute('data-m', m); }
@@ -1315,7 +1377,7 @@ html.rulers #rul{opacity:1}
     if (a.y < top) place(a, a.x, top); else if (a.y > bottom) place(a, a.x, bottom);
     a.el.classList.add('show');
     var x0 = a.x, y0 = a.y, dist = Math.hypot(x - x0, y - y0);
-    return tween(quick ? Math.min(200, 60 + dist * 0.14) : Math.min(360, 110 + dist * 0.22), function (p) {
+    return tween(quick ? Math.min(270, 110 + dist * 0.18) : Math.min(410, 150 + dist * 0.22), function (p) {
       place(a, x0 + (x - x0) * p, y0 + (y - y0) * p);
     }, my);
   }
@@ -1378,11 +1440,11 @@ html.rulers #rul{opacity:1}
     var room = d.scrollHeight - window.innerHeight - ty;
     var f = active ? frontier() : 0;
     var dist = f === null ? room : Math.min(room, f - window.innerHeight * 0.4);
-    if (hold < 0 && active && (f === null || f > window.innerHeight - 100 || window.scrollY > 40)) hold = now + 1100;
+    if (hold < 0 && active && (f === null || f > window.innerHeight - 100 || window.scrollY > 40)) hold = now + 800;
     if (hold < 0 || now < hold) dist = 0;
-    var want = dist > 0 ? Math.min(720 * speed, Math.max(150 * speed, dist * 2.6)) : 0;
-    if (!want && hold > 0 && now >= hold && room > 0 && f !== null && f > window.innerHeight * 0.2) want = 130 * speed;
-    var acc = 900 * speed * dt;
+    var want = dist > 0 ? Math.min(720 * speed * pace, Math.max(150 * speed * pace, dist * 2.6 * pace)) : 0;
+    if (!want && hold > 0 && now >= hold && room > 0 && f !== null && f > window.innerHeight * 0.2) want = 130 * speed * pace;
+    var acc = 900 * speed * pace * dt;
     tv += Math.max(-acc * 3, Math.min(acc, want - tv));
     if (tv > 0.5) {
       ty += tv * dt;
@@ -1408,30 +1470,47 @@ html.rulers #rul{opacity:1}
     requestAnimationFrame(f);
   }
 
-  async function typeIn(el, a, my) {
-    var html = el.innerHTML, txt = el.textContent, n = txt.length;
-    el.innerHTML = '<span></span><i class="car"></i><span class="rest"></span>';
-    var s1 = el.firstChild, car = s1.nextSibling, s2 = el.lastChild;
-    s2.textContent = txt;
-    el.classList.add('on');
-    var frames = Math.max(4, Math.min(18, Math.round(n / 3))), step = Math.ceil(n / frames);
-    for (var i = step; ; i += step) {
-      if (my !== run) break;
-      var k = Math.min(i, n);
-      s1.textContent = txt.slice(0, k);
-      s2.textContent = txt.slice(k);
-      var c = car.getBoundingClientRect();
-      place(a, c.left + window.scrollX, c.top + window.scrollY + c.height / 2);
-      await sleep(17);
-      if (k >= n) break;
+  async function typeIn(el, a, my, replacement, fast) {
+    var html = el.innerHTML, txt = replacement === undefined ? el.textContent : replacement;
+    var chars = Array.from(txt), n = chars.length, restored = false;
+    function restore() {
+      if (restored) return;
+      restored = true;
+      if (replacement === undefined) el.innerHTML = html; else el.textContent = txt;
     }
-    el.innerHTML = html;
+    undo.push(restore);
+    el.innerHTML = '<span></span><i class="car"></i><span class="rest"></span>';
+    var written = el.firstChild, car = written.nextSibling, remaining = el.lastChild;
+    remaining.textContent = txt;
+    el.classList.add('on');
+    var duration = Math.max(160, Math.min(fast ? 700 : 1050, n * (fast ? 10 : 14)));
+    var shownCount = -1;
+    try {
+      await tween(duration, function (progress) {
+        if (my !== run || restored) return;
+        // Linear character cadence; travel/drawing retain their own easing.
+        var linear = 1 - Math.cbrt(1 - progress);
+        var k = Math.min(n, Math.floor(n * linear));
+        if (k !== shownCount) {
+          written.textContent = chars.slice(0, k).join('');
+          remaining.textContent = chars.slice(k).join('');
+          shownCount = k;
+          if (k) sound('type', a);
+        }
+        var box = car.getBoundingClientRect();
+        place(a, box.left + scrollX, box.top + scrollY + box.height / 2);
+      }, my);
+    } finally {
+      restore();
+      var index = undo.indexOf(restore); if (index >= 0) undo.splice(index, 1);
+    }
   }
 
   /* текстові «листки» компонента: елементи без дочірніх елементів, у яких є видимий текст */
   function leaves(el) {
     var out = [];
     (function walk(n) {
+      if (n !== el && n.hasAttribute('data-l')) return;
       var kids = n.children;
       if (!kids.length) { if (n.textContent.trim()) out.push(n); return; }
       for (var i = 0; i < kids.length; i++) if (shown(kids[i])) walk(kids[i]);
@@ -1445,33 +1524,20 @@ html.rulers #rul{opacity:1}
     return rs.length ? rs[rs.length - 1] : n.getBoundingClientRect();
   }
   async function retype(n, txt, a, my, select, fast) {
-    var r = tail(n);
-    place(a, r.right + window.scrollX, r.top + window.scrollY + r.height / 2);
     if (select) {
-      n.classList.add('selx');
-      await sleep(fast ? 45 : 90);
-      n.classList.remove('selx');
+      n.classList.add('selx'); await sleep(85); n.classList.remove('selx');
     }
-    var len = txt.length, frames = Math.max(2, Math.min(fast ? 6 : 14, Math.round(len / 3))), step = Math.ceil(len / frames);
-    for (var i = step; ; i += step) {
-      if (my !== run) break;
-      var k = Math.min(i, len);
-      n.textContent = txt.slice(0, k);
-      r = tail(n);
-      place(a, r.right + window.scrollX, r.top + window.scrollY + r.height / 2);
-      await sleep(17);
-      if (k >= len) break;
-    }
-    n.textContent = txt;
+    if (my === run) await typeIn(n, a, my, txt, fast);
   }
 
   /* перший елемент групи: рамка, потім текст набирається з нуля */
   async function compose(o, a, my) {
     var lt = leaves(o.el), real = lt.map(function (n) { return n.textContent; });
-    var restore = function () { lt.forEach(function (n, i) { n.textContent = real[i]; }); };
+    var restored = false;
+    var restore = function () { if (restored) return; restored = true; lt.forEach(function (n, i) { n.textContent = real[i]; }); };
     undo.push(restore);
     try {
-      lt.forEach(function (n) { n.textContent = ''; });
+      lt.forEach(function (n, i) { n.textContent = ''; var reserve = document.createElement('span'); reserve.className = 'rest'; reserve.textContent = real[i]; n.appendChild(reserve); });
       o.el.classList.add('on');
       mode(a, 'type');
       for (var i = 0; i < lt.length; i++) {
@@ -1480,7 +1546,7 @@ html.rulers #rul{opacity:1}
       }
     } finally {
       restore();
-      undo.splice(undo.indexOf(restore), 1);
+      var at = undo.indexOf(restore); if (at >= 0) undo.splice(at, 1);
     }
   }
 
@@ -1489,7 +1555,9 @@ html.rulers #rul{opacity:1}
     var el = o.el, src = o.src.el, fast = o.fast;
     var ls = leaves(src), lt = leaves(el), real = lt.map(function (n) { return n.textContent; });
     var imS = $$in(src, 'img'), imT = $$in(el, 'img'), realSrc = imT.map(function (im) { return im.getAttribute('src'); });
+    var restored = false;
     var restore = function () {
+      if (restored) return; restored = true;
       lt.forEach(function (n, i) { n.textContent = real[i]; n.classList.remove('selx'); });
       imT.forEach(function (im, i) { if (im.getAttribute('src') !== realSrc[i]) im.setAttribute('src', realSrc[i]); });
       el.style.transform = el.style.zIndex = el.style.position = '';
@@ -1504,9 +1572,9 @@ html.rulers #rul{opacity:1}
       await go(a, rs.left + window.scrollX + gx, rs.top + window.scrollY + gy, my, fast);
       if (my !== run) return;
       src.classList.add('pick');
-      mode(a, 'dup');
+      mode(a, 'dup'); sound('copy', a);
       a.tag.textContent = '0';
-      await sleep(fast ? 40 : 90);
+      await sleep(fast ? 100 : 150);
       if (my !== run) return;
 
       if (ls.length) lt.forEach(function (n, i) { n.textContent = ls[i % ls.length].textContent; });
@@ -1529,11 +1597,15 @@ html.rulers #rul{opacity:1}
       };
       frame(0);
       var dist = Math.hypot(tx, tty);
-      await tween(fast ? Math.min(220, 100 + dist * 0.45) : Math.min(480, 200 + dist * 0.4), frame, my);
+      await tween(fast ? Math.min(620, 420 + dist * 0.2) : Math.min(820, 540 + dist * 0.3), frame, my);
+      if (my !== run) return;
       el.style.transform = '';
+      var measure = spacingMark(el);
+      undo.push(measure);
       src.classList.remove('pick');
       if (my !== run) return;
-      await sleep(fast ? 20 : 60);
+      sound('snap', a);
+      await sleep(fast ? 100 : 150);
       el.classList.remove('ghost');
 
       mode(a, 'type');
@@ -1542,8 +1614,50 @@ html.rulers #rul{opacity:1}
         if (lt[i].textContent !== real[i]) await retype(lt[i], real[i], a, my, true, fast || lt.length > 3);
       }
     } finally {
+      if (measure) { measure(); var mi = undo.indexOf(measure); if (mi >= 0) undo.splice(mi, 1); }
       restore();
-      undo.splice(undo.indexOf(restore), 1);
+      var at = undo.indexOf(restore); if (at >= 0) undo.splice(at, 1);
+    }
+  }
+
+  function spacingMark(el, padding) {
+    var r = el.getBoundingClientRect(), previous = el.previousElementSibling;
+    while (previous && !shown(previous)) previous = previous.previousElementSibling;
+    var p = previous && previous.getBoundingClientRect();
+    var x, y, length, vertical = false;
+    if (!padding && p && r.left >= p.right && Math.abs(r.top - p.top) < 20) {
+      x = p.right; y = r.top + Math.min(r.height, p.height) / 2; length = r.left - p.right;
+    } else if (!padding && p && r.top >= p.bottom && Math.abs(r.left - p.left) < 20) {
+      x = r.left + Math.min(r.width, p.width) / 2; y = p.bottom; length = r.top - p.bottom; vertical = true;
+    } else {
+      x = r.left; y = r.top + 18; length = parseFloat(getComputedStyle(el).paddingLeft);
+    }
+    if (!length || length < 4 || length > 240 || innerWidth < 700) return function () {};
+    var mark = document.createElement('div'); mark.className = 'measure' + (vertical ? ' vertical' : '');
+    mark.style.left = (x + scrollX) + 'px'; mark.style.top = (y + scrollY) + 'px';
+    mark.style[vertical ? 'height' : 'width'] = length + 'px';
+    var label = document.createElement('span'); label.textContent = Math.round(length) + ' px'; mark.appendChild(label); stage.appendChild(mark);
+    return function () { mark.remove(); };
+  }
+  async function positionLayer(el, a, my) {
+    if (!el.matches('.frame,.browser') || innerWidth < 700) return;
+    var r = el.getBoundingClientRect(), cleanup = spacingMark(el, true);
+    var guideLine = document.createElement('div'); guideLine.className = 'snap-guide';
+    guideLine.style.cssText = 'left:' + (r.left + scrollX - 24) + 'px;top:' + (r.top + scrollY) + 'px;width:' + (r.width + 48) + 'px'; stage.appendChild(guideLine);
+    var restored = false;
+    var restore = function () { if (restored) return; restored = true; el.style.translate = ''; cleanup(); guideLine.remove(); };
+    undo.push(restore);
+    try {
+      el.style.translate = '28px 18px';
+      el.classList.add('on'); mode(a, 'move');
+      await tween(540, function (p) {
+        el.style.translate = (28 * (1 - p)).toFixed(1) + 'px ' + (18 * (1 - p)).toFixed(1) + 'px';
+        place(a, r.left + scrollX + 28 * (1 - p), r.top + scrollY + 18 * (1 - p));
+      }, my);
+      if (my !== run) return;
+      sound('snap', a); await sleep(120);
+    } finally {
+      restore(); var at = undo.indexOf(restore); if (at >= 0) undo.splice(at, 1);
     }
   }
 
@@ -1570,7 +1684,7 @@ html.rulers #rul{opacity:1}
       if (my !== run) return;
       if (vertical) g.style.height = d.scrollHeight + 'px';
       rul.appendChild(g);
-      mode(a, 'guide');
+      mode(a, 'guide'); sound('snap', a);
       await tween(460, function (p) {
         var v = from + (target - from) * p;
         if (vertical) { g.style.left = v + 'px'; place(a, v, sy); }
@@ -1583,15 +1697,15 @@ html.rulers #rul{opacity:1}
 
   async function work(a, my) {
     while (my === run) {
-      if (jobs.length) { await jobs.shift()(a, my); continue; }
+      if (jobs.length) { a.busy = true; await jobs.shift()(a, my); a.busy = false; continue; }
       var o = claim();
       if (o === END) break;
       if (!o) {
-        if (++a.idle > 5) a.el.classList.remove('show');
+        a.idle++; a.busy = false; mode(a, 'fly'); a.el.classList.add('show');
         await wait(110);
         continue;
       }
-      a.idle = 0;
+      a.idle = 0; a.busy = true;
       var el = o.el, kind = el.getAttribute('data-l');
 
       if (kind === 'dup') {
@@ -1618,7 +1732,7 @@ html.rulers #rul{opacity:1}
       b.style.top = y + 'px';
       stage.appendChild(b);
       var lab = b.querySelector('b');
-      await tween(kind === 'comp' ? 130 : Math.min(340, 170 + Math.hypot(w, h) * 0.13), function (p) {
+      await tween(kind === 'comp' ? 220 : Math.min(420, 180 + Math.hypot(w, h) * 0.17), function (p) {
         var cw = w * p, ch = h * p;
         b.style.width = cw + 'px';
         b.style.height = ch + 'px';
@@ -1626,20 +1740,26 @@ html.rulers #rul{opacity:1}
         place(a, x + cw, y + ch);
       }, my);
       if (my !== run) return;
+      sound(kind === 'frame' && el.querySelector('img') ? 'image' : 'draw', a);
       if (kind === 'type') {
         mode(a, 'type');
         await typeIn(el, a, my);
       } else if (kind === 'comp') {
         await compose(o, a, my);
       } else if (kind === 'frame') {
-        await sleep(130);
+        b.classList.remove('fill');
+        await positionLayer(el, a, my);
+        if (my !== run) return;
+        await sleep(80);
+        if (leaves(el).length) await compose(o, a, my);
         el.classList.add('on');
         b.classList.remove('fill');
         await sleep(60);
       } else {
-        el.classList.add('on');
-        await sleep(70);
+        await compose(o, a, my);
       }
+      if (my !== run) return;
+      await sleep(55);
       if (my !== run) return;
       o.s = 2;
       fade(b);
@@ -1648,6 +1768,7 @@ html.rulers #rul{opacity:1}
       count();
     }
     if (my !== run) return;
+    a.busy = false;
     if (--active === 0) settle(true);
   }
 
@@ -1683,46 +1804,53 @@ html.rulers #rul{opacity:1}
     }, my).then(function () { return wait(180); });
   }
 
-  /* фінал: рій кружляє над готовою сторінкою, потім розлітається */
+  /* Idle agents remain visible between jobs; the same nodes become the final flock. */
+  function idleMotion(my) {
+    var last = performance.now();
+    function tick(now) {
+      if (my !== run) return;
+      var dt = Math.min(0.04, (now - last) / 1000); last = now;
+      team.forEach(function (a, i) {
+        if (!a.busy) {
+          var x = i % 2 ? innerWidth - 35 - (i % 4) * 18 : 35 + (i % 4) * 18;
+          var y = scrollY + innerHeight * (0.2 + (i % 6) * 0.12) + Math.sin(now / 1300 + a.seed) * 26;
+          var nx = a.x + (x + Math.cos(now / 1800 + a.seed) * 17 - a.x) * Math.min(1, dt * 2.8);
+          var ny = a.y + (y - a.y) * Math.min(1, dt * 2.8);
+          a.el.style.setProperty('--rot', Math.atan2(ny - a.y, nx - a.x) + 'rad');
+          place(a, nx, ny);
+        } else place(a, a.x, a.y);
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
   function flock() {
     var my = ++fl, start = performance.now(), last = start, crew = team.slice();
-    crew.forEach(function (a) {
-      a.fx = a.x - window.scrollX;
-      a.fy = a.y - window.scrollY;
-      a.vx = (Math.random() - 0.5) * 200;
-      a.vy = (Math.random() - 0.5) * 200;
-      a.rad = 60 + Math.random() * 110;
-      sky.appendChild(a.el);
-      mode(a, 'fly');
-      a.el.classList.remove('flip');
-      a.el.classList.add('show');
+    var centerX = innerWidth / 2, centerY = innerHeight / 2;
+    crew.forEach(function (a, i) {
+      a.fx = Math.max(10, Math.min(innerWidth - 10, a.x - scrollX));
+      a.fy = Math.max(10, Math.min(innerHeight - 10, a.y - scrollY));
+      a.vx = 0; a.vy = 0; a.rad = 45 + (i % 5) * 18;
+      sky.appendChild(a.el); mode(a, 'fly'); a.el.classList.add('show');
     });
     function tick(now) {
       if (my !== fl) return;
-      var dt = Math.min(0.05, (now - last) / 1000), t = (now - start) / 1000;
-      last = now;
-      var W = window.innerWidth, H = window.innerHeight, leaving = t > 11;
-      var cx = W * (0.5 + 0.3 * Math.sin(t * 0.55 + 1.3)), cy = H * (0.45 + 0.24 * Math.sin(t * 0.83));
-      for (var i = 0; i < crew.length; i++) {
-        var a = crew[i];
-        var dx = a.fx - cx, dy = a.fy - cy, dist = Math.hypot(dx, dy) || 1, ux = dx / dist, uy = dy / dist;
-        var k = Math.max(-1.6, Math.min(1.6, (a.rad - dist) / 60));
-        var wx = -uy + ux * k, wy = ux + uy * k;
-        if (leaving) { wx = ux * 2 - uy * 0.4; wy = uy * 2 + ux * 0.4; }
-        for (var j = 0; j < crew.length; j++) {
-          if (j === i) continue;
-          var ex = a.fx - crew[j].fx, ey = a.fy - crew[j].fy, e = ex * ex + ey * ey;
-          if (e < 900 && e > 0.01) { wx += ex / e * 16; wy += ey / e * 16; }
-        }
-        var wl = Math.hypot(wx, wy) || 1, sp = leaving ? 520 : 310, turn = Math.min(1, dt * 3.4);
-        a.vx += (wx / wl * sp - a.vx) * turn;
-        a.vy += (wy / wl * sp - a.vy) * turn;
-        a.fx += a.vx * dt;
-        a.fy += a.vy * dt;
+      var dt = Math.min(0.04, (now - last) / 1000), t = (now - start) / 1000; last = now;
+      var targetX = pointer.seen ? pointer.x : innerWidth * (0.5 + Math.sin(t * 0.3) * 0.12);
+      var targetY = pointer.seen ? pointer.y : innerHeight * (0.5 + Math.cos(t * 0.4) * 0.1);
+      centerX += (targetX - centerX) * Math.min(1, dt * 4);
+      centerY += (targetY - centerY) * Math.min(1, dt * 4);
+      crew.forEach(function (a, i) {
+        var angle = t * (0.55 + (i % 3) * 0.09) + a.seed;
+        var tx = Math.max(12, Math.min(innerWidth - 12, centerX + Math.cos(angle) * a.rad));
+        var ty = Math.max(12, Math.min(innerHeight - 12, centerY + Math.sin(angle) * a.rad * 0.75));
+        a.vx += ((tx - a.fx) * 10 - a.vx * 6) * dt;
+        a.vy += ((ty - a.fy) * 10 - a.vy * 6) * dt;
+        a.fx += a.vx * dt; a.fy += a.vy * dt;
         a.el.style.transform = 'translate(' + a.fx.toFixed(1) + 'px,' + a.fy.toFixed(1) + 'px)';
         a.el.style.setProperty('--rot', Math.atan2(a.vy, a.vx) + 'rad');
-      }
-      if (t > 13) { sky.innerHTML = ''; hud.classList.remove('show'); return; }
+      });
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -1745,7 +1873,7 @@ html.rulers #rul{opacity:1}
     $$('.ft').forEach(function (n) { n.textContent = secs; });
     hud.setAttribute('data-st', natural ? 'done' : 'skip');
     clearTimeout(hideTimer);
-    if (natural && team.length) flock();
+    if (team.length && !calm) { flock(); if (natural) sound('done'); }
     else {
       fl++;
       stage.innerHTML = '';
@@ -1756,6 +1884,7 @@ html.rulers #rul{opacity:1}
 
   function start() {
     var my = ++run;
+    if (window.PortfolioSound) window.PortfolioSound.unlock();
     fl++;
     live = true;
     clearTimeout(hideTimer);
@@ -1795,8 +1924,9 @@ html.rulers #rul{opacity:1}
       active = team.length;
       count();
       kickTour();
+      idleMotion(my);
       team.forEach(function (a, i) {
-        setTimeout(function () { work(a, my).catch(function () { settle(false); }); }, i * 40);
+        setTimeout(function () { work(a, my).catch(function () { settle(false); }); }, i * 25);
       });
     }).catch(function () { settle(false); });
   }
